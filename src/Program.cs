@@ -9,8 +9,8 @@ namespace ShadowsOfShadows
 		{
 			Engine.Initialize ("C64.font", 80, 25);
 			Engine.EngineStart += (sender, e) => {
-				var console = (SConsole)Engine.ActiveConsole;
-				console.Print (1, 1, "Hello World!");
+				Engine.ConsoleRenderStack.Clear();
+				Engine.ConsoleRenderStack.Add(new MainConsole(80, 25));
 			};
 			Engine.Run ();
 		}

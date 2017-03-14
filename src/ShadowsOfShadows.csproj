@@ -50,6 +50,13 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Entities\Entity.cs" />
+    <Compile Include="Physics\Transform.cs" />
+    <Compile Include="Renderables\IRenderable.cs" />
+    <Compile Include="Renderables\ConsoleRenderable.cs" />
+    <Compile Include="Helpers\ConsoleObjects.cs" />
+    <Compile Include="MainConsole.cs" />
+    <Compile Include="Entities\Room.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -60,5 +67,11 @@
     <None Include="Yayo_c64.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Entities\" />
+    <Folder Include="Renderables\" />
+    <Folder Include="Helpers\" />
+    <Folder Include="Physics\" />
   </ItemGroup>
 </Project>
