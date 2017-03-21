@@ -57,6 +57,8 @@
     <Compile Include="Helpers\ConsoleObjects.cs" />
     <Compile Include="MainConsole.cs" />
     <Compile Include="Entities\Room.cs" />
+    <Compile Include="Physics\Polygon.cs" />
+    <Compile Include="Physics\CollisionBox.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
