@@ -51,6 +51,7 @@
     <Compile Include="Consoles\MainConsole.cs" />
     <Compile Include="Consoles\Screen.cs" />
     <Compile Include="Consoles\MenuConsole.cs" />
+    <Compile Include="Consoles\BorderedConsole.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
