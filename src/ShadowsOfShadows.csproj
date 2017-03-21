@@ -55,8 +55,11 @@
     <Compile Include="Renderables\IRenderable.cs" />
     <Compile Include="Renderables\ConsoleRenderable.cs" />
     <Compile Include="Helpers\ConsoleObjects.cs" />
-    <Compile Include="MainConsole.cs" />
     <Compile Include="Entities\Room.cs" />
+    <Compile Include="Consoles\MessageConsole.cs" />
+    <Compile Include="Consoles\MainConsole.cs" />
+    <Compile Include="Consoles\Screen.cs" />
+    <Compile Include="Consoles\MenuConsole.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -73,5 +76,6 @@
     <Folder Include="Renderables\" />
     <Folder Include="Helpers\" />
     <Folder Include="Physics\" />
+    <Folder Include="Consoles\" />
   </ItemGroup>
 </Project>

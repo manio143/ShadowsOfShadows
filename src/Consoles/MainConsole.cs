@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 
 using ShadowsOfShadows.Renderables;
 
-namespace ShadowsOfShadows
+namespace ShadowsOfShadows.Consoles
 {
 	public class TestEntity : Entity {}
 
