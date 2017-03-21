@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Linq;
 
-using SadConsole.Game;
-using SadConsole.Consoles;
+using SadConsole.GameHelpers;
+using SadConsole.Surfaces;
+using SadConsole;
 
 
 namespace ShadowsOfShadows.Helpers

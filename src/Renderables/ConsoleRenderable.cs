@@ -1,6 +1,6 @@
 ﻿using System;
 
-using SadConsole.Game;
+using SadConsole.GameHelpers;
 using ShadowsOfShadows.Helpers;
 
 namespace ShadowsOfShadows.Renderables

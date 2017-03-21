@@ -4,7 +4,7 @@ using ShadowsOfShadows.Consoles;
 
 namespace ShadowsOfShadows
 {
-	public class Screen : SadConsole.Consoles.ConsoleList
+	public class Screen : SadConsole.ConsoleContainer
 	{
 		const int MENU_WIDTH = 15;
 		const int MESSAGES_HEIGHT = 6;
@@ -19,9 +19,9 @@ namespace ShadowsOfShadows
 			msgConsole = new MessageConsole (0, height - MESSAGES_HEIGHT - 1, width, MESSAGES_HEIGHT);
 			menuConsole = new MenuConsole (width - MENU_WIDTH - 1, 0, MENU_WIDTH, height);
 
-			Add (mainConsole);
-			Add (msgConsole);
-			Add (menuConsole);
+			Children.Add (mainConsole);
+			Children.Add (msgConsole);
+			Children.Add (menuConsole);
 
 			msgConsole.PrintMessage ("This is a message");
 		}
