@@ -1,0 +1,13 @@
+# this is how you configure zappr
+# a more exhaustive description is at
+# https://zappr.readthedocs.io/en/latest/setup
+
+approvals:
+  minimum: 2
+  ignore: pr_opener
+  pattern: "^(:\\+1:|👍|lgtm|LGTM)$"
+  veto:
+    pattern: "^(:\\-1:|👎)$"
+
+from:
+  collaborators: true
