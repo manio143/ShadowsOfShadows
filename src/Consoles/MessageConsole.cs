@@ -9,7 +9,7 @@ using ShadowsOfShadows.Helpers;
 
 namespace ShadowsOfShadows.Consoles
 {
-	public class MessageConsole : SadConsole.Console
+	public class MessageConsole : BorderedConsole
 	{
 		List<GameObject> consoleObjects = new List<GameObject> ();
 
