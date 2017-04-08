@@ -1,5 +1,5 @@
 ﻿using System;
-
+using SadConsole.Input;
 using ShadowsOfShadows.Consoles;
 
 namespace ShadowsOfShadows
@@ -23,8 +23,19 @@ namespace ShadowsOfShadows
 			Children.Add (msgConsole);
 			Children.Add (menuConsole);
 
-			msgConsole.PrintMessage ("This is a message\nAnd with line breaks");
+			msgConsole.PrintMessageAndWait("This is a message\nAnd with line breaks");
 		}
+
+	    public override bool ProcessKeyboard(Keyboard state)
+	    {
+	        if(msgConsole.IsActive)
+	            if (msgConsole.ProcessKeyboard(state))
+	                return true;
+	        if(menuConsole.IsActive)
+	            if (menuConsole.ProcessKeyboard(state))
+	                return true;
+	        return mainConsole.ProcessKeyboard(state);
+	    }
 	}
 }
 

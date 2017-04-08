@@ -8,6 +8,8 @@ namespace ShadowsOfShadows.Consoles
 {
 	public class MenuConsole : BorderedConsole
 	{
+	    public bool IsActive { get; set; }
+
 		public MenuConsole (int posX, int poxY, int width, int height)
 			:base(width, height)
 		{
