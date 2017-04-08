@@ -35,6 +35,14 @@ namespace ShadowsOfShadows.Helpers
 	        animation.Start();
 	        return new GameObject(animation);
 	    }
+
+	    public static GameObject CreateFromGlyph(int glyph)
+	    {
+	        var animation = new AnimatedSurface("anim", 1, 1);
+	        var editor = new SurfaceEditor(animation.CreateFrame());
+	        editor.SetGlyph(0,0,glyph);
+	        return new GameObject(animation);
+	    }
 	}
 }
 

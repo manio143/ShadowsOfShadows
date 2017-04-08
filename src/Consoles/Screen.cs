@@ -1,9 +1,25 @@
 ﻿using System;
+using System.ComponentModel;
 using SadConsole.Input;
 using ShadowsOfShadows.Consoles;
 
 namespace ShadowsOfShadows
 {
+    public enum TestEnum
+    {
+        [Display("Hello World!")]
+        Hello,
+        [Display("Mornin'")]
+        Hello2,
+        [Display("Elo Elo 3, 2, 0")]
+        Elo,
+        [Display("A Wojtek to gdzie?")]
+        Wojtek,
+        [Display("Do zobaczenia...")]
+        DoZo
+
+    }
+
 	public class Screen : SadConsole.ConsoleContainer
 	{
 		const int MENU_WIDTH = 15;
@@ -24,6 +40,7 @@ namespace ShadowsOfShadows
 			Children.Add (menuConsole);
 
 			msgConsole.PrintMessageAndWait("This is a message\nAnd with line breaks");
+		    msgConsole.AskQuestion("Co mi powiesz?", typeof(TestEnum));
 		}
 
 	    public override bool ProcessKeyboard(Keyboard state)
