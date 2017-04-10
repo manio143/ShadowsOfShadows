@@ -2,7 +2,7 @@
 
 using ShadowsOfShadows.Renderables;
 
-namespace ShadowsOfShadows
+namespace ShadowsOfShadows.Entities
 {
 	public abstract class Entity
 	{
@@ -11,9 +11,10 @@ namespace ShadowsOfShadows
 		public IRenderable Renderable { get; set; }
 
 
-		public Entity ()
+		public Entity ( IRenderable renderable)
 		{
 			Transform = new Transform ();
+            Renderable = renderable;
 		}
 	}
 }
