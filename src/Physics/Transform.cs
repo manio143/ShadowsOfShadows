@@ -10,6 +10,7 @@ namespace ShadowsOfShadows
 		public Direction Direction{ get; set;}
 
 	}
+
 	public enum Direction {
 		Up,
 		Down,
