@@ -34,17 +34,8 @@
     <Reference Include="MonoGame.Framework">
       <HintPath>packages\MonoGame.Framework.DesktopGL.3.5.1.1679\lib\net40\MonoGame.Framework.dll</HintPath>
     </Reference>
-    <Reference Include="NVorbis">
-      <HintPath>packages\MonoGame.Framework.DesktopGL.3.5.1.1679\lib\net40\NVorbis.dll</HintPath>
-    </Reference>
-    <Reference Include="OpenTK">
-      <HintPath>packages\MonoGame.Framework.DesktopGL.3.5.1.1679\lib\net40\OpenTK.dll</HintPath>
-    </Reference>
-    <Reference Include="SadConsole.Core.OpenGL">
-      <HintPath>packages\SadConsole.Core.MonoGameGL.5.2.3\lib\net45\SadConsole.Core.OpenGL.dll</HintPath>
-    </Reference>
-    <Reference Include="SadConsole.GameHelpers.OpenGL">
-      <HintPath>packages\SadConsole.GameHelpers.MonoGameGL.4.5.0\lib\net45\SadConsole.GameHelpers.OpenGL.dll</HintPath>
+    <Reference Include="SadConsole">
+      <HintPath>packages\SadConsole.6.0.1\lib\net\SadConsole.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -55,13 +46,27 @@
     <Compile Include="Renderables\IRenderable.cs" />
     <Compile Include="Renderables\ConsoleRenderable.cs" />
     <Compile Include="Helpers\ConsoleObjects.cs" />
-    <Compile Include="MainConsole.cs" />
     <Compile Include="Entities\Room.cs" />
+    <Compile Include="Consoles\MessageConsole.cs" />
+    <Compile Include="Consoles\MainConsole.cs" />
+    <Compile Include="Consoles\Screen.cs" />
+    <Compile Include="Consoles\MenuConsole.cs" />
+    <Compile Include="Consoles\BorderedConsole.cs" />
     <Compile Include="Physics\Polygon.cs" />
     <Compile Include="Physics\CollisionBox.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
+    <Folder Include="Entities\" />
+    <Folder Include="Renderables\" />
+    <Folder Include="Helpers\" />
+    <Folder Include="Physics\" />
+    <Folder Include="Consoles\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="MonoGame.Framework.dll.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="C64.font">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -69,11 +74,5 @@
     <None Include="Yayo_c64.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Entities\" />
-    <Folder Include="Renderables\" />
-    <Folder Include="Helpers\" />
-    <Folder Include="Physics\" />
   </ItemGroup>
 </Project>

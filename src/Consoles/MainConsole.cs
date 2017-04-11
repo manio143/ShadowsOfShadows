@@ -1,10 +1,10 @@
-﻿using SadConsole.Consoles;
+﻿using SadConsole;
 using System.Linq;
 using Microsoft.Xna.Framework;
 
 using ShadowsOfShadows.Renderables;
 
-namespace ShadowsOfShadows
+namespace ShadowsOfShadows.Consoles
 {
 	public class TestEntity : Entity {}
 
@@ -17,13 +17,14 @@ namespace ShadowsOfShadows
 			testRoom.Entities.First ().Transform.Position = new Point (1,1);
 		}
 
-		public override void Render ()
+		public override void Draw (System.TimeSpan delta)
 		{
-			base.Render ();
+			base.Draw (delta);
+
 			foreach (var entity in testRoom.Entities) {
 				var consoleObject = entity.Renderable.ConsoleObject;
 				consoleObject.Position = entity.Transform.Position;
-				consoleObject.Render ();
+				consoleObject.Draw (delta);
 			}
 		}
 	}
