@@ -97,6 +97,18 @@ namespace ShadowsOfShadows.Consoles
         private GameObject waitPointer;
         public override GameObject WaitPointer => waitPointer;
 
+        private int pointerIndex;
+        private int PointerIndex
+        {
+            get { return pointerIndex; }
+            set 
+            {
+                pointerIndex = value % positions.Count;
+                if(pointerIndex < 0) pointerIndex += positions.Count;
+                waitPointer.Position = positions[pointerIndex] + new Point(-1, 0);
+            }
+        }
+
         private List<GameObject> consoleObjects = new List<GameObject>();
         private List<Point> positions = new List<Point>();
         public override List<GameObject> Other => consoleObjects;
@@ -114,7 +126,7 @@ namespace ShadowsOfShadows.Consoles
             for (var i = 0; i < consoleObjects.Count; i++)
                 consoleObjects[i].Position = positions[i];
 
-            waitPointer.Position = positions[0] + new Point(-1, 0);
+            PointerIndex = 0;
         }
 
         private void ComputePositions(MessageConsole console)
@@ -136,7 +148,20 @@ namespace ShadowsOfShadows.Consoles
         public override void ProcessKeyboard(Keyboard info)
         {
             base.ProcessKeyboard(info);
-            //TODO: handle arrow keys and enter/space as submit
+            if(info.IsKeyPressed(Keys.Left))
+                PointerIndex -= 3;
+            else if(info.IsKeyPressed(Keys.Right))
+                PointerIndex += 3;
+            else if(info.IsKeyPressed(Keys.Down))
+                PointerIndex += 1;
+            else if(info.IsKeyPressed(Keys.Up))
+                PointerIndex -= 1;
+
+            if(info.IsKeyPressed(Keys.Enter) || info.IsKeyPressed(Keys.Space))
+            {
+                result = answers[PointerIndex].Item1;
+                Finished = true;
+            }
         }
     }
 }
