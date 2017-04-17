@@ -54,6 +54,10 @@
     <Compile Include="Consoles\BorderedConsole.cs" />
     <Compile Include="Physics\Polygon.cs" />
     <Compile Include="Physics\CollisionBox.cs" />
+    <Compile Include="Entities\IInteractable.cs" />
+    <Compile Include="Entities\IUpdateable.cs" />
+    <Compile Include="Entities\Character.cs" />
+    <Compile Include="Entities\Player.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
