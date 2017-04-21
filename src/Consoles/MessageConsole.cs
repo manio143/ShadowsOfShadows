@@ -15,10 +15,10 @@ namespace ShadowsOfShadows.Consoles
         public bool IsActive { get; set; }
         public bool ClearInactive { get; set; } = true;
 
-        private Message currentMessage;
+        protected Message CurrentMessage;
 
-        List<GameObject> consoleObjects = new List<GameObject>();
-        Queue<Message> messageQueue = new Queue<Message>();
+        protected List<GameObject> ConsoleObjects = new List<GameObject>();
+        protected Queue<Message> MessageQueue = new Queue<Message>();
         private bool wait;
 
         public MessageConsole(int posX, int poxY, int width, int height)
@@ -32,14 +32,14 @@ namespace ShadowsOfShadows.Consoles
             PrintMessage(new SimpleMessage(message));
         }
 
-        private void PrintMessage(Message message)
+        protected virtual void PrintMessage(Message message)
         {
-            consoleObjects.Clear();
+            ConsoleObjects.Clear();
             message.Create(this);
-            if (message.Text != null) consoleObjects.Add(message.Text);
-            if (message.WaitPointer != null) consoleObjects.Add(message.WaitPointer);
-            if (message.Other != null) consoleObjects.AddRange(message.Other);
-            currentMessage = message;
+            if (message.Text != null) ConsoleObjects.Add(message.Text);
+            if (message.WaitPointer != null) ConsoleObjects.Add(message.WaitPointer);
+            if (message.Other != null) ConsoleObjects.AddRange(message.Other);
+            CurrentMessage = message;
         }
 
         public void PrintMessageAndWait(string message)
@@ -47,10 +47,10 @@ namespace ShadowsOfShadows.Consoles
             PrintMessageAndWait(new WaitMessage(message));
         }
 
-        private void PrintMessageAndWait(Message message)
+        protected void PrintMessageAndWait(Message message)
         {
             if (wait)
-                messageQueue.Enqueue(message);
+                MessageQueue.Enqueue(message);
             else
             {
                 PrintMessage(message);
@@ -64,17 +64,16 @@ namespace ShadowsOfShadows.Consoles
             PrintMessagesAndWait(messages.Select(m => new WaitMessage(m)).ToArray());
         }
 
-        private void PrintMessagesAndWait(WaitMessage[] messages)
+        protected void PrintMessagesAndWait(WaitMessage[] messages)
         {
             PrintMessageAndWait(messages[0]);
             for (var i = 1; i < messages.Length; i++)
-                messageQueue.Enqueue(messages[i]);
+                MessageQueue.Enqueue(messages[i]);
         }
 
         public QuestionMessage AskQuestion(string message, Type answersType)
         {
-            PrintMessageAndWait(message);
-            var questionMessage = new QuestionMessage(answersType);
+            var questionMessage = new QuestionMessage(answersType, message);
             PrintMessageAndWait(questionMessage);
             return questionMessage;
         }
@@ -82,7 +81,7 @@ namespace ShadowsOfShadows.Consoles
         public override void Draw(TimeSpan delta)
         {
             base.Draw(delta);
-            foreach (var co in consoleObjects)
+            foreach (var co in ConsoleObjects)
                 co.Draw(delta);
         }
 
@@ -90,18 +89,19 @@ namespace ShadowsOfShadows.Consoles
         {
             if (wait)
             {
-                currentMessage.ProcessKeyboard(info);
-                if (currentMessage.Finished)
+                CurrentMessage.ProcessKeyboard(info);
+                if (CurrentMessage.Finished)
                 {
+                    CurrentMessage.OnPostProcessing();
                     wait = false;
-                    if (messageQueue.Count > 0)
-                        PrintMessageAndWait(messageQueue.Dequeue());
+                    if (MessageQueue.Count > 0)
+                        PrintMessageAndWait(MessageQueue.Dequeue());
                     else
                     {
                         if (ClearInactive)
                             PrintMessage("");
                         else
-                            consoleObjects.Remove(currentMessage.WaitPointer);
+                            ConsoleObjects.Remove(CurrentMessage.WaitPointer);
                         this.IsActive = false;
                     }
                 }
@@ -112,7 +112,7 @@ namespace ShadowsOfShadows.Consoles
         public override void Update(TimeSpan delta)
         {
             base.Update(delta);
-            foreach (var co in consoleObjects)
+            foreach (var co in ConsoleObjects)
                 co.Update(delta);
         }
     }

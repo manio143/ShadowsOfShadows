@@ -20,39 +20,40 @@ namespace ShadowsOfShadows
 
     }
 
-	public class Screen : SadConsole.ConsoleContainer
-	{
-		const int MENU_WIDTH = 15;
-		const int MESSAGES_HEIGHT = 7;
+    public class Screen : SadConsole.ConsoleContainer
+    {
+        const int MENU_WIDTH = 15;
+        const int MESSAGES_HEIGHT = 7;
 
-		MainConsole mainConsole;
-		MessageConsole msgConsole;
-		MenuConsole menuConsole;
+        MainConsole mainConsole;
+        MessageConsole msgConsole;
+        MenuConsole menuConsole;
 
-		public Screen (int width, int height)
-		{
-			mainConsole = new MainConsole (width - MENU_WIDTH + 1, height - MESSAGES_HEIGHT + 2);
-			msgConsole = new MessageConsole (1, height - MESSAGES_HEIGHT + 1, width, MESSAGES_HEIGHT);
-			menuConsole = new MenuConsole (width - MENU_WIDTH, 1, MENU_WIDTH + 1, height - MESSAGES_HEIGHT + 1);
+        public Screen(int width, int height)
+        {
+            mainConsole = new MainConsole(width - MENU_WIDTH + 1, height - MESSAGES_HEIGHT + 2);
+            msgConsole = new MessageConsole(1, height - MESSAGES_HEIGHT + 1, width, MESSAGES_HEIGHT);
+            menuConsole = new MenuConsole(width - MENU_WIDTH, 1, MENU_WIDTH + 1, height - MESSAGES_HEIGHT + 1);
 
-			Children.Add (mainConsole);
-			Children.Add (msgConsole);
-			Children.Add (menuConsole);
+            Children.Add(mainConsole);
+            Children.Add(msgConsole);
+            Children.Add(menuConsole);
 
-			msgConsole.PrintMessageAndWait("This is a message\nAnd with line breaks");
-		    msgConsole.AskQuestion("Co mi powiesz?", typeof(TestEnum));
-		}
+            msgConsole.PrintMessageAndWait("This is a message\nAnd with line breaks");
+            msgConsole.AskQuestion("Co mi powiesz?", typeof(TestEnum)).PostProcessing =
+                (m) => menuConsole.OpenMainMenu();
+        }
 
-	    public override bool ProcessKeyboard(Keyboard state)
-	    {
-	        if(msgConsole.IsActive)
-	            if (msgConsole.ProcessKeyboard(state))
-	                return true;
-	        if(menuConsole.IsActive)
-	            if (menuConsole.ProcessKeyboard(state))
-	                return true;
-	        return mainConsole.ProcessKeyboard(state);
-	    }
-	}
+        public override bool ProcessKeyboard(Keyboard state)
+        {
+            if (msgConsole.IsActive)
+                if (msgConsole.ProcessKeyboard(state))
+                    return true;
+            if (menuConsole.IsActive)
+                if (menuConsole.ProcessKeyboard(state))
+                    return true;
+            return mainConsole.ProcessKeyboard(state);
+        }
+    }
 }
 
