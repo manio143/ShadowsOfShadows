@@ -4,7 +4,7 @@ using ShadowsOfShadows.Renderables;
 
 namespace ShadowsOfShadows.Entities
 {
-    public abstract class  Openable : Interactive
+    public abstract class  Openable : Thing, IInteractable
     {
         public int LockDificulty { get; set; }
 
@@ -28,5 +28,7 @@ namespace ShadowsOfShadows.Entities
                 return false;
             }
         }
+
+        public abstract void Interact();
     }
 }
