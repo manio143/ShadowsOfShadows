@@ -2,6 +2,7 @@
 using System.Linq;
 using Microsoft.Xna.Framework;
 
+using ShadowsOfShadows.Entities;
 using ShadowsOfShadows.Renderables;
 
 namespace ShadowsOfShadows.Consoles
