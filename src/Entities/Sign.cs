@@ -1,10 +1,11 @@
 ﻿using System;
 
 using ShadowsOfShadows.Renderables;
+using ShadowsOfShadows.Consoles;
 
 namespace ShadowsOfShadows.Entities
 {
-    public class Sign : Interactive
+    public class Sign : Thing, IInteractable
     {
         String Text { get; set; }
 
@@ -13,9 +14,9 @@ namespace ShadowsOfShadows.Entities
             Text = text;
         }
 
-        public override void Interact()
+        public void Interact()
         {
-            // TODO: message console print sign text
+            Screen.msgConsole.PrintMessage(Text);
         }
     }
 }

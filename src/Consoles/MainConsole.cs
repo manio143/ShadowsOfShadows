@@ -7,7 +7,9 @@ using ShadowsOfShadows.Renderables;
 
 namespace ShadowsOfShadows.Consoles
 {
-	public class TestEntity : Entity {}
+	public class TestEntity : Entity {
+        public TestEntity(): base(new ConsoleRenderable('A')) { }
+    }
 
 	public class MainConsole : Console
 	{

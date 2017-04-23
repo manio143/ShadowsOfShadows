@@ -9,9 +9,9 @@ namespace ShadowsOfShadows
 		const int MENU_WIDTH = 15;
 		const int MESSAGES_HEIGHT = 7;
 
-		MainConsole mainConsole;
-		MessageConsole msgConsole;
-		MenuConsole menuConsole;
+		public static MainConsole mainConsole;
+        public static MessageConsole msgConsole;
+        public static MenuConsole menuConsole;
 
 		public Screen (int width, int height)
 		{

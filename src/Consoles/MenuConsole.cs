@@ -1,7 +1,7 @@
 ﻿using System;
 
 using Microsoft.Xna.Framework;
-
+using ShadowsOfShadows.Entities;
 using ShadowsOfShadows.Helpers;
 
 namespace ShadowsOfShadows.Consoles
@@ -13,6 +13,11 @@ namespace ShadowsOfShadows.Consoles
 		{
 			this.Position = new Point (posX, poxY);
 		}
-	}
+
+        internal void OpenChest(Chest chest)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
 

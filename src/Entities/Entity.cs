@@ -1,6 +1,7 @@
 ﻿using System;
 
 using ShadowsOfShadows.Renderables;
+using ShadowsOfShadows.Physics;
 
 namespace ShadowsOfShadows.Entities
 {

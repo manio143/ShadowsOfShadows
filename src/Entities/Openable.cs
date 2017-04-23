@@ -1,6 +1,7 @@
 ﻿using System;
 
 using ShadowsOfShadows.Renderables;
+using ShadowsOfShadows.Consoles;
 
 namespace ShadowsOfShadows.Entities
 {
@@ -13,22 +14,33 @@ namespace ShadowsOfShadows.Entities
             LockDificulty = lockDificulty;
         }
 
-        public bool TryToUnlock(/*Character character*/)
+        public bool TryToUnlock()
         {
             // maybe here should be some randomization
-            if(/*character.UnlockingSkills >= LockDificulty*/ true)
+            if(/* Screen.player.getUnlockingSkills() >= LockDificulty */ true)
             {
                 LockDificulty = 0;
-                // TODO: msg console print successfuly opened
+                Screen.msgConsole.PrintMessage("Lockpicking succeeded");
                 return true;
             }
             else
             {
-                // TODO: msg console print opening failed
+                Screen.msgConsole.PrintMessage("Lockpicking failed");
                 return false;
             }
         }
 
         public abstract void Interact();
+
+        protected bool CheckOpened()
+        {
+            if (LockDificulty == 0)
+                return true;
+            else
+            {
+                Screen.msgConsole.PrintMessage("Target is locked");
+                return false;
+            }
+        }
     }
 }
