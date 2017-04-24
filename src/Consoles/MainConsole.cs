@@ -3,6 +3,7 @@ using System.Linq;
 using Microsoft.Xna.Framework;
 
 using ShadowsOfShadows.Renderables;
+using ShadowsOfShadows.Entities;
 
 namespace ShadowsOfShadows.Consoles
 {

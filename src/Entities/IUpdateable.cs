@@ -1,9 +1,9 @@
 ﻿using System;
 
-namespace ShadowsOfShadows
+namespace ShadowsOfShadows.Entities
 {
 	public interface IUpdateable
 	{
-		void Update(TimeSpan);
+		void Update(TimeSpan DeltaTime);
 	}
 }

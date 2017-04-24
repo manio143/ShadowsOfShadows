@@ -2,7 +2,7 @@
 
 using ShadowsOfShadows.Renderables;
 
-namespace ShadowsOfShadows
+namespace ShadowsOfShadows.Entities
 {
 	public abstract class Entity
 	{

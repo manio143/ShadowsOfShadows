@@ -1,11 +1,14 @@
 ﻿using System;
 
-namespace ShadowsOfShadows
+namespace ShadowsOfShadows.Entities
 {
 	public class Character : Entity, IInteractable, IUpdateable
 	{
-		public Character()
+		public string Name { get; }
+
+		public Character(string name)
 		{
+			this.Name = name;
 		}
 
 		public void Interact()

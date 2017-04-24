@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ShadowsOfShadows
+namespace ShadowsOfShadows.Entities
 {
 	public interface IInteractable
 	{

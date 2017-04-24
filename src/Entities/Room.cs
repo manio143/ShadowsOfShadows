@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ShadowsOfShadows
+namespace ShadowsOfShadows.Entities
 {
 	public class Room
 	{

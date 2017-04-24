@@ -1,11 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
 
-namespace ShadowsOfShadows
+namespace ShadowsOfShadows.Entities
 {
-	public class Player
+	public enum Skill
 	{
-		public Player()
+
+	}
+
+	public class Player : Character
+	{
+		public Dictionary<Skill, int> Skills { get; }
+
+		public Player(string name) : base(name)
 		{
+			Skills = new Dictionary<Skill, int>();
 		}
 	}
 }
