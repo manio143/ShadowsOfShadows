@@ -58,6 +58,7 @@
     <Compile Include="Entities\IUpdateable.cs" />
     <Compile Include="Entities\Character.cs" />
     <Compile Include="Entities\Player.cs" />
+    <Compile Include="Items\Item.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -66,6 +67,7 @@
     <Folder Include="Helpers\" />
     <Folder Include="Physics\" />
     <Folder Include="Consoles\" />
+    <Folder Include="Items\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="MonoGame.Framework.dll.config">
