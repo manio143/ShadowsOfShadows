@@ -1,7 +1,5 @@
-﻿using System;
 
-using ShadowsOfShadows.Renderables;
-
+using System;
 
 namespace ShadowsOfShadows.Entities
 {
