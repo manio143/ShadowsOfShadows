@@ -2,12 +2,17 @@
 using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+
+using ShadowsOfShadows.Entities;
 using ShadowsOfShadows.Renderables;
+
 using Keyboard = SadConsole.Input.Keyboard;
 
 namespace ShadowsOfShadows.Consoles
 {
-	public class TestEntity : Entity {}
+	public class TestEntity : Entity {
+        public TestEntity(): base(new ConsoleRenderable('A')) { }
+    }
 
 	public class MainConsole : Console
 	{

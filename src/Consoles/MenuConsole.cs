@@ -1,11 +1,15 @@
 ﻿using System;
 
 using Microsoft.Xna.Framework;
+
 using SadConsole;
 using ShadowsOfShadows.Helpers;
 
+using ShadowsOfShadows.Entities;
+
 namespace ShadowsOfShadows.Consoles
 {
+
     public enum MainMenuOptions
     {
         [Display("Equipment")]
@@ -79,6 +83,12 @@ namespace ShadowsOfShadows.Consoles
                     throw new ArgumentOutOfRangeException();
             }
         }
+
+     public void OpenChest(Chest chest)
+     {
+            throw new NotImplementedException();
+      }
+
     }
 }
 
