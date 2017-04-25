@@ -59,6 +59,8 @@
     <Compile Include="Entities\IInteractable.cs" />
     <Compile Include="Entities\IUpdateable.cs" />
     <Compile Include="Entities\Character.cs" />
+    <Compile Include="Entities\Player.cs" />
+    <Compile Include="Items\Item.cs" />
     <Compile Include="Entities\NPC.cs" />
     <Compile Include="Entities\Monster.cs" />
   </ItemGroup>
@@ -69,6 +71,7 @@
     <Folder Include="Helpers\" />
     <Folder Include="Physics\" />
     <Folder Include="Consoles\" />
+    <Folder Include="Items\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="MonoGame.Framework.dll.config">

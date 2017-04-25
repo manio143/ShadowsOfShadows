@@ -1,14 +1,38 @@
-﻿using System;
+using System;
+using System.Collections.Generic;
+using ShadowsOfShadows.Items;
 
-namespace ShadowsOfShadows
+namespace ShadowsOfShadows.Entities
 {
 	public class Character : Entity, IInteractable, IUpdateable
 	{
-		public Character ()
+		public string Name { get; }
+
+		public List<Item> Equipment { get; }
+
+		public Character(string name)
 		{
+			this.Name = name;
+			this.Equipment = new List<Item>();
 		}
 
-		public double Health { get; set; }
+		public Character(string name, List<Item> equipment) : this(name)
+		{
+			this.Equipment = equipment;
+		}
+
+
+		public void Interact()
+		{
+
+		}
+
+		public void Update(TimeSpan deltaTime)
+		{
+
+		}
+    
+    public double Health { get; set; }
 
 		public double AttackPower { get; set; }
 
@@ -27,4 +51,3 @@ namespace ShadowsOfShadows
 		}
 	}
 }
-

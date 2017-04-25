@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace ShadowsOfShadows.Entities
 {
@@ -12,4 +12,3 @@ namespace ShadowsOfShadows.Entities
 		}
 	}
 }
-

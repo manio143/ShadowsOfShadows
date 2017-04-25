@@ -1,21 +1,35 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using ShadowsOfShadows.Items;
 
 namespace ShadowsOfShadows.Entities
 {
-    public class Player
-    {
-        public void takeDamager(int damage)
-        {
-            throw new NotImplementedException();
-        }
+	public enum Skill
+	{
 
-        internal int getUnlockingSkills()
+	}
+
+	public class Player : Character
+	{
+		public int Level { get; }
+
+		public Dictionary<Skill, int> Skills { get; }
+
+		public Player(string name) : base(name)
+		{
+			this.Level = 1;
+			this.Skills = new Dictionary<Skill, int>();
+		}
+
+		public Player(string name, List<Item> equipment, Dictionary<Skill, int> skills) : base(name, equipment)
+		{
+			this.Level = 1;
+			this.Skills = skills;
+		}
+    
+        public int UnlockingSkillLevel
         {
-            throw new NotImplementedException();
+            get { throw new NotImplementedException(); }
         }
-    }
+	}
 }
