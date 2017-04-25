@@ -63,6 +63,17 @@
     <Compile Include="Items\Item.cs" />
     <Compile Include="Entities\NPC.cs" />
     <Compile Include="Entities\Monster.cs" />
+    <Compile Include="Entities\Chest.cs" />
+    <Compile Include="Entities\Corpse.cs" />
+    <Compile Include="Entities\Door.cs" />
+    <Compile Include="Entities\NonInteractive.cs" />
+    <Compile Include="Entities\Openable.cs" />
+    <Compile Include="Entities\Sign.cs" />
+    <Compile Include="Entities\Stone.cs" />
+    <Compile Include="Entities\Switch.cs" />
+    <Compile Include="Entities\Thing.cs" />
+    <Compile Include="Entities\TrapChest.cs" />
+    <Compile Include="Entities\Wall.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

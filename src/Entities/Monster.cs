@@ -1,10 +1,10 @@
 ﻿using System;
 
-namespace ShadowsOfShadows
+namespace ShadowsOfShadows.Entities
 {
 	public class Monster : Character
 	{
-		public Monster ()
+		public Monster () : base("Monster", 'M')
 		{
 		}
 	}

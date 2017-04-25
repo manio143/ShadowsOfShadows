@@ -21,7 +21,7 @@ namespace ShadowsOfShadows.Entities
             if(CheckOpened())
             {
                 //TODO: change current console to menu console
-                Screen.menuConsole.OpenChest(this);
+                Screen.MenuConsole.OpenChest(this);
             }
         }
     }

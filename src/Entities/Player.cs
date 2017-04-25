@@ -15,13 +15,13 @@ namespace ShadowsOfShadows.Entities
 
 		public Dictionary<Skill, int> Skills { get; }
 
-		public Player(string name) : base(name)
+		public Player(string name) : base(name, 'P')
 		{
 			this.Level = 1;
 			this.Skills = new Dictionary<Skill, int>();
 		}
 
-		public Player(string name, List<Item> equipment, Dictionary<Skill, int> skills) : base(name, equipment)
+		public Player(string name, List<Item> equipment, Dictionary<Skill, int> skills) : base(name, 'P', equipment)
 		{
 			this.Level = 1;
 			this.Skills = skills;
