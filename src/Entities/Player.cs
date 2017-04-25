@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using ShadowsOfShadows.Items;
 
@@ -26,5 +26,10 @@ namespace ShadowsOfShadows.Entities
 			this.Level = 1;
 			this.Skills = skills;
 		}
+    
+        public int UnlockingSkillLevel
+        {
+            get { throw new NotImplementedException(); }
+        }
 	}
 }

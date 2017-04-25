@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using ShadowsOfShadows.Items;
 
@@ -30,6 +30,24 @@ namespace ShadowsOfShadows.Entities
 		public void Update(TimeSpan deltaTime)
 		{
 
+		}
+    
+    public double Health { get; set; }
+
+		public double AttackPower { get; set; }
+
+		public double DefencePower { get; set; }
+
+		public double Mana { get; set; }
+
+		public bool Immortal { get; set; }
+
+		public double MagicPower { get; set; }
+
+		public void Attack(Character character)
+		{
+			this.Health -= character.DefencePower;
+			character.Health -= this.AttackPower;
 		}
 	}
 }

@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 
 using ShadowsOfShadows.Renderables;
+using ShadowsOfShadows.Physics;
 
 namespace ShadowsOfShadows.Entities
 {
@@ -11,10 +12,10 @@ namespace ShadowsOfShadows.Entities
 		public IRenderable Renderable { get; set; }
 
 
-		public Entity ()
+		public Entity ( IRenderable renderable)
 		{
 			Transform = new Transform ();
+            Renderable = renderable;
 		}
 	}
 }
-
