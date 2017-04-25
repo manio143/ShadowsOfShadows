@@ -19,7 +19,7 @@ namespace ShadowsOfShadows.Entities
         public void Interact()
         {
             Value = !Value;
-            Screen.msgConsole.PrintMessage("Switch has been set to " + Value);
+			Screen.MessageConsole.PrintMessage("Switch has been set to " + Value);
         }
     }
 }

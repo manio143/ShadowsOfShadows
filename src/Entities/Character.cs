@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using ShadowsOfShadows.Items;
+using ShadowsOfShadows.Helpers;
 
 namespace ShadowsOfShadows.Entities
 {
@@ -10,13 +11,13 @@ namespace ShadowsOfShadows.Entities
 
 		public List<Item> Equipment { get; }
 
-		public Character(string name)
+		public Character(string name, char renderChar) : base(new Renderables.ConsoleRenderable(renderChar))
 		{
 			this.Name = name;
 			this.Equipment = new List<Item>();
 		}
 
-		public Character(string name, List<Item> equipment) : this(name)
+		public Character(string name, char renderChar, List<Item> equipment) : this(name, renderChar)
 		{
 			this.Equipment = equipment;
 		}

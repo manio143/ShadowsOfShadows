@@ -1,10 +1,10 @@
 ﻿using System;
 
-namespace ShadowsOfShadows
+namespace ShadowsOfShadows.Entities
 {
 	public class NPC : Character
 	{
-		public NPC ()
+		public NPC () : base("NPC", 'N')
 		{
 			Immortal = true;
 		}

@@ -16,7 +16,7 @@ namespace ShadowsOfShadows.Entities
 
         public void Interact()
         {
-            Screen.msgConsole.PrintMessage(Text);
+			Screen.MessageConsole.PrintMessageAndWait(Text);
         }
     }
 }
