@@ -1,9 +1,12 @@
 ﻿using SadConsole;
 using System.Linq;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 
 using ShadowsOfShadows.Entities;
 using ShadowsOfShadows.Renderables;
+
+using Keyboard = SadConsole.Input.Keyboard;
 
 namespace ShadowsOfShadows.Consoles
 {
@@ -30,6 +33,14 @@ namespace ShadowsOfShadows.Consoles
 				consoleObject.Draw (delta);
 			}
 		}
+
+	    public override bool ProcessKeyboard(Keyboard info)
+	    {
+	        if(info.IsKeyPressed(Keys.Escape))
+	            Screen.MenuConsole.OpenMainMenu();
+
+	        return true;
+	    }
 	}
 }
 

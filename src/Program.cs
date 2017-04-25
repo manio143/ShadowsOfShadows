@@ -19,7 +19,9 @@ namespace ShadowsOfShadows
 
 		public static void Initialize()
 		{
-			Global.CurrentScreen = new Screen (WIDTH, HEIGHT);
+		    var screen = new Screen(WIDTH, HEIGHT);
+		    Global.CurrentScreen = screen;
+            Global.FocusedConsoles.Set(screen);
 		}
 	}
 }
