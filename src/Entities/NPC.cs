@@ -6,12 +6,7 @@ namespace ShadowsOfShadows
 	{
 		public NPC ()
 		{
-		}
-
-		public bool Immortal 
-		{
-			get { return true; }
-			set { }
+			Immortal = true;
 		}
 	}
 }
