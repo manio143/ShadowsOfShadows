@@ -1,9 +1,10 @@
-﻿using System;
 
-namespace ShadowsOfShadows
+using System;
+
+namespace ShadowsOfShadows.Entities
 {
-	public interface IInteractable
-	{
-		void Interact();
-	}
+    public interface IInteractable
+    {
+        void Interact();
+    }
 }

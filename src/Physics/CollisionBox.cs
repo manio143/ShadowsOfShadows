@@ -26,6 +26,11 @@ namespace ShadowsOfShadows.Physics
 
 			return false;
 		}
-	}
+
+        public void TurnOff()
+        {
+            Polygon.Rectangles.Clear();
+        }
+    }
 }
 

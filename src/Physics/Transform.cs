@@ -2,12 +2,13 @@
 
 using Microsoft.Xna.Framework;
 
-namespace ShadowsOfShadows
+namespace ShadowsOfShadows.Physics
 {
 	public class Transform
 	{
 		public Point Position{ get; set;}
 		public Direction Direction{ get; set;}
+        public CollisionBox Collision { get; set; }
 
 	}
 
