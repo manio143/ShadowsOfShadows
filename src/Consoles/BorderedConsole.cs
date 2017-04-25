@@ -28,7 +28,7 @@ namespace ShadowsOfShadows.Consoles
 
 		public override void Draw(System.TimeSpan delta)
 		{
-			Global.DrawCalls.Add(new DrawCallSurface(borderSurface, this.relativePosition - new Point(1), UsePixelPositioning));
+			Global.DrawCalls.Add(new DrawCallSurface(borderSurface, this.Position - new Point(1), UsePixelPositioning));
 
 			base.Draw (delta);
 		}
