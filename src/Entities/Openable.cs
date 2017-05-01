@@ -20,12 +20,12 @@ namespace ShadowsOfShadows.Entities
             if(/* Screen.player.getUnlockingSkills() >= LockDificulty */ true)
             {
                 LockDificulty = 0;
-                Screen.MessageConsole.PrintMessage("Lockpicking succeeded");
+				Screen.MessageConsole.PrintMessage("Lockpicking succeeded");
                 return true;
             }
             else
             {
-                Screen.MessageConsole.PrintMessage("Lockpicking failed");
+				Screen.MessageConsole.PrintMessage("Lockpicking failed");
                 return false;
             }
         }
@@ -38,7 +38,7 @@ namespace ShadowsOfShadows.Entities
                 return true;
             else
             {
-                Screen.MessageConsole.PrintMessage("Target is locked");
+				Screen.MessageConsole.PrintMessage("Target is locked");
                 return false;
             }
         }

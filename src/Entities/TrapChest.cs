@@ -22,7 +22,7 @@ namespace ShadowsOfShadows.Entities
             {
                 Active = false;
                 //Screen.player.takeDamage(Damage); TODO:
-                Screen.MessageConsole.PrintMessage("It's a trap!");
+				Screen.MessageConsole.PrintMessage("It's a trap!");
             }
 
             base.Interact();
