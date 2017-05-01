@@ -8,7 +8,7 @@ namespace ShadowsOfShadows.Items
 {
     public class LeatherHat : HeadArmor
     {
-        public LeatherHat(int dp) : base(dp)
+        public LeatherHat() : base(2)
         {
         }
     }

@@ -13,6 +13,9 @@ namespace ShadowsOfShadows.Items
         {
             AmountOfMana = amountOfMana;
         }
+        public ManaPotion() : this(5)
+        {
+        }
         public override void Use()
         {
             // Screen.player.Mana = Math.Min(Screen.player.Mana + AmountOfMana, Screen.player.MaxMana);
@@ -20,7 +23,7 @@ namespace ShadowsOfShadows.Items
     }
     public class StrongManaPotion : ManaPotion
     {
-        public StrongManaPotion(int amountOfMana) : base(amountOfMana)
+        public StrongManaPotion() : base(10)
         {
         }
     }

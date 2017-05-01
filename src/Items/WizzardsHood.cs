@@ -8,7 +8,7 @@ namespace ShadowsOfShadows.Items
 {
     public class WizzardsHood : HeadArmor
     {
-        public WizzardsHood(int dp) : base(dp)
+        public WizzardsHood() : base(1)
         {
         }
     }

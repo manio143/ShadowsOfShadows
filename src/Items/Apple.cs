@@ -5,14 +5,14 @@ namespace ShadowsOfShadows.Items
 {
     public class Apple : RegenerationConsumable
     {
-        public Apple(int regen) : base(regen)
+        public Apple() : base(3)
         {
         }
     }
 
     public class Beef : RegenerationConsumable
     {
-        public Beef(int regen) : base(regen)
+        public Beef() : base(5)
         {
         }
     }

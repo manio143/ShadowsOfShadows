@@ -8,7 +8,7 @@ namespace ShadowsOfShadows.Items
 {
     public class SteelHelmet : HeadArmor
     {
-        public SteelHelmet(int dp) : base(dp)
+        public SteelHelmet() : base(3)
         {
         }
     }

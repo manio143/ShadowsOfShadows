@@ -8,7 +8,7 @@ namespace ShadowsOfShadows.Items
 {
     public class WoodenShield : Shield
     {
-        public WoodenShield(int dp) : base(dp)
+        public WoodenShield() : base(1)
         {
         }
     }
