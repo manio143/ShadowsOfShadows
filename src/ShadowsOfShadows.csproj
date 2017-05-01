@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -40,15 +40,60 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Consoles\Messages.cs" />
+    <Compile Include="Entities\Chest.cs" />
+    <Compile Include="Entities\Corpse.cs" />
+    <Compile Include="Entities\Door.cs" />
+    <Compile Include="Entities\Entity.cs" />
+    <Compile Include="Entities\IInteractable.cs" />
+    <Compile Include="Entities\NonInteractive.cs" />
+    <Compile Include="Entities\Openable.cs" />
+    <Compile Include="Entities\Player.cs" />
+    <Compile Include="Entities\Room.cs" />
+    <Compile Include="Entities\Sign.cs" />
+    <Compile Include="Entities\Stone.cs" />
+    <Compile Include="Entities\Switch.cs" />
+    <Compile Include="Entities\Thing.cs" />
+    <Compile Include="Entities\TrapChest.cs" />
+    <Compile Include="Entities\Wall.cs" />
     <Compile Include="Helpers\EnumHelper.cs" />
+    <Compile Include="Items\Apple.cs" />
+    <Compile Include="Items\BodyArmor.cs" />
+    <Compile Include="Items\Bow.cs" />
+    <Compile Include="Items\Club.cs" />
+    <Compile Include="Items\Consumable.cs" />
+    <Compile Include="Items\DefensePotion.cs" />
+    <Compile Include="Items\FireRod.cs" />
+    <Compile Include="Items\HeadArmor.cs" />
+    <Compile Include="Items\HealthPotion.cs" />
+    <Compile Include="Items\IceRod.cs" />
+    <Compile Include="Items\Key.cs" />
+    <Compile Include="Items\LeatherHat.cs" />
+    <Compile Include="Items\LeatherJacket.cs" />
+    <Compile Include="Items\LeatherShoes.cs" />
+    <Compile Include="Items\LegsArmor.cs" />
+    <Compile Include="Items\MagicPotion.cs" />
+    <Compile Include="Items\ManaPotion.cs" />
+    <Compile Include="Items\QuestItem.cs" />
+    <Compile Include="Items\RegenerationConsumable.cs" />
+    <Compile Include="Items\Shield.cs" />
+    <Compile Include="Items\SteelBoots.cs" />
+    <Compile Include="Items\SteelChestplate.cs" />
+    <Compile Include="Items\SteelHelmet.cs" />
+    <Compile Include="Items\SteelShield.cs" />
+    <Compile Include="Items\StrengthPotion.cs" />
+    <Compile Include="Items\Sword.cs" />
+    <Compile Include="Items\TimedConsumable.cs" />
+    <Compile Include="Items\Weapon.cs" />
+    <Compile Include="Items\Wearable.cs" />
+    <Compile Include="Items\WizardsCape.cs" />
+    <Compile Include="Items\WizzardsHood.cs" />
+    <Compile Include="Items\WoodenShield.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Entities\Entity.cs" />
     <Compile Include="Physics\Transform.cs" />
     <Compile Include="Renderables\IRenderable.cs" />
     <Compile Include="Renderables\ConsoleRenderable.cs" />
     <Compile Include="Helpers\ConsoleObjects.cs" />
-    <Compile Include="Entities\Room.cs" />
     <Compile Include="Consoles\MessageConsole.cs" />
     <Compile Include="Consoles\MainConsole.cs" />
     <Compile Include="Consoles\Screen.cs" />
@@ -56,34 +101,10 @@
     <Compile Include="Consoles\BorderedConsole.cs" />
     <Compile Include="Physics\Polygon.cs" />
     <Compile Include="Physics\CollisionBox.cs" />
-    <Compile Include="Entities\IInteractable.cs" />
-    <Compile Include="Entities\IUpdateable.cs" />
-    <Compile Include="Entities\Character.cs" />
-    <Compile Include="Entities\Player.cs" />
     <Compile Include="Items\Item.cs" />
-    <Compile Include="Entities\NPC.cs" />
-    <Compile Include="Entities\Monster.cs" />
-    <Compile Include="Entities\Chest.cs" />
-    <Compile Include="Entities\Corpse.cs" />
-    <Compile Include="Entities\Door.cs" />
-    <Compile Include="Entities\NonInteractive.cs" />
-    <Compile Include="Entities\Openable.cs" />
-    <Compile Include="Entities\Sign.cs" />
-    <Compile Include="Entities\Stone.cs" />
-    <Compile Include="Entities\Switch.cs" />
-    <Compile Include="Entities\Thing.cs" />
-    <Compile Include="Entities\TrapChest.cs" />
-    <Compile Include="Entities\Wall.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ItemGroup>
-    <Folder Include="Entities\" />
-    <Folder Include="Renderables\" />
-    <Folder Include="Helpers\" />
-    <Folder Include="Physics\" />
-    <Folder Include="Consoles\" />
-    <Folder Include="Items\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="MonoGame.Framework.dll.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
