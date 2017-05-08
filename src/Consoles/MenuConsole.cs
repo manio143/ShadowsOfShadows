@@ -74,7 +74,7 @@ namespace ShadowsOfShadows.Consoles
                     //TODO: Show settings (should we have any)
                     break;
                 case MainMenuOptions.CloseMenu:
-                    PrintMessage("");
+                    PrintPlayerStats();
                     break;
                 case MainMenuOptions.Quit:
                     SadConsole.Game.Instance.Exit();
@@ -84,11 +84,23 @@ namespace ShadowsOfShadows.Consoles
             }
         }
 
-     public void OpenChest(Chest chest)
-     {
-            throw new NotImplementedException();
-      }
+        private void PrintPlayerStats()
+        {
+            PrintMessage(
+                "STATS\n\n" +
+                "HP       " + Screen.MainConsole.Player.Health + "\n" +
+                "Mana     " + Screen.MainConsole.Player.Mana + "\n" +
+                "AP       " + Screen.MainConsole.Player.AttackPower + "\n" +
+                "MP       " + Screen.MainConsole.Player.MagicPower + "\n" +
+                "DP       " + Screen.MainConsole.Player.DefencePower + "\n" +
+                "Level    " + Screen.MainConsole.Player.Level + "\n" +
+                "\n"
+            );
+        }
 
+        public void OpenChest(Chest chest)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
-
