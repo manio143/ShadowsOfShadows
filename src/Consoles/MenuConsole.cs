@@ -43,7 +43,7 @@ namespace ShadowsOfShadows.Consoles
             if (message is QuestionMessage)
             {
                 var qm = (QuestionMessage) message;
-                qm.Rows = qm.AnswerCount;
+                qm.Rows = qm.AnswersCount;
             }
             base.PrintMessage(message);
         }
@@ -84,7 +84,7 @@ namespace ShadowsOfShadows.Consoles
             }
         }
 
-        private void PrintPlayerStats()
+        public void PrintPlayerStats()
         {
             PrintMessage(
                 "STATS\n\n" +
