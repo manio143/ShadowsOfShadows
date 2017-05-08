@@ -30,6 +30,7 @@
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="SadConsole">
       <HintPath>packages\SadConsole.6.1.3\lib\net\SadConsole.dll</HintPath>
     </Reference>
@@ -41,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Consoles\Messages.cs" />
     <Compile Include="Helpers\EnumHelper.cs" />
+    <Compile Include="Helpers\GenericsHelper.cs" />
     <Compile Include="Helpers\PopularQuestions.cs" />
     <Compile Include="Items\AllowedItem.cs" />
     <Compile Include="Program.cs" />

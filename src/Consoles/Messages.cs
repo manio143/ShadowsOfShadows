@@ -96,11 +96,21 @@ namespace ShadowsOfShadows.Consoles
             get { return pointerIndex; }
             set
             {
-                pointerIndex = value % Positions.Count;
-                if (pointerIndex < 0) pointerIndex += Positions.Count;
-                WaitPointer.Position = Positions[pointerIndex] + new Point(-1, 0);
+                if (Positions.Count == 0)
+                {
+                    pointerIndex = 0;
+                    WaitPointer.IsVisible = false;
+                }
+                else
+                {
+                    pointerIndex = value % Positions.Count;
+                    if (pointerIndex < 0) pointerIndex += Positions.Count;
+                    WaitPointer.Position = Positions[pointerIndex] + new Point(-1, 0);
+                }
             }
         }
+
+        public int StartIndex { get; set; } = 0;
 
         protected List<Point> Positions = new List<Point>();
 
@@ -123,7 +133,7 @@ namespace ShadowsOfShadows.Consoles
             for (var i = 0; i < Other.Count; i++)
                 Other[i].Position = Positions[i];
 
-            PointerIndex = 0;
+            PointerIndex = StartIndex;
 
             Text.Position = console.Position + new Point(1, 1);
         }
@@ -230,6 +240,10 @@ namespace ShadowsOfShadows.Consoles
             {
                 ProcessItemWithEquipment(Answers[PointerIndex].Item1);
             }
+            if (info.IsKeyPressed(Keys.Escape))
+            {
+                Finished = true;
+            }
         }
 
         private void ProcessItemWithEquipment(Item item)
@@ -266,7 +280,8 @@ namespace ShadowsOfShadows.Consoles
         {
             var newMessage = Screen.MenuConsole.OpenChest(Chest);
             this.PostProcessing = null;
-            newMessage.PointerIndex = this.PointerIndex;
+            newMessage.StartIndex = this.PointerIndex;
+            Finished = true;
         }
     }
 }
