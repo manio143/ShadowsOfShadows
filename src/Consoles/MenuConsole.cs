@@ -40,9 +40,9 @@ namespace ShadowsOfShadows.Consoles
 
         protected override void PrintMessage(Message message)
         {
-            if (message is QuestionMessage)
+            if (message.IsInstanceOfGenericType(typeof(ChoiceMessage<>)))
             {
-                var qm = (QuestionMessage) message;
+                dynamic qm = message;
                 qm.Rows = qm.AnswersCount;
             }
             base.PrintMessage(message);
