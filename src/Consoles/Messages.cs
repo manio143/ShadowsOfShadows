@@ -210,4 +210,63 @@ namespace ShadowsOfShadows.Consoles
             }
         }
     }
+
+    public class ChestMessage : ChoiceMessage<Item>
+    {
+        public Chest Chest { get; }
+
+        public ChestMessage(Chest chest)
+            : base(chest.Items
+                .Select(item => new Tuple<Item, string>(item, item.ToString()))
+                , "Chest")
+        {
+            Chest = chest;
+        }
+
+        public override void ProcessKeyboard(Keyboard info)
+        {
+            base.ProcessKeyboard(info);
+            if (info.IsKeyPressed(Keys.Enter) || info.IsKeyPressed(Keys.Space))
+            {
+                ProcessItemWithEquipment(Answers[PointerIndex].Item1);
+            }
+        }
+
+        private void ProcessItemWithEquipment(Item item)
+        {
+            var similar = Screen.MainConsole.Player.Equipment
+                .FirstOrDefault(i => item.IsLike(i) && item.Allowed == AllowedItem.Single);
+            if (similar == null)
+            {
+                Screen.MainConsole.Player.Equipment.Add(item);
+                Chest.Items.Remove(item);
+                ResetView();
+            }
+            else
+            {
+                var question = Screen.MessageConsole.AskQuestion(
+                    "You already have a similar item and cannot have both. Do you want to swap?",
+                    typeof(YesNoQuestion));
+                question.DefaultAnswer = YesNoQuestion.No;
+                question.PostProcessing = message =>
+                {
+                    if ((YesNoQuestion) (message as QuestionMessage).Result == YesNoQuestion.Yes)
+                    {
+                        Screen.MainConsole.Player.Equipment.Remove(similar);
+                        Screen.MainConsole.Player.Equipment.Add(item);
+                        Chest.Items.Remove(item);
+                        Chest.Items.Add(similar);
+                        ResetView();
+                    }
+                };
+            }
+        }
+
+        private void ResetView()
+        {
+            var newMessage = Screen.MenuConsole.OpenChest(Chest);
+            this.PostProcessing = null;
+            newMessage.PointerIndex = this.PointerIndex;
+        }
+    }
 }

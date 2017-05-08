@@ -98,9 +98,12 @@ namespace ShadowsOfShadows.Consoles
             );
         }
 
-        public void OpenChest(Chest chest)
+        public ChestMessage OpenChest(Chest chest)
         {
-            throw new NotImplementedException();
+            var message = new ChestMessage(chest);
+            PrintMessageAndWait(message);
+            message.PostProcessing = msg => PrintPlayerStats();
+            return message;
         }
     }
 }
