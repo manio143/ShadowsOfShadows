@@ -74,6 +74,10 @@
     <Compile Include="Entities\Thing.cs" />
     <Compile Include="Entities\TrapChest.cs" />
     <Compile Include="Entities\Wall.cs" />
+    <Compile Include="Entities\Projectile.cs" />
+    <Compile Include="Helpers\Skill.cs" />
+    <Compile Include="Helpers\SkillFactory.cs" />
+    <Compile Include="Helpers\Fraction.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
