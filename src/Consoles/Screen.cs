@@ -26,6 +26,7 @@ namespace ShadowsOfShadows
     public class TestItem : Item
     {
         public override AllowedItem Allowed { get; }
+
         public override bool IsLike(Item item)
         {
             return item is TestItem;
@@ -68,8 +69,6 @@ namespace ShadowsOfShadows
                         });
                     MenuConsole.OpenChest(chest);
                 };
-
-
         }
 
         public override bool ProcessKeyboard(Keyboard state)
