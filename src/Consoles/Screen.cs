@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using SadConsole.Input;
 using ShadowsOfShadows.Consoles;
@@ -32,20 +32,9 @@ namespace ShadowsOfShadows
             return item is TestItem;
         }
 
-        private string str;
-
-        public TestItem(AllowedItem allowed) : base("Test", "Stat1")
+        public TestItem(AllowedItem allowed) : base(allowed == AllowedItem.Multiple ? "MultipleItem" : "SingleItem", "")
         {
             Allowed = allowed;
-            if (allowed == AllowedItem.Multiple)
-                str = "MultipleItem";
-            else
-                str = "SingleItem";
-        }
-
-        public override string ToString()
-        {
-            return str;
         }
     }
 
