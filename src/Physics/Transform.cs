@@ -11,12 +11,5 @@ namespace ShadowsOfShadows.Physics
         public CollisionBox Collision { get; set; }
 
 	}
-
-	public enum Direction {
-		Up,
-		Down,
-		Left,
-		Right
-	}
 }
 
