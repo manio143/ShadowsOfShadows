@@ -2,11 +2,13 @@
 
 namespace ShadowsOfShadows.Items
 {
-	public class Item
+	public abstract class Item
 	{
-		public Item()
-		{
-			
-		}
+	    public abstract AllowedItem Allowed { get; }
+
+	    public virtual bool IsLike(Item item)
+	    {
+	        return false;
+	    }
 	}
 }

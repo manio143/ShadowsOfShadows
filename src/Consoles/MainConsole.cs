@@ -16,11 +16,15 @@ namespace ShadowsOfShadows.Consoles
 
 	public class MainConsole : Console
 	{
+	    public Player Player { get; private set; }
+
 		private Room testRoom = new Room (new[]{ new TestEntity () });
 		public MainConsole (int width, int height) : base(width, height)
 		{
 			testRoom.Entities.First ().Renderable = new ConsoleRenderable ('A');
 			testRoom.Entities.First ().Transform.Position = new Point (1,1);
+
+		    Player = new Player("Player");
 		}
 
 		public override void Draw (System.TimeSpan delta)

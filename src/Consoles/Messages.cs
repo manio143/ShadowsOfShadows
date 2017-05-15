@@ -6,13 +6,17 @@ using System.Globalization;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using SadConsole.GameHelpers;
+using ShadowsOfShadows.Entities;
 using ShadowsOfShadows.Helpers;
+using ShadowsOfShadows.Items;
 using Keyboard = SadConsole.Input.Keyboard;
 
 namespace ShadowsOfShadows.Consoles
 {
     public abstract class Message
     {
+        public const int PointerGlyph = 26;
+
         public abstract GameObject Text { get; }
         public abstract GameObject WaitPointer { get; }
         public abstract List<GameObject> Other { get; }
@@ -75,6 +79,100 @@ namespace ShadowsOfShadows.Consoles
         }
     }
 
+    public class ChoiceMessage<T> : Message
+    {
+        protected List<Tuple<T, string>> Answers;
+        public int AnswersCount => Answers.Count;
+
+        public int Rows { get; set; } = 1;
+
+        public override GameObject Text { get; }
+        public override GameObject WaitPointer { get; }
+        public override List<GameObject> Other { get; }
+
+        private int pointerIndex;
+        protected int PointerIndex
+        {
+            get { return pointerIndex; }
+            set
+            {
+                if (Positions.Count == 0)
+                {
+                    pointerIndex = 0;
+                    WaitPointer.IsVisible = false;
+                }
+                else
+                {
+                    pointerIndex = value % Positions.Count;
+                    if (pointerIndex < 0) pointerIndex += Positions.Count;
+                    WaitPointer.Position = Positions[pointerIndex] + new Point(-1, 0);
+                }
+            }
+        }
+
+        public int StartIndex { get; set; } = 0;
+
+        protected List<Point> Positions = new List<Point>();
+
+        public ChoiceMessage(IEnumerable<Tuple<T, string>> answers, string question = null)
+        {
+            Answers = new List<Tuple<T, string>>(answers);
+            WaitPointer = ConsoleObjects.CreateFromGlyph(PointerGlyph);
+            Other = new List<GameObject>();
+            if (question != null)
+                Text = ConsoleObjects.CreateFromString(question);
+        }
+
+        public override void Create(MessageConsole console)
+        {
+            Other.Clear();
+            Other.AddRange(Answers.Select(t => ConsoleObjects.CreateFromString(t.Item2)));
+
+            ComputePositions(console);
+
+            for (var i = 0; i < Other.Count; i++)
+                Other[i].Position = Positions[i];
+
+            PointerIndex = StartIndex;
+
+            Text.Position = console.Position + new Point(1, 1);
+        }
+
+        private void ComputePositions(MessageConsole console)
+        {
+            var columns = (int) Math.Ceiling(Answers.Count * 1.0 / Rows);
+            var last = 1;
+            for (var i = 0; i < columns; i++)
+            {
+                for (var j = 0; j < Rows && i * Rows + j < Answers.Count; j++)
+                    Positions.Add(console.Position + new Point(last, j + 1 + (Text == null ? 0 : 2)));
+
+                var maxLegth = 0;
+                for (var j = 0; j < Rows && i * Rows + j < Answers.Count; j++)
+                    maxLegth = Math.Max(maxLegth, Answers[i * Rows + j].Item2.Length);
+                last += maxLegth + 2;
+            }
+        }
+
+        public override void ProcessKeyboard(Keyboard info)
+        {
+            base.ProcessKeyboard(info);
+            MovePointer(info);
+        }
+
+        protected void MovePointer(Keyboard info)
+        {
+            if (info.IsKeyPressed(Keys.Left))
+                PointerIndex -= Rows;
+            else if (info.IsKeyPressed(Keys.Right))
+                PointerIndex += Rows;
+            else if (info.IsKeyPressed(Keys.Down))
+                PointerIndex += 1;
+            else if (info.IsKeyPressed(Keys.Up))
+                PointerIndex -= 1;
+        }
+    }
+
     [AttributeUsage(AttributeTargets.All)]
     public class DisplayAttribute : Attribute
     {
@@ -86,111 +184,104 @@ namespace ShadowsOfShadows.Consoles
         }
     }
 
-    public class QuestionMessage : Message
+    public class QuestionMessage : ChoiceMessage<Enum>
     {
-        private List<Tuple<Enum, string>> answers;
-
-        public int Rows { get; set; } = 3;
-
-        public int AnswerCount { get; }
-
         public QuestionMessage(Type answersType, string question = null)
-        {
-            answers = answersType.GetEnumValues()
+            :base(answersType.GetEnumValues()
                 .Cast<Enum>()
                 .Select(@enum => new Tuple<Enum, string>(@enum, @enum.GetAttributeOfType<DisplayAttribute>()?.Title))
                 .Where(tp => tp.Item2 != null)
-                .ToList();
-            AnswerCount = answers.Count;
-
-            if (question != null)
-            {
-                Text = ConsoleObjects.CreateFromString(question);
-                Rows = 2;
-            }
-        }
-
-        public override GameObject Text { get; } = null;
-
-        private GameObject waitPointer;
-        public override GameObject WaitPointer => waitPointer;
-
-        private int pointerIndex;
-
-        private int PointerIndex
+                , question)
         {
-            get { return pointerIndex; }
-            set
-            {
-                pointerIndex = value % positions.Count;
-                if (pointerIndex < 0) pointerIndex += positions.Count;
-                waitPointer.Position = positions[pointerIndex] + new Point(-1, 0);
-            }
+            if (question != null)
+                Rows = 2;
+            else
+                Rows = 3;
         }
 
-        private List<GameObject> consoleObjects = new List<GameObject>();
-        private List<Point> positions = new List<Point>();
-        public override List<GameObject> Other => consoleObjects;
-
-        private Enum result;
-        public Enum Result => result;
+        public Enum Result { get; private set; }
 
         public Enum DefaultAnswer { get; set; }
-
-        public override void Create(MessageConsole console)
-        {
-            waitPointer = ConsoleObjects.CreateFromGlyph(26);
-            consoleObjects = answers.Select(t => ConsoleObjects.CreateFromString(t.Item2)).ToList();
-
-            ComputePositions(console);
-
-            for (var i = 0; i < consoleObjects.Count; i++)
-                consoleObjects[i].Position = positions[i];
-
-            PointerIndex = 0;
-
-            Text.Position = console.Position + new Point(1, 1);
-        }
-
-        private void ComputePositions(MessageConsole console)
-        {
-            var columns = (int) Math.Ceiling(answers.Count * 1.0 / Rows);
-            var last = 1;
-            for (var i = 0; i < columns; i++)
-            {
-                for (var j = 0; j < Rows && i * Rows + j < answers.Count; j++)
-                    positions.Add(console.Position + new Point(last, j + 1 + (Text == null ? 0 : 2)));
-
-                var maxLegth = 0;
-                for (var j = 0; j < Rows && i * Rows + j < answers.Count; j++)
-                    maxLegth = Math.Max(maxLegth, answers[i * Rows + j].Item2.Length);
-                last += maxLegth + 2;
-            }
-        }
 
         public override void ProcessKeyboard(Keyboard info)
         {
             base.ProcessKeyboard(info);
-            if (info.IsKeyPressed(Keys.Left))
-                PointerIndex -= Rows;
-            else if (info.IsKeyPressed(Keys.Right))
-                PointerIndex += Rows;
-            else if (info.IsKeyPressed(Keys.Down))
-                PointerIndex += 1;
-            else if (info.IsKeyPressed(Keys.Up))
-                PointerIndex -= 1;
 
             if (info.IsKeyPressed(Keys.Enter) || info.IsKeyPressed(Keys.Space))
             {
-                result = answers[PointerIndex].Item1;
+                Result = Answers[PointerIndex].Item1;
                 Finished = true;
             }
 
             if (info.IsKeyPressed(Keys.Escape) && DefaultAnswer != null)
             {
-                result = DefaultAnswer;
+                Result = DefaultAnswer;
                 Finished = true;
             }
+        }
+    }
+
+    public class ChestMessage : ChoiceMessage<Item>
+    {
+        public Chest Chest { get; }
+
+        public ChestMessage(Chest chest)
+            : base(chest.Items
+                .Select(item => new Tuple<Item, string>(item, item.ToString()))
+                , "Chest")
+        {
+            Chest = chest;
+        }
+
+        public override void ProcessKeyboard(Keyboard info)
+        {
+            base.ProcessKeyboard(info);
+            if (info.IsKeyPressed(Keys.Enter) || info.IsKeyPressed(Keys.Space))
+            {
+                ProcessItemWithEquipment(Answers[PointerIndex].Item1);
+            }
+            if (info.IsKeyPressed(Keys.Escape))
+            {
+                Finished = true;
+            }
+        }
+
+        private void ProcessItemWithEquipment(Item item)
+        {
+            var similar = Screen.MainConsole.Player.Equipment
+                .FirstOrDefault(i => item.IsLike(i) && item.Allowed == AllowedItem.Single);
+            if (similar == null)
+            {
+                Screen.MainConsole.Player.Equipment.Add(item);
+                Chest.Items.Remove(item);
+                ResetView();
+            }
+            else
+            {
+                var question = Screen.MessageConsole.AskQuestion(
+                    "You already have a similar item and cannot have both. Do you want to swap?",
+                    typeof(YesNoQuestion));
+                question.DefaultAnswer = YesNoQuestion.No;
+                question.PostProcessing = message =>
+                {
+                    if ((YesNoQuestion) (message as QuestionMessage).Result == YesNoQuestion.Yes)
+                    {
+                        Screen.MainConsole.Player.Equipment.Remove(similar);
+                        Screen.MainConsole.Player.Equipment.Add(item);
+                        Chest.Items.Remove(item);
+                        Chest.Items.Add(similar);
+                        ResetView();
+                    }
+                };
+            }
+        }
+
+        private void ResetView()
+        {
+            var newMessage = Screen.MenuConsole.OpenChest(Chest);
+            this.PostProcessing = null;
+            newMessage.StartIndex = this.PointerIndex;
+            Finished = true;
         }
     }
 }
