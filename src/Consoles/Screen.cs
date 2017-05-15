@@ -33,7 +33,7 @@ namespace ShadowsOfShadows
 
         private string str;
 
-        public TestItem(AllowedItem allowed)
+        public TestItem(AllowedItem allowed) : base("Test", "Stat1")
         {
             Allowed = allowed;
             if (allowed == AllowedItem.Multiple)

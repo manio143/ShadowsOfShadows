@@ -17,7 +17,7 @@ namespace ShadowsOfShadows.Entities
         public bool TryToUnlock()
         {
             // maybe here should be some randomization
-            if(/* Screen.player.getUnlockingSkills() >= LockDificulty */ true)
+            if( Screen.MainConsole.Player.UnlockingSkillLevel >= LockDificulty)
             {
                 LockDificulty = 0;
 				Screen.MessageConsole.PrintMessage("Lockpicking succeeded");

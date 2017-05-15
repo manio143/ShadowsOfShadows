@@ -21,7 +21,7 @@ namespace ShadowsOfShadows.Entities
             if(Active)
             {
                 Active = false;
-                //Screen.player.takeDamage(Damage); TODO:
+                Screen.MainConsole.Player.TakeDamage(Damage);
 				Screen.MessageConsole.PrintMessage("It's a trap!");
             }
 

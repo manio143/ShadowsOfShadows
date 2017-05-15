@@ -33,22 +33,29 @@ namespace ShadowsOfShadows.Entities
 
 		}
     
-    public double Health { get; set; }
+        public int Health { get; set; }
+        public int MaxHealth { get; set; }
 
-		public double AttackPower { get; set; }
+        public int AttackPower { get; set; }
 
-		public double DefencePower { get; set; }
+		public int DefencePower { get; set; }
 
-		public double Mana { get; set; }
+		public int Mana { get; set; }
+        public int MaxMana { get; set; }
 
-		public bool Immortal { get; set; }
+        public bool Immortal { get; set; }
 
-		public double MagicPower { get; set; }
+		public int MagicPower { get; set; }
 
 		public void Attack(Character character)
 		{
 			this.Health -= character.DefencePower;
 			character.Health -= this.AttackPower;
 		}
+
+        public void TakeDamage(int amount)
+        {
+            Health = Math.Max(Health - Math.Min(DefencePower - amount, 0), 0);
+        }
 	}
 }
