@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -78,6 +78,39 @@
     <Compile Include="Entities\Thing.cs" />
     <Compile Include="Entities\TrapChest.cs" />
     <Compile Include="Entities\Wall.cs" />
+    <Compile Include="Items\AllowedItem.cs" />
+    <Compile Include="Items\Apple.cs" />
+    <Compile Include="Items\BodyArmor.cs" />
+    <Compile Include="Items\Bow.cs" />
+    <Compile Include="Items\Club.cs" />
+    <Compile Include="Items\Consumable.cs" />
+    <Compile Include="Items\DefensePotion.cs" />
+    <Compile Include="Items\FireRod.cs" />
+    <Compile Include="Items\HeadArmor.cs" />
+    <Compile Include="Items\HealthPotion.cs" />
+    <Compile Include="Items\IceRod.cs" />
+    <Compile Include="Items\Key.cs" />
+    <Compile Include="Items\LeatherHat.cs" />
+    <Compile Include="Items\LeatherJacket.cs" />
+    <Compile Include="Items\LeatherShoes.cs" />
+    <Compile Include="Items\LegsArmor.cs" />
+    <Compile Include="Items\MagicPotion.cs" />
+    <Compile Include="Items\ManaPotion.cs" />
+    <Compile Include="Items\QuestItem.cs" />
+    <Compile Include="Items\RegenerationConsumable.cs" />
+    <Compile Include="Items\Shield.cs" />
+    <Compile Include="Items\SteelBoots.cs" />
+    <Compile Include="Items\SteelChestplate.cs" />
+    <Compile Include="Items\SteelHelmet.cs" />
+    <Compile Include="Items\SteelShield.cs" />
+    <Compile Include="Items\StrengthPotion.cs" />
+    <Compile Include="Items\Sword.cs" />
+    <Compile Include="Items\TimedConsumable.cs" />
+    <Compile Include="Items\Weapon.cs" />
+    <Compile Include="Items\Wearable.cs" />
+    <Compile Include="Items\WizardsCape.cs" />
+    <Compile Include="Items\WizardsHood.cs" />
+    <Compile Include="Items\WoodenShield.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
