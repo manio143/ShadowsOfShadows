@@ -7,6 +7,7 @@ namespace ShadowsOfShadows.Helpers
 		Strength,
 		MagicPower,
 		Mana,
-		ShootingPower
+		ShootingPower,
+		Lockpicking,
 	}
 }
