@@ -7,17 +7,19 @@ namespace ShadowsOfShadows.Physics
 	public class CollisionBox
 	{
 		public Polygon Polygon {get;}
+        public bool Active { get; private set; } 
 
 		public CollisionBox (Polygon polygon)
 		{
 			this.Polygon = polygon;
+            Active = true;
 		}
 
-		public static bool CheckCollision(CollisionBox box1, CollisionBox box2)
+		public static bool CheckCollision(Transform box1, Transform box2)
 		{
-			foreach (Rectangle rect1 in box1.Polygon.Rectangles) 
+			foreach (Rectangle rect1 in box1.Collision.Polygon.WithOffset(box1.Position)) 
 			{
-				foreach (Rectangle rect2 in box2.Polygon.Rectangles) 
+				foreach (Rectangle rect2 in box2.Collision.Polygon.WithOffset(box2.Position)) 
 				{
 					if (rect1.Intersects (rect2))
 						return true;
@@ -29,7 +31,7 @@ namespace ShadowsOfShadows.Physics
 
         public void TurnOff()
         {
-            Polygon.Rectangles.Clear();
+            Active = false;
         }
     }
 }
