@@ -50,10 +50,10 @@ namespace ShadowsOfShadows.Entities
 					Transform.Position = new Point(Transform.Position.X - Velocity, Transform.Position.Y);
 					break;
 				case Direction.Up:
-					Transform.Position = new Point(Transform.Position.X, Transform.Position.Y + Velocity);
+					Transform.Position = new Point(Transform.Position.X, Transform.Position.Y - Velocity);
 					break;
 				case Direction.Down:
-					Transform.Position = new Point(Transform.Position.X, Transform.Position.Y - Velocity);
+					Transform.Position = new Point(Transform.Position.X, Transform.Position.Y + Velocity);
 					break;
 
 			}
