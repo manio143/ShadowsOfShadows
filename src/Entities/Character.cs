@@ -87,6 +87,10 @@ namespace ShadowsOfShadows.Entities
 
 		public double MagicPower { get; set; }
 
+		public double MaxMana { get; set; }
+
+		public double MaxHealth { get; set; }
+
 		public void Attack(Character character)
 		{
 			this.Health -= character.DefencePower;
