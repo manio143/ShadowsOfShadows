@@ -80,13 +80,13 @@ namespace ShadowsOfShadows.Consoles
                 Player.IsMoving = true;
             }
 
-            if (info.IsKeyReleased(Keys.Up))
+            if (info.IsKeyReleased(Keys.Up) && Player.Transform.Direction == Direction.Up)
                 Player.IsMoving = false;
-            if (info.IsKeyReleased(Keys.Left))
+            if (info.IsKeyReleased(Keys.Left) && Player.Transform.Direction == Direction.Left)
                 Player.IsMoving = false;
-            if (info.IsKeyReleased(Keys.Right))
+            if (info.IsKeyReleased(Keys.Right) && Player.Transform.Direction == Direction.Right)
                 Player.IsMoving = false;
-            if (info.IsKeyReleased(Keys.Down))
+            if (info.IsKeyReleased(Keys.Down) && Player.Transform.Direction == Direction.Down)
                 Player.IsMoving = false;
 
             if (info.IsKeyPressed(Keys.E))
