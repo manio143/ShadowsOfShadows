@@ -8,7 +8,7 @@ namespace ShadowsOfShadows.Helpers
 	{
 		private static SkillFactory instance;
 
-		private SkillFactory()
+		protected SkillFactory()
 		{
 			
 		}
