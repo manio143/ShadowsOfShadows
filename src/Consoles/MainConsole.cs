@@ -2,7 +2,6 @@
 using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-
 using ShadowsOfShadows.Entities;
 using ShadowsOfShadows.Helpers;
 using ShadowsOfShadows.Physics;
@@ -14,96 +13,99 @@ using Keyboard = SadConsole.Input.Keyboard;
 
 namespace ShadowsOfShadows.Consoles
 {
-	public class MainConsole : Console
-	{
-	    public Player Player { get; private set; }
+    public class MainConsole : Console
+    {
+        public Player Player { get; private set; }
 
-		private Point Middle { get; }
+        private Point Middle { get; }
 
-		private Room testRoom = TestRooms.Room1;
-		public MainConsole (int width, int height) : base(width, height)
-		{
-		    Player = new Player("Player", Fraction.Warrior, 10);
-			Player.Transform.Position = new Point(1,1);
+        private Room testRoom = TestRooms.Room1;
 
-			Middle = new Point(Width/2, Height/2);
-		}
+        public MainConsole(int width, int height) : base(width, height)
+        {
+            Player = new Player("Player", Fraction.Warrior, 10);
+            Player.Transform.Position = new Point(1, 1);
 
-		public override void Draw (System.TimeSpan delta)
-		{
-			base.Draw (delta);
+            Middle = new Point(Width / 2, Height / 2);
+        }
 
-			var playerObject = Player.Renderable.ConsoleObject;
-			playerObject.Position = Middle;
-			playerObject.Draw(delta);
+        public override void Draw(System.TimeSpan delta)
+        {
+            base.Draw(delta);
 
-			foreach (var entity in testRoom.Entities) {
-				var consoleObject = entity.Renderable.ConsoleObject;
-				consoleObject.Position = entity.Transform.Position - Player.Transform.Position + Middle;
-				if(consoleObject.Position.X < Width && consoleObject.Position.Y < Height)
-					consoleObject.Draw (delta);
-			}
-		}
+            var playerObject = Player.Renderable.ConsoleObject;
+            playerObject.Position = Middle;
+            playerObject.Draw(delta);
 
-		public override void Update(TimeSpan delta)
-		{
-			base.Update(delta);
-			foreach (var entity in testRoom.Entities)
-				(entity as IUpdateable)?.Update(delta);
-			Player.Update(delta);
-		}
+            foreach (var entity in testRoom.Entities)
+            {
+                var consoleObject = entity.Renderable.ConsoleObject;
+                consoleObject.Position = entity.Transform.Position - Player.Transform.Position + Middle;
+                if (consoleObject.Position.X < Width && consoleObject.Position.Y < Height)
+                    consoleObject.Draw(delta);
+            }
+        }
 
-		public override bool ProcessKeyboard(Keyboard info)
-	    {
-	        if(info.IsKeyPressed(Keys.Escape))
-	            Screen.MenuConsole.OpenMainMenu();
+        public override void Update(TimeSpan delta)
+        {
+            base.Update(delta);
+            foreach (var entity in testRoom.Entities)
+                (entity as IUpdateable)?.Update(delta);
+            Player.Update(delta);
+        }
 
-		    if (info.IsKeyDown(Keys.Up))
-		    {
-			    Player.Transform.Direction = Direction.Up;
-			    Player.IsMoving = true;
-		    }
-		    if (info.IsKeyDown(Keys.Right))
-		    {
-			    Player.Transform.Direction = Direction.Right;
-			    Player.IsMoving = true;
-		    }
-		    if (info.IsKeyDown(Keys.Left))
-		    {
-			    Player.Transform.Direction = Direction.Left;
-			    Player.IsMoving = true;
-		    }
-		    if (info.IsKeyDown(Keys.Down))
-		    {
-			    Player.Transform.Direction = Direction.Down;
-			    Player.IsMoving = true;
-		    }
+        public override bool ProcessKeyboard(Keyboard info)
+        {
+            if (info.IsKeyPressed(Keys.Escape))
+                Screen.MenuConsole.OpenMainMenu();
 
-		    if (info.IsKeyReleased(Keys.Up))
-			    Player.IsMoving = false;
-		    if (info.IsKeyReleased(Keys.Left))
-			    Player.IsMoving = false;
-		    if (info.IsKeyReleased(Keys.Right))
-			    Player.IsMoving = false;
-		    if (info.IsKeyReleased(Keys.Down))
-			    Player.IsMoving = false;
+            if (info.IsKeyDown(Keys.Up))
+            {
+                Player.Transform.Direction = Direction.Up;
+                Player.IsMoving = true;
+            }
+            if (info.IsKeyDown(Keys.Right))
+            {
+                Player.Transform.Direction = Direction.Right;
+                Player.IsMoving = true;
+            }
+            if (info.IsKeyDown(Keys.Left))
+            {
+                Player.Transform.Direction = Direction.Left;
+                Player.IsMoving = true;
+            }
+            if (info.IsKeyDown(Keys.Down))
+            {
+                Player.Transform.Direction = Direction.Down;
+                Player.IsMoving = true;
+            }
 
-		    if (info.IsKeyPressed(Keys.E))
-		    {
-			    var entity = testRoom.Entities.FirstOrDefault(e => e.Transform.Position ==
-			                                                       Player.Transform.Position +
-			                                                       Player.Transform.Direction.AsPoint()) as IInteractable;
-			    entity?.Interact();
-		    }
-		    if (info.IsKeyPressed(Keys.T))
-		    {
-			    var entity = testRoom.Entities.FirstOrDefault(e => e.Transform.Position ==
-			                                                       Player.Transform.Position +
-			                                                       Player.Transform.Direction.AsPoint()) as Openable;
-			    entity?.TryToUnlock();
-		    }
+            if (info.IsKeyReleased(Keys.Up))
+                Player.IsMoving = false;
+            if (info.IsKeyReleased(Keys.Left))
+                Player.IsMoving = false;
+            if (info.IsKeyReleased(Keys.Right))
+                Player.IsMoving = false;
+            if (info.IsKeyReleased(Keys.Down))
+                Player.IsMoving = false;
 
-	        return true;
-	    }
-	}
+            if (info.IsKeyPressed(Keys.E))
+            {
+                var entity = testRoom.Entities.FirstOrDefault(e => e.Transform.Position ==
+                                                                   Player.Transform.Position +
+                                                                   Player.Transform.Direction
+                                                                       .AsPoint()) as IInteractable;
+                entity?.Interact();
+            }
+            if (info.IsKeyPressed(Keys.T))
+            {
+                var entity = testRoom.Entities.FirstOrDefault(e => e.Transform.Position ==
+                                                                   Player.Transform.Position +
+                                                                   Player.Transform.Direction.AsPoint()) as Openable;
+                entity?.TryToUnlock();
+            }
+
+            return true;
+        }
+    }
 }

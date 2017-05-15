@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Globalization;
+using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using SadConsole.GameHelpers;
@@ -91,6 +89,7 @@ namespace ShadowsOfShadows.Consoles
         public override List<GameObject> Other { get; }
 
         private int pointerIndex;
+
         protected int PointerIndex
         {
             get { return pointerIndex; }
@@ -110,7 +109,7 @@ namespace ShadowsOfShadows.Consoles
             }
         }
 
-        public int StartIndex { get; set; } = 0;
+        public int StartIndex { get; set; }
 
         protected List<Point> Positions = new List<Point>();
 
@@ -187,10 +186,11 @@ namespace ShadowsOfShadows.Consoles
     public class QuestionMessage : ChoiceMessage<Enum>
     {
         public QuestionMessage(Type answersType, string question = null)
-            :base(answersType.GetEnumValues()
-                .Cast<Enum>()
-                .Select(@enum => new Tuple<Enum, string>(@enum, @enum.GetAttributeOfType<DisplayAttribute>()?.Title))
-                .Where(tp => tp.Item2 != null)
+            : base(answersType.GetEnumValues()
+                    .Cast<Enum>()
+                    .Select(
+                        @enum => new Tuple<Enum, string>(@enum, @enum.GetAttributeOfType<DisplayAttribute>()?.Title))
+                    .Where(tp => tp.Item2 != null)
                 , question)
         {
             if (question != null)
@@ -227,7 +227,7 @@ namespace ShadowsOfShadows.Consoles
 
         public ChestMessage(Chest chest)
             : base(chest.Items
-                .Select(item => new Tuple<Item, string>(item, item.ToString()))
+                    .Select(item => new Tuple<Item, string>(item, item.ToString()))
                 , "Chest")
         {
             Chest = chest;
@@ -282,8 +282,8 @@ namespace ShadowsOfShadows.Consoles
         private void ResetView()
         {
             var newMessage = Screen.MenuConsole.OpenChest(Chest);
-            this.PostProcessing = null;
-            newMessage.StartIndex = this.PointerIndex;
+            PostProcessing = null;
+            newMessage.StartIndex = PointerIndex;
             Finished = true;
         }
     }
