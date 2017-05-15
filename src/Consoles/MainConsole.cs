@@ -25,12 +25,7 @@ namespace ShadowsOfShadows.Consoles
         public MainConsole(int width, int height) : base(width, height)
         {
             Player = new Player("Player", Fraction.Warrior, 10);
-            foreach(var w in CurrentRoom.Entities)
-            {
-                w.Transform.Collision = new CollisionBox(
-                new Polygon(new List<Rectangle> { new Rectangle(0, 0, 1, 1) })
-                );
-            }
+
 
             var v = new Wall(new ConsoleRenderable(219));
             v.Transform.Position = new Point(2, 2);
