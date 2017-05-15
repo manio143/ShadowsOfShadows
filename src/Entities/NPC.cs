@@ -16,7 +16,7 @@ namespace ShadowsOfShadows.Entities
 
 		public override void Shoot<T>(Direction direction)
 		{
-			T projectile = (T)new Projectile(SkillFactory.Instance.GetNewSkillSet(Fraction)[Skill.ShootingPower],
+			T projectile = (T)new Projectile(SkillFactory.GetNewSkillSet(Fraction)[Skill.ShootingPower],
 											 direction);
 		}
 	}

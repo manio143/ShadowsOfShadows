@@ -3,27 +3,9 @@ using System.Collections.Generic;
 
 namespace ShadowsOfShadows.Helpers
 {
-	/* Is a singleton class */
-	public class SkillFactory
+	public static class SkillFactory
 	{
-		private static SkillFactory instance;
-
-		protected SkillFactory()
-		{
-			
-		}
-
-		public static SkillFactory Instance
-		{
-			get
-			{
-				if (instance == null)
-					instance = new SkillFactory();
-				return instance;
-			}
-		}
-
-		public Dictionary<Skill, int> GetNewSkillSet(Fraction fraction)
+		public static Dictionary<Skill, int> GetNewSkillSet(Fraction fraction)
 		{
 			Dictionary<Skill, int> skills = new Dictionary<Skill, int>();
 
