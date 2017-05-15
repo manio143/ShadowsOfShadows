@@ -1,15 +1,18 @@
 ﻿using System;
+using ShadowsOfShadows.Physics;
 
 namespace ShadowsOfShadows.Entities
 {
 	public class Projectile : Entity, IUpdateable
 	{
 		/* Negative means healing */
-		public int Damage { get; } 
+		public int Damage { get; }
+		private Direction Direction;
 
-		public Projectile(int Damage) : base(new Renderables.ConsoleRenderable('O'))
+		public Projectile(int damage, Direction direction) : base(new Renderables.ConsoleRenderable('O'))
 		{
-			this.Damage = Damage;
+			this.Damage = damage;
+			this.Direction = direction;
 		}
 
 		public void Update(TimeSpan deltaTime)

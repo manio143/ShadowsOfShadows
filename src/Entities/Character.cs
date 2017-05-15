@@ -2,10 +2,11 @@ using System;
 using System.Collections.Generic;
 using ShadowsOfShadows.Items;
 using ShadowsOfShadows.Helpers;
+using ShadowsOfShadows.Physics;
 
 namespace ShadowsOfShadows.Entities
 {
-	public class Character : Entity, IInteractable, IUpdateable
+	public abstract class Character : Entity, IInteractable, IUpdateable
 	{
 		public string Name { get; }
 
@@ -32,8 +33,10 @@ namespace ShadowsOfShadows.Entities
 		{
 
 		}
+
+		public abstract void Shoot<T>(Direction direction) where T : Projectile;
     
-    public double Health { get; set; }
+        public double Health { get; set; }
 
 		public double AttackPower { get; set; }
 

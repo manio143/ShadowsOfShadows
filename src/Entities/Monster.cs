@@ -1,4 +1,5 @@
 ﻿using System;
+using ShadowsOfShadows.Physics;
 
 namespace ShadowsOfShadows.Entities
 {
@@ -6,9 +7,14 @@ namespace ShadowsOfShadows.Entities
 	{
 		private int Experience;
 
-		public Monster () : base("Monster", 'M')
+		public Monster() : base("Monster", 'M')
 		{
 			this.Experience = 0;
+		}
+
+		public override void Shoot<T>(Direction direction)
+		{
+			T projectile = (T)new Projectile(1, direction);
 		}
 	}
 }
