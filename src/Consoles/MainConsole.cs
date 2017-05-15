@@ -20,7 +20,7 @@ namespace ShadowsOfShadows.Consoles
 
         private Point Middle { get; }
 
-        public Room CurrentRoom { get; set; } = TestRooms.Room1;
+        public Room CurrentRoom { get; private set; } = TestRooms.Room1;
 
         public MainConsole(int width, int height) : base(width, height)
         {
