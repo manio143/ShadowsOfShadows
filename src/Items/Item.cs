@@ -2,7 +2,7 @@
 
 namespace ShadowsOfShadows.Items
 {
-	public class Item
+	public abstract class Item
 	{
         protected String Name { get; set; }
         protected String StatsString { get; set; }
@@ -16,6 +16,13 @@ namespace ShadowsOfShadows.Items
         {
             String result = Name + "\n" + "Statistics:\n" + StatsString;
             return result;
+        }
+
+        public abstract AllowedItem Allowed { get; }
+
+        public virtual bool IsLike(Item item)
+        {
+            return false;
         }
     }
 }

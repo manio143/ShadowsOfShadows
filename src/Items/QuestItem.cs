@@ -11,5 +11,7 @@ namespace ShadowsOfShadows.Items
         public QuestItem(string name, string stats) : base(name, stats)
         {
         }
+
+        public override AllowedItem Allowed { get; } = AllowedItem.Multiple;
     }
 }

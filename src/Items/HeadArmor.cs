@@ -24,5 +24,10 @@ namespace ShadowsOfShadows.Items
         {
             Screen.MainConsole.Player.DefencePower -= DP;
         }
+
+        public override bool IsLike(Item item)
+        {
+            return (item is HeadArmor);
+        }
     }
 }

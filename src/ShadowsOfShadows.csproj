@@ -60,6 +60,7 @@
     <Compile Include="Entities\TrapChest.cs" />
     <Compile Include="Entities\Wall.cs" />
     <Compile Include="Helpers\EnumHelper.cs" />
+    <Compile Include="Items\AllowedItem.cs" />
     <Compile Include="Items\Apple.cs" />
     <Compile Include="Items\BodyArmor.cs" />
     <Compile Include="Items\Bow.cs" />

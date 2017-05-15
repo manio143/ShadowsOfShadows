@@ -13,5 +13,7 @@ namespace ShadowsOfShadows.Items
         }
 
         public abstract void Use();
+
+        public override AllowedItem Allowed { get; } = AllowedItem.Multiple;
     }
 }

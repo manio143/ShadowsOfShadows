@@ -28,5 +28,10 @@ namespace ShadowsOfShadows.Items
             Screen.MainConsole.Player.AttackPower -= AP;
             Screen.MainConsole.Player.MagicPower -= MP;
         }
+
+        public override bool IsLike(Item item)
+        {
+            return (item is Weapon);
+        }
     }
 }
