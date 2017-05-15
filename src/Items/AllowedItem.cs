@@ -1,5 +1,4 @@
-﻿
-namespace ShadowsOfShadows.Items
+﻿namespace ShadowsOfShadows.Items
 {
     public enum AllowedItem
     {

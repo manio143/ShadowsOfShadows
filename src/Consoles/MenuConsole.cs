@@ -40,10 +40,10 @@ namespace ShadowsOfShadows.Consoles
 
         protected override void PrintMessage(Message message)
         {
-            if (message is QuestionMessage)
+            if (message.IsInstanceOfGenericType(typeof(ChoiceMessage<>)))
             {
-                var qm = (QuestionMessage) message;
-                qm.Rows = qm.AnswerCount;
+                dynamic qm = message;
+                qm.Rows = qm.AnswersCount;
             }
             base.PrintMessage(message);
         }
@@ -74,7 +74,7 @@ namespace ShadowsOfShadows.Consoles
                     //TODO: Show settings (should we have any)
                     break;
                 case MainMenuOptions.CloseMenu:
-                    PrintMessage("");
+                    PrintPlayerStats();
                     break;
                 case MainMenuOptions.Quit:
                     SadConsole.Game.Instance.Exit();
@@ -84,10 +84,26 @@ namespace ShadowsOfShadows.Consoles
             }
         }
 
-     public void OpenChest(Chest chest)
-     {
-            throw new NotImplementedException();
-      }
+        public void PrintPlayerStats()
+        {
+            PrintMessage(
+                "STATS\n\n" +
+                "HP       " + Screen.MainConsole.Player.Health + "\n" +
+                "Mana     " + Screen.MainConsole.Player.Mana + "\n" +
+                "AP       " + Screen.MainConsole.Player.AttackPower + "\n" +
+                "MP       " + Screen.MainConsole.Player.MagicPower + "\n" +
+                "DP       " + Screen.MainConsole.Player.DefencePower + "\n" +
+                "Level    " + Screen.MainConsole.Player.Level + "\n" +
+                "\n"
+            );
+        }
 
+        public ChestMessage OpenChest(Chest chest)
+        {
+            var message = new ChestMessage(chest);
+            PrintMessageAndWait(message);
+            message.PostProcessing = msg => PrintPlayerStats();
+            return message;
+        }
     }
 }

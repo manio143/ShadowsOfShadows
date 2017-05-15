@@ -2,6 +2,9 @@
 using System.ComponentModel;
 using SadConsole.Input;
 using ShadowsOfShadows.Consoles;
+using ShadowsOfShadows.Entities;
+using ShadowsOfShadows.Items;
+using ShadowsOfShadows.Renderables;
 
 namespace ShadowsOfShadows
 {
@@ -18,6 +21,31 @@ namespace ShadowsOfShadows
         [Display("Do zobaczenia...")]
         DoZo
 
+    }
+
+    public class TestItem : Item
+    {
+        public override AllowedItem Allowed { get; }
+        public override bool IsLike(Item item)
+        {
+            return item is TestItem;
+        }
+
+        private string str;
+
+        public TestItem(AllowedItem allowed)
+        {
+            Allowed = allowed;
+            if (allowed == AllowedItem.Multiple)
+                str = "MultipleItem";
+            else
+                str = "SingleItem";
+        }
+
+        public override string ToString()
+        {
+            return str;
+        }
     }
 
     public class Screen : SadConsole.ConsoleContainer
@@ -41,7 +69,18 @@ namespace ShadowsOfShadows
 
             MessageConsole.PrintMessageAndWait("This is a message\nAnd with line breaks");
             MessageConsole.AskQuestion("Co mi powiesz?", typeof(TestEnum)).PostProcessing =
-                (m) => MenuConsole.OpenMainMenu();
+                (m) =>
+                {
+                    var chest = new Chest(new ConsoleRenderable('c'), 0,
+                        new[]
+                        {
+                            new TestItem(AllowedItem.Multiple), new TestItem(AllowedItem.Multiple),
+                            new TestItem(AllowedItem.Single), new TestItem(AllowedItem.Single)
+                        });
+                    MenuConsole.OpenChest(chest);
+                };
+
+
         }
 
         public override bool ProcessKeyboard(Keyboard state)

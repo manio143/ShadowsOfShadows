@@ -9,20 +9,17 @@ namespace ShadowsOfShadows.Entities
 {
     public class Chest : Openable
     {
-        List<Item> Items { get; set; }
+        public List<Item> Items { get; }
 
-        public Chest(IRenderable rendarable, int lockDificulty, List<Item> items) : base(rendarable, lockDificulty)
+        public Chest(IRenderable rendarable, int lockDificulty, IEnumerable<Item> items) : base(rendarable, lockDificulty)
         {
-            Items = items;
+            Items = new List<Item>(items);
         }
 
         public override void Interact()
         {
-            if(CheckOpened())
-            {
-                //TODO: change current console to menu console
+            if (CheckOpened())
                 Screen.MenuConsole.OpenChest(this);
-            }
         }
     }
 }
