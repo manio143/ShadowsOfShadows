@@ -238,7 +238,10 @@ namespace ShadowsOfShadows.Consoles
             base.ProcessKeyboard(info);
             if (info.IsKeyPressed(Keys.Enter) || info.IsKeyPressed(Keys.Space))
             {
-                ProcessItemWithEquipment(Answers[PointerIndex].Item1);
+                if (Answers.Count == 0)
+                    Finished = true;
+                else
+                    ProcessItemWithEquipment(Answers[PointerIndex].Item1);
             }
             if (info.IsKeyPressed(Keys.Escape))
             {

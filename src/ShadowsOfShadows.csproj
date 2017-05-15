@@ -114,6 +114,7 @@
     <Compile Include="Items\WizardsCape.cs" />
     <Compile Include="Items\WizardsHood.cs" />
     <Compile Include="Items\WoodenShield.cs" />
+    <Compile Include="TestData\TestRooms.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

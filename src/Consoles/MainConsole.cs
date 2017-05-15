@@ -5,36 +5,39 @@ using Microsoft.Xna.Framework.Input;
 
 using ShadowsOfShadows.Entities;
 using ShadowsOfShadows.Renderables;
-
+using ShadowsOfShadows.TestData;
 using Keyboard = SadConsole.Input.Keyboard;
 
 namespace ShadowsOfShadows.Consoles
 {
-	public class TestEntity : Entity {
-        public TestEntity(): base(new ConsoleRenderable('A')) { }
-    }
-
 	public class MainConsole : Console
 	{
 	    public Player Player { get; private set; }
 
-		private Room testRoom = new Room (new[]{ new TestEntity () });
+		private Point Middle { get; }
+
+		private Room testRoom = TestRooms.Room1;
 		public MainConsole (int width, int height) : base(width, height)
 		{
-			testRoom.Entities.First ().Renderable = new ConsoleRenderable ('A');
-			testRoom.Entities.First ().Transform.Position = new Point (1,1);
-
 		    Player = new Player("Player");
+			Player.Transform.Position = new Point(1,1);
+
+			Middle = new Point(Width/2, Height/2);
 		}
 
 		public override void Draw (System.TimeSpan delta)
 		{
 			base.Draw (delta);
 
+			var playerObject = Player.Renderable.ConsoleObject;
+			playerObject.Position = Middle;
+			playerObject.Draw(delta);
+
 			foreach (var entity in testRoom.Entities) {
 				var consoleObject = entity.Renderable.ConsoleObject;
-				consoleObject.Position = entity.Transform.Position;
-				consoleObject.Draw (delta);
+				consoleObject.Position = entity.Transform.Position - Player.Transform.Position + Middle;
+				if(consoleObject.Position.X < Width && consoleObject.Position.Y < Height)
+					consoleObject.Draw (delta);
 			}
 		}
 
