@@ -8,7 +8,7 @@ namespace ShadowsOfShadows.Items
 {
     public class SteelChestplate : BodyArmor
     {
-        public SteelChestplate() : base(3)
+        public SteelChestplate() : base("Steel Chestplate", 3)
         {
         }
     }

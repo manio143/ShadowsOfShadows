@@ -1,28 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+using ShadowsOfShadows.Consoles;
 
 namespace ShadowsOfShadows.Items
 {
     public class DefensePotion : TimedConsumable
     {
         public int DP { get; private set; }
-        public DefensePotion(TimeSpan duration, int dp) : base(duration)
+        public DefensePotion() : base("Defense Potion", "Defense power 3\n", TimeSpan.FromSeconds(10))
         {
-            DP = dp;
+            DP = 3;
         }
 
         public override void EndEffect()
         {
-            //Screen.player.DefensePower -= DP; TODO:
+            Screen.MainConsole.Player.DefencePower -= DP;
         }
 
         public override void Use()
         {
             base.Use();
-            // Screen.player.DefensePower += DP; TODO:
+            Screen.MainConsole.Player.DefencePower += DP;
         }
     }
 }

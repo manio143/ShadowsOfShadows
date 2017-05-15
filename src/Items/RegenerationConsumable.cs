@@ -7,14 +7,14 @@ namespace ShadowsOfShadows.Items
     {
         public int RegenerationValue { get; private set;}
 
-        public RegenerationConsumable(int regen)
+        public RegenerationConsumable(String name, int regen) :base(name, "Health regeneration: " + regen + "\n") 
         {
             RegenerationValue = regen;
         }
 
         public override void Use()
         {
-            //Screen.player.Health = Math.Min(Screen.player.Health + RegenerationValue, Screen.player.MaxHealth); TODO:
+            Screen.MainConsole.Player.Health = Math.Min(Screen.MainConsole.Player.Health + RegenerationValue, Screen.MainConsole.Player.MaxHealth);
         }
     }
 }

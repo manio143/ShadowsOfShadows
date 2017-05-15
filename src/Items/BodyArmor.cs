@@ -1,29 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+using ShadowsOfShadows.Consoles;
 
 namespace ShadowsOfShadows.Items
 {
-    public class BodyArmor : Wearable
+    public abstract class BodyArmor : Wearable
     {
         public int DP { get; private set; }
 
-        public BodyArmor(int dp)
+        public BodyArmor(String name, int dp) : base(name, "Defence Power " + dp.ToString() + "\n")
         {
             DP = dp;
         }
 
         public override void Equip()
         {
-            // TODO: enequip previous armor
-            // Screen.player.DefensePower += DP; TODO:
+            Screen.MainConsole.Player.DefencePower += DP;
         }
 
         public override void UnEquip()
         {
-            // Screen.player.DefensePower -= DP; TODO:
+            Screen.MainConsole.Player.DefencePower -= DP;
         }
     }
 }

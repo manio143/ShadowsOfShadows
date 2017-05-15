@@ -9,19 +9,19 @@ namespace ShadowsOfShadows.Items
     public class StrengthPotion : TimedConsumable
     {
         public int AP { get; private set; }
-        public StrengthPotion(TimeSpan duration, int ap) : base(duration)
+        public StrengthPotion(TimeSpan duration) : base("Strength Potion", "Attack power 3\n", duration)
         {
-            AP = ap;
+            AP = 3;
         }
         public override void Use()
         {
             base.Use();
-            // Screen.player.AttackPower += AP; TODO:
+            Screen.MainConsole.Player.AttackPower += AP;
         }
 
         public override void EndEffect()
         {
-            // Screen.player.AttackPower -= AP; TODO:
+            Screen.MainConsole.Player.AttackPower -= AP;
         }
 
     }

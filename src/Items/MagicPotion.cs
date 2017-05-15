@@ -9,20 +9,20 @@ namespace ShadowsOfShadows.Items
     public class MagicPotion : TimedConsumable
     {
         public int MP { get; private set; }
-        public MagicPotion(TimeSpan duration, int mp) : base(duration)
+        public MagicPotion() : base("Magic Potion", "Magic power 3\n", TimeSpan.FromSeconds(10))
         {
-            MP = mp;
+            MP = 3;
         }
 
         public override void Use()
         {
-            base.Use();
-            // Screen.player.MagicPower += MP; TODO:
+           base.Use();
+           Screen.MainConsole.Player.MagicPower += MP;
         }
 
         public override void EndEffect()
         {
-            // Screen.player.MagicPower -= MP; TODO:
+            Screen.MainConsole.Player.MagicPower -= MP;
         }
     }
 }

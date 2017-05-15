@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ShadowsOfShadows.Items
 {
-    public class WizzardsHood : HeadArmor
+    public class WizardsHood : HeadArmor
     {
-        public WizzardsHood() : base(1)
+        public WizardsHood() : base("Wizards Hood", 1)
         {
         }
     }

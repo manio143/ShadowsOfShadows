@@ -9,21 +9,21 @@ namespace ShadowsOfShadows.Items
     public class ManaPotion : Consumable
     {
         public int AmountOfMana { get; private set; }
-        public ManaPotion(int amountOfMana)
+        public ManaPotion(String name, int amountOfMana): base(name, "Mana regeneration " + amountOfMana + "\n")
         {
             AmountOfMana = amountOfMana;
         }
-        public ManaPotion() : this(5)
+        public ManaPotion() : this("Mana Potion", 5)
         {
         }
         public override void Use()
         {
-            // Screen.player.Mana = Math.Min(Screen.player.Mana + AmountOfMana, Screen.player.MaxMana);
+            Screen.MainConsole.Player.Mana = Math.Min(Screen.MainConsole.Player.Mana + AmountOfMana, Screen.MainConsole.Player.MaxMana);
         }
     }
     public class StrongManaPotion : ManaPotion
     {
-        public StrongManaPotion() : base(10)
+        public StrongManaPotion() : base("Strong Mana Potion", 10)
         {
         }
     }

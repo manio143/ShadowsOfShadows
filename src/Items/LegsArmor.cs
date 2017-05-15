@@ -6,24 +6,23 @@ using System.Threading.Tasks;
 
 namespace ShadowsOfShadows.Items
 {
-    public class LegsArmor : Wearable
+    public abstract class LegsArmor : Wearable
     {
         public int DP { get; private set; }
 
-        public LegsArmor(int dp)
+        public LegsArmor(String name, int dp) : base(name, "Defence Power " + dp.ToString() + "\n")
         {
             DP = dp;
         }
 
         public override void Equip()
         {
-            // TODO: enequip previous armor
-            // Screen.player.DefensePower += DP; TODO:
+            Screen.MainConsole.Player.DefencePower += DP;
         }
 
         public override void UnEquip()
         {
-            // Screen.player.DefensePower -= DP; TODO:
+            Screen.MainConsole.Player.DefencePower -= DP;
         }
     }
 }

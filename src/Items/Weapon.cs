@@ -11,7 +11,7 @@ namespace ShadowsOfShadows.Items
         public int AP { get; private set; }
         public int MP { get; private set; }
 
-        public Weapon(int ap, int mp)
+        public Weapon(String name, int ap, int mp) : base(name, "Attack power " + ap +",\n" + "Magic power " + mp + "\n")
         {
             AP = ap;
             MP = mp;
@@ -19,15 +19,14 @@ namespace ShadowsOfShadows.Items
 
         public override void Equip()
         {
-            // unequip previous
-            // Screen.player.AttackPower += AP; TODO:
-            // Screen.player.MagicPower += MP; TODO:
+            Screen.MainConsole.Player.AttackPower += AP;
+            Screen.MainConsole.Player.MagicPower += MP;
         }
 
         public override void UnEquip()
         {
-            // Screen.player.AttackPower -= AP; TODO:
-            // Screen.player.MagicPower -= MP; TODO:
+            Screen.MainConsole.Player.AttackPower -= AP;
+            Screen.MainConsole.Player.MagicPower -= MP;
         }
     }
 }

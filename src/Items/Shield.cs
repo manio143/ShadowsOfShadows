@@ -10,20 +10,19 @@ namespace ShadowsOfShadows.Items
     {
         public int DP { get; private set; }
 
-        public Shield(int dp)
+        public Shield(String name, int dp) : base(name, "Defence Power " + dp.ToString() + "\n")
         {
             DP = dp;
         }
 
         public override void Equip()
         {
-            // TODO: enequip previous shield
-            // Screen.player.DefensePower += DP; TODO:
+            Screen.MainConsole.Player.DefencePower += DP;
         }
 
         public override void UnEquip()
         {
-            // Screen.player.DefensePower -= DP; TODO:
+            Screen.MainConsole.Player.DefencePower -= DP;
         }
     }
 }

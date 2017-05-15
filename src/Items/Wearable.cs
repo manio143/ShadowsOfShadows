@@ -8,6 +8,10 @@ namespace ShadowsOfShadows.Items
 {
     public abstract class Wearable :  Item
     {
+        public Wearable(String name, String stats): base(name, stats)
+        {
+
+        }
         public abstract void Equip();
         public abstract void UnEquip();
     }

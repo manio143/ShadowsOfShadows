@@ -10,20 +10,19 @@ namespace ShadowsOfShadows.Items
     {
         public int DP { get; private set; }
 
-        public HeadArmor(int dp)
+        public HeadArmor(String name, int dp) : base(name, "Defence Power " + dp.ToString() + "\n")
         {
             DP = dp;
         }
 
         public override void Equip()
         {
-            // TODO: unequip previous head armor
-            // Screen.player.DefensePower += DP;
+            Screen.MainConsole.Player.DefencePower += DP;
         }
 
         public override void UnEquip()
         {
-            // Screen.player.DefensePower -= DP; TODO:
+            Screen.MainConsole.Player.DefencePower -= DP;
         }
     }
 }

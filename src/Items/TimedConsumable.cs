@@ -11,7 +11,7 @@ namespace ShadowsOfShadows.Items
         public System.TimeSpan Duration { get; private set; }
         public bool Active { get; private set; }
 
-        public TimedConsumable(System.TimeSpan duration)
+        public TimedConsumable(String name, String stats, System.TimeSpan duration) : base(name, "Duration " + duration.TotalSeconds + ",\n" + stats)
         {
             Duration = duration;
             Active = false;

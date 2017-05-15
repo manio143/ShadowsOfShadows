@@ -8,7 +8,7 @@ namespace ShadowsOfShadows.Items
 {
     public class SteelShield : Shield
     {
-        public SteelShield() : base(3)
+        public SteelShield() : base("Steel Shield", 3)
         {
         }
     }

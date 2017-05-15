@@ -8,5 +8,8 @@ namespace ShadowsOfShadows.Items
 {
     public class QuestItem : Item
     {
+        public QuestItem(string name, string stats) : base(name, stats)
+        {
+        }
     }
 }

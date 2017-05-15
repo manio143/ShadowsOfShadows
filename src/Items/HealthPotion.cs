@@ -8,14 +8,14 @@ namespace ShadowsOfShadows.Items
 {
     public class HealthPotion : RegenerationConsumable
     {
-        public HealthPotion() : base(10)
+        public HealthPotion() : base("Health Potion", 10)
         {
         }
 
 
         public class StrongHealthPotion : RegenerationConsumable
         {
-            public StrongHealthPotion() : base(20)
+            public StrongHealthPotion() : base("Strong Health Potion", 20)
             {
             }
         }

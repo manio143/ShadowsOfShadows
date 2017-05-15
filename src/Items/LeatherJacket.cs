@@ -8,7 +8,7 @@ namespace ShadowsOfShadows.Items
 {
     public class LeatherJacket : BodyArmor
     {
-        public LeatherJacket() : base(2)
+        public LeatherJacket() : base("Leather Jacket", 2)
         {
         }
     }
