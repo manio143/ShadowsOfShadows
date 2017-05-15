@@ -12,8 +12,10 @@ namespace ShadowsOfShadows.Entities
 	{
 		public string Name { get; }
 
+		public bool IsMoving { get; set; }
+
 		private int Speed;
-		private int CurrentSpeed;
+		public int CurrentSpeed { get; set; }
 		public int Velocity { get; set; }
 
 		public List<Item> Equipment { get; }
@@ -41,6 +43,9 @@ namespace ShadowsOfShadows.Entities
 
 		private void Move()
 		{
+			if (IsMoving == false)
+				return;
+			
 			switch (Transform.Direction)
 			{
 				case Direction.Right:
@@ -55,7 +60,6 @@ namespace ShadowsOfShadows.Entities
 				case Direction.Down:
 					Transform.Position = new Point(Transform.Position.X, Transform.Position.Y + Velocity);
 					break;
-
 			}
 		}
 
