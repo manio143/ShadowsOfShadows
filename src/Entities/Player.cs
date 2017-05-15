@@ -15,7 +15,7 @@ namespace ShadowsOfShadows.Entities
 
 		public Dictionary<Skill, int> Skills { get; }
 
-		public Player(string name, Fraction fraction) : base(name, 'P')
+		public Player(string name, Fraction fraction, int speed) : base(name, 'P', speed, 1)
 		{
 			this.Fraction = fraction;
             this.Experience = 0;
@@ -23,8 +23,8 @@ namespace ShadowsOfShadows.Entities
 			this.Skills = new Dictionary<Skill, int>();
 		}
 
-		public Player(string name, List<Item> equipment, Dictionary<Skill, int> skills, 
-		              Fraction fraction) : base(name, 'P', equipment)
+		public Player(string name, Fraction fraction, int speed, List<Item> equipment, Dictionary<Skill, int> skills
+		              ) : base(name, 'P', speed, 1, equipment)
 		{
             this.Fraction = fraction;
             this.Experience = 0;
