@@ -1,11 +1,8 @@
-﻿using System;
-
-using ShadowsOfShadows.Renderables;
-using ShadowsOfShadows.Consoles;
+﻿using ShadowsOfShadows.Renderables;
 
 namespace ShadowsOfShadows.Entities
 {
-    public abstract class  Openable : Thing, IInteractable
+    public abstract class Openable : Thing, IInteractable
     {
         public int LockDificulty { get; set; }
 
@@ -17,15 +14,15 @@ namespace ShadowsOfShadows.Entities
         public bool TryToUnlock()
         {
             // maybe here should be some randomization
-            if( Screen.MainConsole.Player.UnlockingSkillLevel >= LockDificulty)
+            if (Screen.MainConsole.Player.UnlockingSkillLevel >= LockDificulty)
             {
                 LockDificulty = 0;
-				Screen.MessageConsole.PrintMessage("Lockpicking succeeded");
+                Screen.MessageConsole.PrintMessage("Lockpicking succeeded");
                 return true;
             }
             else
             {
-				Screen.MessageConsole.PrintMessage("Lockpicking failed");
+                Screen.MessageConsole.PrintMessage("Lockpicking failed");
                 return false;
             }
         }
@@ -38,7 +35,7 @@ namespace ShadowsOfShadows.Entities
                 return true;
             else
             {
-				Screen.MessageConsole.PrintMessage("Target is locked");
+                Screen.MessageConsole.PrintMessage("Target is locked");
                 return false;
             }
         }

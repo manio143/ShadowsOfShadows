@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
+﻿using System.Collections.Generic;
 using ShadowsOfShadows.Renderables;
 using ShadowsOfShadows.Items;
 
@@ -10,7 +8,9 @@ namespace ShadowsOfShadows.Entities
     {
         int Damage { get; set; }
         bool Active { get; set; }
-        public TrapChest(IRenderable rendarable, int lockDificulty, List<Item> items, int damage) : base(rendarable, lockDificulty, items)
+
+        public TrapChest(IRenderable rendarable, int lockDificulty, List<Item> items, int damage) : base(rendarable,
+            lockDificulty, items)
         {
             Damage = damage;
             Active = true;
@@ -18,11 +18,11 @@ namespace ShadowsOfShadows.Entities
 
         public override void Interact()
         {
-            if(Active)
+            if (Active)
             {
                 Active = false;
                 Screen.MainConsole.Player.TakeDamage(Damage);
-				Screen.MessageConsole.PrintMessage("It's a trap!");
+                Screen.MessageConsole.PrintMessage("It's a trap!");
             }
 
             base.Interact();
