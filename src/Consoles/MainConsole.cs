@@ -10,6 +10,7 @@ using ShadowsOfShadows.TestData;
 using Console = SadConsole.Console;
 using IUpdateable = ShadowsOfShadows.Entities.IUpdateable;
 using Keyboard = SadConsole.Input.Keyboard;
+using System.Collections.Generic;
 
 namespace ShadowsOfShadows.Consoles
 {
@@ -19,11 +20,17 @@ namespace ShadowsOfShadows.Consoles
 
         private Point Middle { get; }
 
-        private Room testRoom = TestRooms.Room1;
+        public Room CurrentRoom { get; private set; } = TestRooms.Room1;
 
         public MainConsole(int width, int height) : base(width, height)
         {
             Player = new Player("Player", Fraction.Warrior, 10);
+
+
+            var v = new Wall(new ConsoleRenderable(219));
+            v.Transform.Position = new Point(2, 2);
+            v.Transform.Collision.TurnOff();
+            CurrentRoom.Entities.Add(v);
             Player.Transform.Position = new Point(1, 1);
 
             Middle = new Point(Width / 2, Height / 2);
@@ -37,7 +44,7 @@ namespace ShadowsOfShadows.Consoles
             playerObject.Position = Middle;
             playerObject.Draw(delta);
 
-            foreach (var entity in testRoom.Entities)
+            foreach (var entity in CurrentRoom.Entities)
             {
                 var consoleObject = entity.Renderable.ConsoleObject;
                 consoleObject.Position = entity.Transform.Position - Player.Transform.Position + Middle;
@@ -49,7 +56,7 @@ namespace ShadowsOfShadows.Consoles
         public override void Update(TimeSpan delta)
         {
             base.Update(delta);
-            foreach (var entity in testRoom.Entities)
+            foreach (var entity in CurrentRoom.Entities)
                 (entity as IUpdateable)?.Update(delta);
             Player.Update(delta);
         }
@@ -91,7 +98,7 @@ namespace ShadowsOfShadows.Consoles
 
             if (info.IsKeyPressed(Keys.E))
             {
-                var entity = testRoom.Entities.FirstOrDefault(e => e.Transform.Position ==
+                var entity = CurrentRoom.Entities.FirstOrDefault(e => e.Transform.Position ==
                                                                    Player.Transform.Position +
                                                                    Player.Transform.Direction
                                                                        .AsPoint()) as IInteractable;
@@ -99,7 +106,7 @@ namespace ShadowsOfShadows.Consoles
             }
             if (info.IsKeyPressed(Keys.T))
             {
-                var entity = testRoom.Entities.FirstOrDefault(e => e.Transform.Position ==
+                var entity = CurrentRoom.Entities.FirstOrDefault(e => e.Transform.Position ==
                                                                    Player.Transform.Position +
                                                                    Player.Transform.Direction.AsPoint()) as Openable;
                 entity?.TryToUnlock();

@@ -2,6 +2,8 @@ using System;
 
 using ShadowsOfShadows.Renderables;
 using ShadowsOfShadows.Physics;
+using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 
 namespace ShadowsOfShadows.Entities
 {

@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using ShadowsOfShadows.Items;
 using ShadowsOfShadows.Physics;
 using ShadowsOfShadows.Renderables;
+using System.Linq;
 
 namespace ShadowsOfShadows.Entities
 {
@@ -45,6 +46,11 @@ namespace ShadowsOfShadows.Entities
             if (IsMoving == false)
                 return;
 
+            var entity = Screen.MainConsole.CurrentRoom.Entities.FirstOrDefault(e => e.Transform.Position ==
+                                                                   Transform.Position +
+                                                                   Transform.Direction.AsPoint());
+            
+            Point lastPosition = Transform.Position;            
             switch (Transform.Direction)
             {
                 case Direction.Right:
@@ -60,6 +66,9 @@ namespace ShadowsOfShadows.Entities
                     Transform.Position = new Point(Transform.Position.X, Transform.Position.Y + Velocity);
                     break;
             }
+
+            if (entity != null && CollisionBox.CheckCollision(Transform, entity.Transform))
+                Transform.Position = lastPosition;
         }
 
         public void Update(TimeSpan deltaTime)

@@ -17,15 +17,15 @@ namespace ShadowsOfShadows.Physics
 
 		public static bool CheckCollision(Transform box1, Transform box2)
 		{
-			foreach (Rectangle rect1 in box1.Collision.Polygon.WithOffset(box1.Position)) 
-			{
-				foreach (Rectangle rect2 in box2.Collision.Polygon.WithOffset(box2.Position)) 
-				{
-					if (rect1.Intersects (rect2))
-						return true;
-				}
-			}
-
+            if(box1.Collision.Active && box2.Collision.Active)
+			    foreach (Rectangle rect1 in box1.Collision.Polygon.WithOffset(box1.Position)) 
+			    {
+				    foreach (Rectangle rect2 in box2.Collision.Polygon.WithOffset(box2.Position)) 
+				    {
+					    if (rect1.Intersects (rect2))
+						    return true;
+				    }
+			    }
 			return false;
 		}
 
