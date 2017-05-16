@@ -61,6 +61,13 @@ namespace ShadowsOfShadows.Consoles
 			foreach(var room in CurrentRooms)
 			foreach (var entity in room.Entities)
                 (entity as IUpdateable)?.Update(delta);
+
+			foreach (var entity in CurrentRoom.Entities) 
+			{
+				var projectile = entity as Projectile;
+				if (projectile != null && projectile.IsDead)
+					CurrentRoom.Entities.Remove (projectile);
+			}
             Player.Update(delta);
         }
 
