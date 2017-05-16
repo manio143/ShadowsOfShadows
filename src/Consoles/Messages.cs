@@ -287,4 +287,48 @@ namespace ShadowsOfShadows.Consoles
             Finished = true;
         }
     }
+
+    public class EquipmentMessage : ChoiceMessage<Item>
+    {
+        public EquipmentMessage()
+            : base(Screen.MainConsole.Player.Equipment.Select(item => new Tuple<Item, string>(item, item.ToString())), "EQUIPMENT")
+        {
+        }
+
+        public override void ProcessKeyboard(Keyboard info)
+        {
+            base.ProcessKeyboard(info);
+            if (info.IsKeyPressed(Keys.Enter) || info.IsKeyPressed(Keys.Space))
+            {
+                if (Answers.Count == 0)
+                    Finished = true;
+                else
+                    ProcessItem(Answers[PointerIndex].Item1);
+            }
+            if (info.IsKeyPressed(Keys.Escape))
+            {
+                Finished = true;
+            }
+        }
+
+        private void ProcessItem(Item item)
+        {
+            var consumable = item as Consumable;
+            if (consumable != null)
+            {
+                consumable.Use();
+                Screen.MainConsole.Player.Equipment.Remove(consumable);
+                Screen.MessageConsole.PrintMessage($"{consumable} consumed.");
+                ResetView();
+            }
+        }
+
+        private void ResetView()
+        {
+            var newMessage = Screen.MenuConsole.OpenEquipment();
+            PostProcessing = null;
+            newMessage.StartIndex = PointerIndex;
+            Finished = true;
+        }
+    }
 }

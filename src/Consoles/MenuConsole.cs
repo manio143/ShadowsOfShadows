@@ -61,8 +61,7 @@ namespace ShadowsOfShadows.Consoles
             switch ((MainMenuOptions) qm.Result)
             {
                 case MainMenuOptions.Equipment:
-                    PrintMessage("EQUIPMENT");
-                    //TODO: When equipment is done display it
+                    OpenEquipment();
                     break;
                 case MainMenuOptions.SaveGame:
                     //TODO: Show slot options
@@ -103,6 +102,14 @@ namespace ShadowsOfShadows.Consoles
             var message = new ChestMessage(chest);
             PrintMessageAndWait(message);
             message.PostProcessing = msg => PrintPlayerStats();
+            return message;
+        }
+
+        public EquipmentMessage OpenEquipment()
+        {
+            var message = new EquipmentMessage();
+            PrintMessageAndWait(message);
+            message.PostProcessing = msg => OpenMainMenu();
             return message;
         }
     }

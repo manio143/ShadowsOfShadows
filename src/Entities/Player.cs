@@ -20,7 +20,7 @@ namespace ShadowsOfShadows.Entities
 			this.Fraction = fraction;
             this.Experience = 0;
 			this.Level = 1;
-			this.Skills = new Dictionary<Skill, int>();
+			this.Skills = SkillFactory.GetNewSkillSet(fraction);
 		}
 
 		public Player(string name, Fraction fraction, int speed, List<Item> equipment, Dictionary<Skill, int> skills
@@ -31,16 +31,12 @@ namespace ShadowsOfShadows.Entities
 			this.Level = 1;
 			this.Skills = skills;
 		}
-    
-        public int UnlockingSkillLevel
-        {
-            get { throw new NotImplementedException(); }
-        }
+
+		public int UnlockingSkillLevel => Skills[Skill.Lockpicking];
 
 		public override void Shoot<T>(Direction direction)
 		{
-			T projectile = (T)new Projectile(SkillFactory.GetNewSkillSet(Fraction)[Skill.ShootingPower],
-			                                 direction);
+			T projectile = (T)new Projectile(Skills[Skill.ShootingPower], direction);
 		}
 	}
 }
