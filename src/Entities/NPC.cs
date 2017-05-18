@@ -19,6 +19,11 @@ namespace ShadowsOfShadows.Entities
 			T projectile = (T)new Projectile(SkillFactory.GetNewSkillSet(Fraction)[Skill.ShootingPower],
 											 direction);
 		}
-	}
+
+        public override char GetEntityChar()
+        {
+            return 'N';
+        }
+    }
 }
 

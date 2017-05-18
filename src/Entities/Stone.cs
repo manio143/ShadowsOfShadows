@@ -12,5 +12,10 @@ namespace ShadowsOfShadows.Entities
         public Stone(IRenderable renderable) : base(renderable)
         {
         }
+
+        public override char GetEntityChar()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

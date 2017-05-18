@@ -2,10 +2,16 @@
 
 namespace ShadowsOfShadows.Items
 {
+    [System.Xml.Serialization.XmlInclude(typeof(Consumable))]
     public abstract class Item
     {
         protected string Name { get; set; }
         protected string StatsString { get; set; }
+
+        public Item()
+        {
+
+        }
 
         public Item(string name, string stats)
         {

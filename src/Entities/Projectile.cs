@@ -18,5 +18,9 @@ namespace ShadowsOfShadows.Entities
 		{
 
 		}
-	}
+        public override char GetEntityChar()
+        {
+            return 'O';
+        }
+    }
 }

@@ -18,5 +18,10 @@ namespace ShadowsOfShadows.Entities
         {
 			Screen.MessageConsole.PrintMessageAndWait(Text);
         }
+
+        public override char GetEntityChar()
+        {
+            return 'T';
+        }
     }
 }

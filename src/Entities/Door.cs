@@ -22,5 +22,10 @@ namespace ShadowsOfShadows.Entities
                 Transform.Collision.TurnOff();
             }
         }
+
+        public override char GetEntityChar()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

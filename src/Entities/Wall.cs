@@ -7,10 +7,22 @@ using ShadowsOfShadows.Renderables;
 
 namespace ShadowsOfShadows.Entities
 {
+    [Serializable]
     public class Wall : Thing
     {
+        /* For serialization */
+        public Wall () : base()
+        {
+
+        }
+
         public Wall(IRenderable renderable) : base(renderable)
         {
+        }
+
+        public override char GetEntityChar()
+        {
+            return (char)219;
         }
     }
 }

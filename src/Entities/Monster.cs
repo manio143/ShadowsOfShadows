@@ -16,6 +16,11 @@ namespace ShadowsOfShadows.Entities
 		{
 			T projectile = (T)new Projectile(1, direction);
 		}
-	}
+
+        public override char GetEntityChar()
+        {
+            return 'M';
+        }
+    }
 }
 

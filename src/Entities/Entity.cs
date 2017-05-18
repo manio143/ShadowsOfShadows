@@ -7,17 +7,25 @@ using System.Collections.Generic;
 
 namespace ShadowsOfShadows.Entities
 {
-	public abstract class Entity
+    [System.Xml.Serialization.XmlInclude(typeof(Thing))]
+    public abstract class Entity
 	{
 		public Transform Transform { get; set;}
 
 		public IRenderable Renderable { get; set; }
 
+        /* For serialization */
+        public Entity ()
+        {
+
+        }
 
 		public Entity ( IRenderable renderable)
 		{
 			Transform = new Transform ();
             Renderable = renderable;
 		}
+
+        public abstract char GetEntityChar();
 	}
 }

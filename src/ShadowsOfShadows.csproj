@@ -31,13 +31,21 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="SadConsole">
+    <Reference Include="MonoGame.Framework, Version=3.5.1.1679, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\MonoGame.Framework.DesktopGL.3.5.1.1679\lib\net40\MonoGame.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="NVorbis, Version=0.8.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\MonoGame.Framework.DesktopGL.3.5.1.1679\lib\net40\NVorbis.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenTK, Version=1.1.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
+      <HintPath>packages\MonoGame.Framework.DesktopGL.3.5.1.1679\lib\net40\OpenTK.dll</HintPath>
+    </Reference>
+    <Reference Include="SadConsole, Version=6.1.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\SadConsole.6.1.3\lib\net\SadConsole.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="MonoGame.Framework">
-      <HintPath>packages\MonoGame.Framework.DesktopGL.3.5.1.1679\lib\net40\MonoGame.Framework.dll</HintPath>
-    </Reference>
+    <Reference Include="System.XML" />
+    <Reference Include="System.Xml.Serialization" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Consoles\Messages.cs" />
@@ -115,21 +123,12 @@
     <Compile Include="Items\WizardsCape.cs" />
     <Compile Include="Items\WizardsHood.cs" />
     <Compile Include="Items\WoodenShield.cs" />
+    <Compile Include="Serialization\GameState.cs" />
     <Compile Include="TestData\TestRooms.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Entities\" />
-    <Folder Include="Renderables\" />
-    <Folder Include="Helpers\" />
-    <Folder Include="Physics\" />
-    <Folder Include="Consoles\" />
-    <Folder Include="Items\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="MonoGame.Framework.dll.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="packages.config" />
     <None Include="C64.font">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

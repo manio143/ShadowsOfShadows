@@ -7,8 +7,15 @@ using ShadowsOfShadows.Renderables;
 
 namespace ShadowsOfShadows.Entities
 {
+    [System.Xml.Serialization.XmlInclude(typeof(Wall))]
+    [System.Xml.Serialization.XmlInclude(typeof(Chest))]
     public abstract class Thing : Entity
     {
+        public Thing()
+        {
+
+        }
+
         public Thing(IRenderable renderable) : base(renderable)
         {
         }

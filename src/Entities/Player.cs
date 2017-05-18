@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using ShadowsOfShadows.Items;
 using ShadowsOfShadows.Helpers;
 using ShadowsOfShadows.Physics;
+using System.Xml.Serialization;
 
 namespace ShadowsOfShadows.Entities
 {
@@ -13,9 +14,16 @@ namespace ShadowsOfShadows.Entities
 		private int Experience;
 		public int Level { get; }
 
-		public Dictionary<Skill, int> Skills { get; }
+        [XmlIgnore]
+        public Dictionary<Skill, int> Skills { get; }
 
-		public Player(string name, Fraction fraction, int speed) : base(name, 'P', speed, 1)
+        /* For serialization */
+        public Player() : base("", 'P', 1, 1)
+        {
+
+        }
+
+        public Player(string name, Fraction fraction, int speed) : base(name, 'P', speed, 1)
 		{
 			this.Fraction = fraction;
             this.Experience = 0;
@@ -38,5 +46,10 @@ namespace ShadowsOfShadows.Entities
 		{
 			T projectile = (T)new Projectile(Skills[Skill.ShootingPower], direction);
 		}
-	}
+
+        public override char GetEntityChar()
+        {
+            return 'P';
+        }
+    }
 }

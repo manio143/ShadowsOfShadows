@@ -7,10 +7,12 @@ using ShadowsOfShadows.Helpers;
 using ShadowsOfShadows.Physics;
 using ShadowsOfShadows.Renderables;
 using ShadowsOfShadows.TestData;
+using ShadowsOfShadows.Serialization;
 using Console = SadConsole.Console;
 using IUpdateable = ShadowsOfShadows.Entities.IUpdateable;
 using Keyboard = SadConsole.Input.Keyboard;
 using System.Collections.Generic;
+using SadConsole.GameHelpers;
 
 namespace ShadowsOfShadows.Consoles
 {
@@ -24,6 +26,21 @@ namespace ShadowsOfShadows.Consoles
 
         public MainConsole(int width, int height) : base(width, height)
         {
+            /* Example of loading game state from file
+             * GameState loader = new GameState();
+            GameState lastGame = loader.loadGameState("1.sav");
+
+            Player = lastGame.Player;
+            Player.Renderable = new ConsoleRenderable('P');
+            Player.Renderable.ConsoleObject.Position = lastGame.PlayerPosition;
+            Player.Transform.Position = lastGame.PlayerPosition;
+            CurrentRoom = lastGame.Rooms[0];
+
+            foreach (var entity in CurrentRoom.Entities)
+            {
+                entity.Renderable = new ConsoleRenderable(entity.GetEntityChar());
+                entity.Renderable.ConsoleObject.Position = entity.Transform.Position;
+            }*/
             Player = new Player("Player", Fraction.Warrior, 10);
 
 
@@ -34,19 +51,28 @@ namespace ShadowsOfShadows.Consoles
             Player.Transform.Position = new Point(1, 1);
 
             Middle = new Point(Width / 2, Height / 2);
+
+            /* Example of saving game state
+             * var rooms = new List<Room>();
+            rooms.Add(CurrentRoom);
+
+            var gS = new GameState(Player, rooms, Middle);
+            gS.saveGameState("1.sav");*/
         }
 
         public override void Draw(System.TimeSpan delta)
         {
             base.Draw(delta);
 
-            var playerObject = Player.Renderable.ConsoleObject;
+            GameObject playerObject = Player.Renderable.ConsoleObject;
+            //var playerObject = Player.Renderable.ConsoleObject;
             playerObject.Position = Middle;
             playerObject.Draw(delta);
 
             foreach (var entity in CurrentRoom.Entities)
             {
-                var consoleObject = entity.Renderable.ConsoleObject;
+                GameObject consoleObject = entity.Renderable.ConsoleObject;
+                //var consoleObject = entity.Renderable.ConsoleObject;
                 consoleObject.Position = entity.Transform.Position - Player.Transform.Position + Middle;
                 if (consoleObject.Position.X < Width && consoleObject.Position.Y < Height)
                     consoleObject.Draw(delta);
