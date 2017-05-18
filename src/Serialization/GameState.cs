@@ -17,7 +17,7 @@ namespace ShadowsOfShadows.Serialization
 		[XmlArray("Rooms"), XmlArrayItem(typeof(Room), ElementName = "Room")]
         public List<Room> Rooms { get; set; }
 
-        public Point PlayerPosition { get; set; }
+        public Point Middle { get; set; }
 
 		/* For serialization */
 		public GameState()
@@ -25,11 +25,11 @@ namespace ShadowsOfShadows.Serialization
 		
 		}
 
-		public GameState (Player player, List<Room> rooms, Point playerPosition)
+		public GameState (Player player, List<Room> rooms, Point middle)
 		{
 			this.Player = player;
 			this.Rooms = rooms;
-            this.PlayerPosition = playerPosition;
+            this.Middle = middle;
 		}
 
 		public void saveGameState(string fileName)

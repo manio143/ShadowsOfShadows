@@ -6,7 +6,7 @@ namespace ShadowsOfShadows.Physics
 {
 	public class CollisionBox
 	{
-		public Polygon Polygon {get;}
+		public Polygon Polygon { get; set; }
         public bool Active { get; set; }
 
         /* For serialization */

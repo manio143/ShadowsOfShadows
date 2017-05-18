@@ -4,6 +4,7 @@ using ShadowsOfShadows.Items;
 using ShadowsOfShadows.Helpers;
 using ShadowsOfShadows.Physics;
 using System.Xml.Serialization;
+using System.Linq;
 
 namespace ShadowsOfShadows.Entities
 {
@@ -12,10 +13,10 @@ namespace ShadowsOfShadows.Entities
 		private Fraction Fraction;
 
 		private int Experience;
-		public int Level { get; }
+		public int Level { get; set; }
 
         [XmlIgnore]
-        public Dictionary<Skill, int> Skills { get; }
+        public Dictionary<Skill, int> Skills { get; private set; }
 
         /* For serialization */
         public Player() : base("", 'P', 1, 1)
@@ -50,6 +51,30 @@ namespace ShadowsOfShadows.Entities
         public override char GetEntityChar()
         {
             return 'P';
+        }
+
+        public SerializeableKeyValue<Skill, int>[] SearchCategoriesSerializable
+        {
+            get
+            {
+                var list = new SerializeableKeyValue<Skill, int> [Skills.Count];
+                if (Skills != null)
+                {
+                    int i = 0;
+                    foreach (var skill in Skills)
+                        list[i++] = new SerializeableKeyValue<Skill, int>() { Key = skill.Key, Value = Skills[skill.Key] };
+                    //list.AddRange(Skills.Keys.Select(key => new SerializeableKeyValue<Skill, int>() { Key = key, Value = Skills[key] }));
+                }
+                return list.ToArray();
+            }
+            set
+            {
+                Skills = new Dictionary<Skill, int>();
+                foreach (var item in value)
+                {
+                    Skills.Add(item.Key, item.Value);
+                }
+            }
         }
     }
 }

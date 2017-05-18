@@ -52,6 +52,7 @@
     <Compile Include="Helpers\EnumHelper.cs" />
     <Compile Include="Helpers\GenericsHelper.cs" />
     <Compile Include="Helpers\PopularQuestions.cs" />
+    <Compile Include="Helpers\SerializableHelper.cs" />
     <Compile Include="Physics\Direction.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

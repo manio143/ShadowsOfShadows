@@ -14,7 +14,7 @@ namespace ShadowsOfShadows.Entities
 
         public bool IsMoving { get; set; }
 
-        private int Speed;
+        public int Speed { get; set; }
         public int CurrentSpeed { get; set; }
         public int Velocity { get; set; }
 
