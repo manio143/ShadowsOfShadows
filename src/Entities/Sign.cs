@@ -9,6 +9,8 @@ namespace ShadowsOfShadows.Entities
     {
         String Text { get; set; }
 
+        public Sign() : base('T') { }
+
         public Sign(String text) : base( new ConsoleRenderable('T'))
         {
             Text = text;
@@ -17,11 +19,6 @@ namespace ShadowsOfShadows.Entities
         public void Interact()
         {
 			Screen.MessageConsole.PrintMessageAndWait(Text);
-        }
-
-        public override char GetEntityChar()
-        {
-            return 'T';
         }
     }
 }

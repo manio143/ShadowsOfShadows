@@ -5,15 +5,8 @@ using ShadowsOfShadows.Helpers;
 
 namespace ShadowsOfShadows.Renderables
 {
-    [Serializable]
     public class ConsoleRenderable : IRenderable
 	{
-        /* For serialization */
-        public ConsoleRenderable()
-        {
-
-        }
-
 		public ConsoleRenderable (char symbol, Color color = new Color())
 		{
 			ConsoleObject = ConsoleObjects.CreateFromChar(symbol, color);

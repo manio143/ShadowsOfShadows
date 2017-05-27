@@ -3,7 +3,6 @@
 
 namespace ShadowsOfShadows.Items
 {
-    [System.Xml.Serialization.XmlInclude(typeof(Apple))]
     public class RegenerationConsumable : Consumable
     {
         public int RegenerationValue { get; /*private*/ set;}

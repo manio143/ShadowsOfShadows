@@ -6,8 +6,6 @@ namespace ShadowsOfShadows.Entities
 {
     public abstract class NonInteractive : Thing
     {
-        public NonInteractive(IRenderable renderable) : base(renderable)
-        {
-        }
+        public NonInteractive(IRenderable renderable) : base(renderable) { }
     }
 }

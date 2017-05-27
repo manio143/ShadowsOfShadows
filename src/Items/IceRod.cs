@@ -8,9 +8,7 @@ namespace ShadowsOfShadows.Items
 {
     public class IceRod : Weapon
     {
-        public IceRod(int ap, int mp) : base("Ice Rod", ap, mp)
-        {
-        }
+        public IceRod(int ap, int mp) : base("Ice Rod", ap, mp) { }
 
         public override void Equip()
         {

@@ -15,14 +15,11 @@ namespace ShadowsOfShadows.Entities
 		private int Experience;
 		public int Level { get; set; }
 
-        [XmlIgnore]
+        [XmlIgnore] // TODO Can a dictionary really be serialized?
         public Dictionary<Skill, int> Skills { get; private set; }
 
         /* For serialization */
-        public Player() : base("", 'P', 1, 1)
-        {
-
-        }
+        public Player() : base('P') { }
 
         public Player(string name, Fraction fraction, int speed) : base(name, 'P', speed, 1)
 		{
@@ -47,11 +44,6 @@ namespace ShadowsOfShadows.Entities
 		{
 			T projectile = (T)new Projectile(Skills[Skill.ShootingPower], direction);
 		}
-
-        public override char GetEntityChar()
-        {
-            return 'P';
-        }
 
         public SerializeableKeyValue<Skill, int>[] SearchCategoriesSerializable
         {

@@ -2,22 +2,23 @@ using System;
 
 using ShadowsOfShadows.Renderables;
 using ShadowsOfShadows.Physics;
-using Microsoft.Xna.Framework;
-using System.Collections.Generic;
+using System.Xml.Serialization;
 
 namespace ShadowsOfShadows.Entities
 {
-    [System.Xml.Serialization.XmlInclude(typeof(Thing))]
     public abstract class Entity
 	{
 		public Transform Transform { get; set;}
 
+        [XmlIgnore]
 		public IRenderable Renderable { get; set; }
 
         /* For serialization */
-        public Entity ()
-        {
+        public Entity() { }
 
+        public Entity(char c)
+        {
+            Renderable = new ConsoleRenderable(c);
         }
 
 		public Entity ( IRenderable renderable)
@@ -25,7 +26,5 @@ namespace ShadowsOfShadows.Entities
 			Transform = new Transform ();
             Renderable = renderable;
 		}
-
-        public abstract char GetEntityChar();
 	}
 }

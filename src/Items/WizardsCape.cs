@@ -8,8 +8,6 @@ namespace ShadowsOfShadows.Items
 {
     public class WizardsCape : BodyArmor
     {
-        public WizardsCape() : base("Wizards Cape", 1)
-        {
-        }
+        public WizardsCape() : base("Wizards Cape", 1) { }
     }
 }

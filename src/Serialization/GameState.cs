@@ -19,11 +19,8 @@ namespace ShadowsOfShadows.Serialization
 
         public Point Middle { get; set; }
 
-		/* For serialization */
-		public GameState()
-		{
-		
-		}
+        /* For serialization */
+        public GameState() { }
 
 		public GameState (Player player, List<Room> rooms, Point middle)
 		{
@@ -31,41 +28,5 @@ namespace ShadowsOfShadows.Serialization
 			this.Rooms = rooms;
             this.Middle = middle;
 		}
-
-		public void saveGameState(string fileName)
-		{
-			// TODO Catch exception
-			XmlSerializer xsSubmit = new XmlSerializer(typeof(GameState));
-		    var objectToSerialize = this;
-			var xml = "";
-
-			using(var sww = new StringWriter())
-			{
-				using(XmlWriter writer = XmlWriter.Create(sww))
-				{
-					xsSubmit.Serialize(writer, objectToSerialize);
-					xml = sww.ToString();
-
-					System.IO.StreamWriter file = new System.IO.StreamWriter("../../../savedgames/" + fileName);
-					file.Write(xml);
-
-					file.Close();
-				}
-			}
-		}
-
-        public GameState loadGameState(string fileName)
-        {
-            GameState state = null;
-            string path = "../../../savedgames/" + fileName;
-
-            XmlSerializer serializer = new XmlSerializer(typeof(GameState));
-
-            StreamReader reader = new StreamReader(path);
-            state = (GameState)serializer.Deserialize(reader);
-            reader.Close();
-
-            return state;
-        }
 	}
 }

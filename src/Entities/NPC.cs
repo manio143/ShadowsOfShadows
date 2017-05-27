@@ -8,6 +8,8 @@ namespace ShadowsOfShadows.Entities
 	{
 		private Fraction Fraction;
 
+        public NPC() : base('N') { }
+
 		public NPC (Fraction fraction, int speed) : base("NPC", 'N', speed, 1)
 		{
 			this.Fraction = fraction;
@@ -19,11 +21,6 @@ namespace ShadowsOfShadows.Entities
 			T projectile = (T)new Projectile(SkillFactory.GetNewSkillSet(Fraction)[Skill.ShootingPower],
 											 direction);
 		}
-
-        public override char GetEntityChar()
-        {
-            return 'N';
-        }
     }
 }
 

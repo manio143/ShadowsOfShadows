@@ -7,10 +7,7 @@ namespace ShadowsOfShadows.Entities
         public List<Entity> Entities { get; set; }
 
         /* For serialization */
-        public Room ()
-        {
-
-        }
+        public Room() { }
 
 		public Room (IEnumerable<Entity> entities)
 		{

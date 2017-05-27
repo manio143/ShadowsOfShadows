@@ -5,9 +5,7 @@ namespace ShadowsOfShadows.Items
 {
     public class Bow : Weapon
     {
-        public Bow(int ap, int mp) : base("Bow", ap, mp)
-        {
-        }
+        public Bow(int ap, int mp) : base("Bow", ap, mp) { }
 
         public override void Equip()
         {

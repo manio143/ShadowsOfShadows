@@ -8,8 +8,6 @@ namespace ShadowsOfShadows.Items
 {
     public class Sword : Weapon
     {
-        public Sword() : base("Sword", 10, 0)
-        {
-        }
+        public Sword() : base("Sword", 10, 0) { }
     }
 }

@@ -11,10 +11,7 @@ namespace ShadowsOfShadows.Entities
     {
         public List<Item> Items { get; }
 
-        public Chest() : base()
-        {
-
-        }
+        public Chest() : base('c') { }
 
         public Chest(IRenderable rendarable, int lockDificulty, IEnumerable<Item> items) : base(rendarable, lockDificulty)
         {
@@ -25,10 +22,6 @@ namespace ShadowsOfShadows.Entities
         {
             if (CheckOpened())
                 Screen.MenuConsole.OpenChest(this);
-        }
-        public override char GetEntityChar()
-        {
-            return 'c';
         }
 
     }

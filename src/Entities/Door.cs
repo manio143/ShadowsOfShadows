@@ -11,6 +11,7 @@ namespace ShadowsOfShadows.Entities
     {
         public Door(IRenderable rendarable, int lockDificulty) : base(rendarable, lockDificulty)
         {
+            // TODO Set char
         }
 
         public override void Interact()
@@ -21,11 +22,6 @@ namespace ShadowsOfShadows.Entities
                 // Generator.RoomGenerator.Generate(this.GetHashCode()
                 Transform.Collision.TurnOff();
             }
-        }
-
-        public override char GetEntityChar()
-        {
-            throw new NotImplementedException();
         }
     }
 }

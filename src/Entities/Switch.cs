@@ -9,6 +9,8 @@ namespace ShadowsOfShadows.Entities
 {
     public class Switch : Thing, IInteractable
     {
+        public Switch() : base() { throw new NotImplementedException(); }
+
         public Switch(IRenderable renderable) : base(renderable)
         {
             Value = false;
@@ -20,11 +22,6 @@ namespace ShadowsOfShadows.Entities
         {
             Value = !Value;
 			Screen.MessageConsole.PrintMessage("Switch has been set to " + Value);
-        }
-
-        public override char GetEntityChar()
-        {
-            throw new NotImplementedException();
         }
     }
 }

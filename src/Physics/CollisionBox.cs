@@ -10,10 +10,7 @@ namespace ShadowsOfShadows.Physics
         public bool Active { get; set; }
 
         /* For serialization */
-        public CollisionBox()
-        {
-
-        }
+        public CollisionBox() { }
 
         public CollisionBox (Polygon polygon)
 		{

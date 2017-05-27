@@ -8,9 +8,7 @@ namespace ShadowsOfShadows.Items
 {
     public class FireRod : Weapon
     {
-        public FireRod(int ap, int mp) : base("Fire Rod", ap, mp)
-        {
-        }
+        public FireRod(int ap, int mp) : base("Fire Rod", ap, mp) { }
 
         public override void Equip()
         {

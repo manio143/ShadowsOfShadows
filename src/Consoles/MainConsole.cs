@@ -27,20 +27,15 @@ namespace ShadowsOfShadows.Consoles
         public MainConsole(int width, int height) : base(width, height)
         {
             //Example of loading game state from file
-            /*GameState loader = new GameState();
-            GameState lastGame = loader.loadGameState("1.sav");
+            /*var lastGame = Serializer.loadGameState(SaveSlot.Slot3);
 
             Player = lastGame.Player;
-            Player.Renderable = new ConsoleRenderable('P');
             Player.Renderable.ConsoleObject.Position = Player.Transform.Position;
             CurrentRoom = lastGame.Rooms[0];
             Middle = lastGame.Middle;
 
             foreach (var entity in CurrentRoom.Entities)
-            {
-                entity.Renderable = new ConsoleRenderable(entity.GetEntityChar());
-                entity.Renderable.ConsoleObject.Position = entity.Transform.Position;
-            }*/
+                entity.Renderable.ConsoleObject.Position = entity.Transform.Position;*/
             Player = new Player("Player", Fraction.Warrior, 10);
 
 
@@ -57,21 +52,21 @@ namespace ShadowsOfShadows.Consoles
             rooms.Add(CurrentRoom);
 
             var gS = new GameState(Player, rooms, Middle);
-            gS.saveGameState("1.sav");
+            Serializer.Save(SaveSlot.Slot3, gS);
         }
 
         public override void Draw(System.TimeSpan delta)
         {
             base.Draw(delta);
 
-            GameObject playerObject = Player.Renderable.ConsoleObject;
+            var playerObject = Player.Renderable.ConsoleObject;
             //var playerObject = Player.Renderable.ConsoleObject;
             playerObject.Position = Middle;
             playerObject.Draw(delta);
 
             foreach (var entity in CurrentRoom.Entities)
             {
-                GameObject consoleObject = entity.Renderable.ConsoleObject;
+                var consoleObject = entity.Renderable.ConsoleObject;
                 //var consoleObject = entity.Renderable.ConsoleObject;
                 consoleObject.Position = entity.Transform.Position - Player.Transform.Position + Middle;
                 if (consoleObject.Position.X < Width && consoleObject.Position.Y < Height)

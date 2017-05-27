@@ -11,18 +11,8 @@ namespace ShadowsOfShadows.Entities
     public class Wall : Thing
     {
         /* For serialization */
-        public Wall () : base()
-        {
+        public Wall() : base((char)219) { }
 
-        }
-
-        public Wall(IRenderable renderable) : base(renderable)
-        {
-        }
-
-        public override char GetEntityChar()
-        {
-            return (char)219;
-        }
+        public Wall(IRenderable renderable) : base(renderable) { }
     }
 }

@@ -5,7 +5,6 @@ using SadConsole.GameHelpers;
 
 namespace ShadowsOfShadows.Renderables
 {
-    [System.Xml.Serialization.XmlInclude(typeof(ConsoleRenderable))]
     public class IRenderable
     {
         [XmlIgnore]

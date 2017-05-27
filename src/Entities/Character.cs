@@ -10,7 +10,7 @@ namespace ShadowsOfShadows.Entities
 {
     public abstract class Character : Entity, IInteractable, IUpdateable
     {
-        public string Name { get; }
+        public string Name { get; set; }
 
         public bool IsMoving { get; set; }
 
@@ -19,6 +19,10 @@ namespace ShadowsOfShadows.Entities
         public int Velocity { get; set; }
 
         public List<Item> Equipment { get; }
+
+        public Character() { }
+
+        public Character(char c) : base(c) { }
 
         protected Character(string name, char renderChar, int speed, int velocity) : base(
             new ConsoleRenderable(renderChar))
