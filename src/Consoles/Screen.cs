@@ -53,10 +53,6 @@ namespace ShadowsOfShadows
             MessageConsole = new MessageConsole(1, height - MESSAGES_HEIGHT + 1, width, MESSAGES_HEIGHT);
             MenuConsole = new MenuConsole(width - MENU_WIDTH, 1, MENU_WIDTH + 1, height - MESSAGES_HEIGHT + 1);
 
-            Children.Add(MainConsole);
-            Children.Add(MessageConsole);
-            Children.Add(MenuConsole);
-
             MessageConsole.PrintMessageAndWait("This is a message\nAnd with line breaks");
             MessageConsole.AskQuestion("Co mi powiesz?", typeof(TestEnum)).PostProcessing =
                 (m) =>
@@ -80,6 +76,25 @@ namespace ShadowsOfShadows
                 if (MenuConsole.ProcessKeyboard(state))
                     return true;
             return MainConsole.ProcessKeyboard(state);
+        }
+
+        public override void Update(TimeSpan delta)
+        {
+            base.Update(delta);
+            if (MessageConsole.IsActive)
+                MessageConsole.Update(delta);
+            else if (MenuConsole.IsActive)
+                MenuConsole.Update(delta);
+            else 
+                MainConsole.Update(delta);
+        }
+
+        public override void Draw(TimeSpan delta)
+        {
+            base.Draw(delta);
+            MessageConsole.Draw(delta);
+            MenuConsole.Draw(delta);
+            MainConsole.Draw(delta);
         }
     }
 }
