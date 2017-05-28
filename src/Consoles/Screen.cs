@@ -69,6 +69,16 @@ namespace ShadowsOfShadows
                         });
                     MenuConsole.OpenChest(chest);
                 };
+
+            // Nie wiem czy nie mamy buga bo w ten sposób nie wy?wietlaj? si? najpierw poprzednie wiadomo?ci
+            // chyba ?e zawsze b?dziemy u?ywa? PrintMessageAndWait ale to podczas walki byloby slabe
+            Monster mn = new Monster(0, 0);
+            mn.Health = 5;
+            mn.MaxHealth = 10;
+            MainConsole.Player.AttackPower = 5;
+            mn.DefencePower = 2;
+            MainConsole.Player.Attack(mn);
+
         }
 
         public override bool ProcessKeyboard(Keyboard state)
