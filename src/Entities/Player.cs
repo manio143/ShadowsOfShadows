@@ -6,12 +6,14 @@ using ShadowsOfShadows.Physics;
 
 namespace ShadowsOfShadows.Entities
 {
-	public class Player : Character
-	{
-		private Fraction Fraction;
+    public class Player : Character
+    {
+        private Fraction Fraction;
 
-		private int Experience;
-		public int Level { get; }
+        private int Experience;
+        public int Level { get; }
+
+        public List<TimedConsumable> ActiveBuffs { get; set; } = new List<TimedConsumable>();
 
 		public Dictionary<Skill, int> Skills { get; }
 
@@ -38,5 +40,27 @@ namespace ShadowsOfShadows.Entities
 		{
 			T projectile = (T)new Projectile(Skills[Skill.ShootingPower], direction);
 		}
-	}
+
+        public override void Update(TimeSpan deltaTime)
+        {
+            base.Update(deltaTime);
+
+            bool changes = false;
+
+            for (int i = ActiveBuffs.Count - 1; i >= 0; i--)
+            {
+                ActiveBuffs[i].Update(deltaTime);
+                if (ActiveBuffs[i].Active == false)
+                {
+                    ActiveBuffs.RemoveAt(i);
+                    changes = true;
+                }
+            }
+            if(changes && !Screen.MenuConsole.IsActive)
+            {
+                // refresh player's stats
+                Screen.MenuConsole.PrintPlayerStats();
+            }
+        }
+    }
 }
