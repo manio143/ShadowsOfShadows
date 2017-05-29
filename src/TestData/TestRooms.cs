@@ -25,7 +25,7 @@ namespace ShadowsOfShadows.TestData
             new Wall(new ConsoleRenderable(219)) {Transform = new Transform() {Position = new Point(4, 1)}},
             new Wall(new ConsoleRenderable(219)) {Transform = new Transform() {Position = new Point(4, 0)}},
 
-            new Chest(new ConsoleRenderable('c'), 1, new[] { new StrengthPotion(System.TimeSpan.FromSeconds(5))})
+            new Chest(new ConsoleRenderable('c'), 1, new Item [] { new Apple(), new StrengthPotion(System.TimeSpan.FromSeconds(5))})
             {
                 Transform = new Transform() {Position = new Point(3, 3)}
             },
