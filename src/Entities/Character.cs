@@ -71,7 +71,7 @@ namespace ShadowsOfShadows.Entities
                 Transform.Position = lastPosition;
         }
 
-        public void Update(TimeSpan deltaTime)
+        public virtual void Update(TimeSpan deltaTime)
         {
             CurrentSpeed--;
             if (CurrentSpeed == 0)
