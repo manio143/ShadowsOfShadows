@@ -10,33 +10,36 @@ namespace ShadowsOfShadows.Serialization
 {
     public static class Serializer
     {
+        private static string SaveFolder = Path.Combine(
+                        Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                        "ShadowsOfShadows",
+                        "savedgames");
+
         public static void Save(SaveSlot slot, GameState state)
         {
             // TODO Catch exception
             XmlSerializer xsSubmit = new XmlSerializer(typeof(GameState),
-                new Type[] { typeof(RegenerationConsumable), typeof(Apple),
+                new Type[] {typeof(RegenerationConsumable), typeof(Apple),
                     typeof(Wall), typeof(Chest)}); // TODO Is it necessary to list all the types here?
             var xml = "";
 
             using (var sww = new StringWriter())
-            {
                 using (XmlWriter writer = XmlWriter.Create(sww))
                 {
                     xsSubmit.Serialize(writer, state);
                     xml = sww.ToString();
 
-                    System.IO.StreamWriter file = new System.IO.StreamWriter("../../../savedgames/" + slot + ".sav");
+                    System.IO.StreamWriter file = new System.IO.StreamWriter(SaveFolder + "/" + slot + ".sav");
                     file.Write(xml);
 
                     file.Close();
                 }
-            }
         }
 
         public static GameState loadGameState(SaveSlot slot)
         {
             GameState state = null;
-            string path = "../../../savedgames/" + slot + ".sav";
+            string path = SaveFolder + "/" + slot + ".sav";
 
             XmlSerializer serializer = new XmlSerializer(typeof(GameState),
                 new Type[] { typeof(RegenerationConsumable), typeof(Apple),

@@ -8,7 +8,7 @@ namespace ShadowsOfShadows.Entities
         /* Negative means healing */
         public int Damage { get; }
 
-        public Projectile() : base('O') { }
+        public Projectile() : base('*') { }
 
 		public Projectile(int damage, Direction direction) : base(new Renderables.ConsoleRenderable('O'))
 		{

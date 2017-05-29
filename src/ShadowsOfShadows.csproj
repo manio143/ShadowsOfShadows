@@ -34,10 +34,10 @@
     <Reference Include="MonoGame.Framework">
       <HintPath>packages\MonoGame.Framework.DesktopGL.3.5.1.1679\lib\net40\MonoGame.Framework.dll</HintPath>
     </Reference>
-    <Reference Include="NVorbis>
+    <Reference Include="NVorbis">
       <HintPath>packages\MonoGame.Framework.DesktopGL.3.5.1.1679\lib\net40\NVorbis.dll</HintPath>
     </Reference>
-    <Reference Include="OpenTK>
+    <Reference Include="OpenTK">
       <HintPath>packages\MonoGame.Framework.DesktopGL.3.5.1.1679\lib\net40\OpenTK.dll</HintPath>
     </Reference>
     <Reference Include="SadConsole">
@@ -130,7 +130,6 @@
     <Compile Include="TestData\TestRooms.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ItemGroup />
   <ItemGroup>
 	<Folder Include="Entities\" />
 	<Folder Include="Renderables\" />
@@ -139,6 +138,7 @@
     <Folder Include="Consoles\" />
     <Folder Include="Items\" />
 	<Folder Include="Serialization\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="C64.font">
