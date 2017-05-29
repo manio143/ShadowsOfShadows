@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Linq;
 
 namespace ShadowsOfShadows.Items
 {
-    public abstract class Item
+	public abstract class Item : IEquatable<Item>
     {
         protected string Name { get; set; }
         protected string StatsString { get; set; }
@@ -27,5 +28,33 @@ namespace ShadowsOfShadows.Items
         {
             return false;
         }
+
+		public bool Equals(Item other)
+		{
+			if (other.GetType () == GetType ())
+			{
+				foreach (var property in GetType().GetProperties())
+					if (!property.GetValue (other).Equals (property.GetValue (this)))
+						return false;
+				return true;
+			}
+			return false;
+		}
+
+		public override bool Equals (object obj)
+		{
+			if (obj is Item)
+				return Equals ((Item)obj);
+			return base.Equals (obj);
+		}
+
+		public override int GetHashCode ()
+		{
+			var elements = GetType ().GetProperties ().Select (p => p.GetValue (this).GetHashCode ());
+			int sum = 0;
+			foreach (var e in elements)
+				sum = (sum + e) % 288919320;
+			return sum;
+		}
     }
 }
