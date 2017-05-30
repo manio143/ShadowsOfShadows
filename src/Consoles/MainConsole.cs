@@ -26,12 +26,7 @@ namespace ShadowsOfShadows.Consoles
         {
             Player = new Player("Player", Fraction.Warrior, 10);
 
-
-            var v = new Wall(new ConsoleRenderable(219));
-            v.Transform.Position = new Point(2, 2);
-            v.Transform.Collision.TurnOff();
-            CurrentRoom.Entities.Add(v);
-            Player.Transform.Position = new Point(1, 1);
+			Player.Transform.Position = CurrentRoom.EnterPoint;
 
             Middle = new Point(Width / 2, Height / 2);
         }

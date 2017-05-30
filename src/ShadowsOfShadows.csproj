@@ -38,6 +38,9 @@
     <Reference Include="MonoGame.Framework">
       <HintPath>packages\MonoGame.Framework.DesktopGL.3.5.1.1679\lib\net40\MonoGame.Framework.dll</HintPath>
     </Reference>
+    <Reference Include="MathNet.Numerics">
+      <HintPath>packages\MathNet.Numerics.3.19.0\lib\net40\MathNet.Numerics.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Consoles\Messages.cs" />
@@ -116,6 +119,7 @@
     <Compile Include="Items\WizardsHood.cs" />
     <Compile Include="Items\WoodenShield.cs" />
     <Compile Include="TestData\TestRooms.cs" />
+    <Compile Include="Generators\RoomGenerator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -125,6 +129,7 @@
     <Folder Include="Physics\" />
     <Folder Include="Consoles\" />
     <Folder Include="Items\" />
+    <Folder Include="Generators\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="MonoGame.Framework.dll.config">
