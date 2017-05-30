@@ -15,6 +15,13 @@ namespace ShadowsOfShadows.Serialization
                         "ShadowsOfShadows",
                         "savedgames");
 
+		private static FileStream OpenFile(SaveSlot slot, bool create = false)
+		{
+			if (!Directory.Exists (SaveFolder))
+				Directory.CreateDirectory (SaveFolder);
+			return File.Open (SaveFolder + "/" + slot + ".sav", create ? FileMode.OpenOrCreate : FileMode.Open);
+		}
+
         public static void Save(SaveSlot slot, GameState state)
         {
             // TODO Catch exception
@@ -29,23 +36,22 @@ namespace ShadowsOfShadows.Serialization
                     xsSubmit.Serialize(writer, state);
                     xml = sww.ToString();
 
-                    System.IO.StreamWriter file = new System.IO.StreamWriter(SaveFolder + "/" + slot + ".sav");
+				var file = new System.IO.StreamWriter(OpenFile(slot, true));
                     file.Write(xml);
 
                     file.Close();
                 }
         }
 
-        public static GameState loadGameState(SaveSlot slot)
+        public static GameState Load(SaveSlot slot)
         {
             GameState state = null;
-            string path = SaveFolder + "/" + slot + ".sav";
 
             XmlSerializer serializer = new XmlSerializer(typeof(GameState),
                 new Type[] { typeof(RegenerationConsumable), typeof(Apple),
                     typeof(Wall), typeof(Chest) }); // As above
 
-            StreamReader reader = new StreamReader(path);
+			var reader = new StreamReader(OpenFile(slot));
             state = (GameState)serializer.Deserialize(reader);
             reader.Close();
 
