@@ -307,8 +307,10 @@ namespace ShadowsOfShadows.Consoles
 				string title = kvp.Key.ToString();
 				//Not great but currently I don't see another way
 				int remaining = Screen.MENU_WIDTH - 1 - title.Length;
-				string countStr = kvp.Value > 1 ? kvp.Value.ToString() : "";
-				title += countStr.PadLeft(remaining - countStr.Length);
+				if(kvp.Value > 1) {
+					string countStr = kvp.Value.ToString();
+					title += countStr.PadLeft(remaining - countStr.Length);
+				}
 				return new Tuple<Item, string>(kvp.Key, title);
 			});
 		}

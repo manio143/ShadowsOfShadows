@@ -40,7 +40,7 @@ namespace ShadowsOfShadows
 
     public class Screen : SadConsole.ConsoleContainer
     {
-        public const int MENU_WIDTH = 15;
+        public const int MENU_WIDTH = 20;
         public const int MESSAGES_HEIGHT = 7;
 
         public static MainConsole MainConsole;
