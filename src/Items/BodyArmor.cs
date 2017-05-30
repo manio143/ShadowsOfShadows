@@ -6,7 +6,9 @@ namespace ShadowsOfShadows.Items
 {
     public abstract class BodyArmor : Wearable
     {
-        public int DP { get; private set; }
+        public int DP { get; set; }
+
+		public BodyArmor() : base("Body Armor") { }
 
         public BodyArmor(String name, int dp) : base(name, "Defence Power " + dp.ToString() + "\n")
         {

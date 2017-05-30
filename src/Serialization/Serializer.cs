@@ -2,6 +2,7 @@
 using System.Xml.Serialization;
 using System.Xml;
 using System.IO;
+using System.Linq;
 
 using ShadowsOfShadows.Entities;
 using ShadowsOfShadows.Items;
@@ -22,18 +23,28 @@ namespace ShadowsOfShadows.Serialization
 			return File.Open (SaveFolder + "/" + slot + ".sav", create ? FileMode.OpenOrCreate : FileMode.Open);
 		}
 
+		private static Type[] GetAllTypes()
+		{
+			return typeof(Serializer).Assembly.GetTypes ()
+				.Where(t => t.Namespace.Contains("Entities") 
+					|| t.Namespace.Contains("Item")
+					|| t.Namespace.Contains("Physics")
+					|| t.Namespace.Contains("Helpers")
+				).Where(t => !t.IsSealed)
+				.Where(t => !t.IsGenericTypeDefinition)
+				.Where(t => !t.IsInterface).ToArray ();
+		}
+
         public static void Save(SaveSlot slot, GameState state)
         {
             // TODO Catch exception
-            XmlSerializer xsSubmit = new XmlSerializer(typeof(GameState),
-                new Type[] {typeof(RegenerationConsumable), typeof(Apple),
-                    typeof(Wall), typeof(Chest)}); // TODO Is it necessary to list all the types here?
+			XmlSerializer serializer = new XmlSerializer(typeof(GameState), GetAllTypes());
             var xml = "";
 
             using (var sww = new StringWriter())
                 using (XmlWriter writer = XmlWriter.Create(sww))
                 {
-                    xsSubmit.Serialize(writer, state);
+					serializer.Serialize(writer, state);
                     xml = sww.ToString();
 
 				var file = new System.IO.StreamWriter(OpenFile(slot, true));
@@ -47,9 +58,7 @@ namespace ShadowsOfShadows.Serialization
         {
             GameState state = null;
 
-            XmlSerializer serializer = new XmlSerializer(typeof(GameState),
-                new Type[] { typeof(RegenerationConsumable), typeof(Apple),
-                    typeof(Wall), typeof(Chest) }); // As above
+			XmlSerializer serializer = new XmlSerializer(typeof(GameState), GetAllTypes());
 
 			var reader = new StreamReader(OpenFile(slot));
             state = (GameState)serializer.Deserialize(reader);

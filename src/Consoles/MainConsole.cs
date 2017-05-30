@@ -27,7 +27,7 @@ namespace ShadowsOfShadows.Consoles
         public MainConsole(int width, int height) : base(width, height)
         {
             //Example of loading game state from file
-            /*var lastGame = Serializer.loadGameState(SaveSlot.Slot3);
+            /*var lastGame = Serializer.Load(SaveSlot.Slot3);
 
             Player = lastGame.Player;
             Player.Renderable.ConsoleObject.Position = Player.Transform.Position;

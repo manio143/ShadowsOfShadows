@@ -8,8 +8,12 @@ namespace ShadowsOfShadows.Items
 {
     public abstract class TimedConsumable : Consumable
     {
-        public System.TimeSpan Duration { get; private set; }
-        public bool Active { get; private set; }
+        public System.TimeSpan Duration { get; set; }
+        public bool Active { get; set; }
+
+		public TimedConsumable() : base() { }
+
+		public TimedConsumable(string name) : base(name) { }
 
         public TimedConsumable(String name, String stats, System.TimeSpan duration) : base(name, "Duration " + duration.TotalSeconds + ",\n" + stats)
         {

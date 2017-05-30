@@ -8,7 +8,9 @@ namespace ShadowsOfShadows.Items
 {
     public class Shield : Wearable
     {
-        public int DP { get; private set; }
+        public int DP { get; set; }
+
+		public Shield() : base("Shield") { }
 
         public Shield(String name, int dp) : base(name, "Defence Power " + dp.ToString() + "\n")
         {

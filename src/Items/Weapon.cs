@@ -8,8 +8,12 @@ namespace ShadowsOfShadows.Items
 {
     public class Weapon : Wearable
     {
-        public int AP { get; private set; }
-        public int MP { get; private set; }
+        public int AP { get; set; }
+        public int MP { get; set; }
+
+		public Weapon() : base() { }
+
+		public Weapon(String name) : base(name) { }
 
         public Weapon(String name, int ap, int mp) : base(name, "Attack power " + ap +",\n" + "Magic power " + mp + "\n")
         {

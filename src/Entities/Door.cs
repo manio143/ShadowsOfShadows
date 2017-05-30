@@ -9,6 +9,8 @@ namespace ShadowsOfShadows.Entities
 {
     public class Door : Openable
     {
+		public Door() : base() { }
+
         public Door(IRenderable rendarable, int lockDificulty) : base(rendarable, lockDificulty)
         {
             // TODO Set char
