@@ -12,6 +12,8 @@ namespace ShadowsOfShadows.Entities
     {
         public string Name { get; }
 
+        private static MathNet.Numerics.Distributions.Normal rnd = new MathNet.Numerics.Distributions.Normal(0.7, 0.15);
+
         public bool IsMoving { get; set; }
 
         private int Speed;
@@ -99,13 +101,15 @@ namespace ShadowsOfShadows.Entities
 
         public void Attack(Character character)
         {
-            Health -= character.DefencePower;
-            character.Health -= AttackPower;
+            int previousHP = character.Health;
+            double sample = rnd.Sample();
+            character.TakeDamage((int)(AttackPower * sample));
+            Screen.MessageConsole.PrintMessage(Name + " dealt " + (previousHP - character.Health) + " damage to " + character.Name);
         }
 
         public void TakeDamage(int amount)
         {
-            Health = Math.Max(Health - Math.Min(DefencePower - amount, 0), 0);
+            Health = Math.Max(Health - Math.Max(amount - DefencePower, 0), 0);
         }
     }
 }
