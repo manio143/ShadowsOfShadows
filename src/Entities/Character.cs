@@ -15,6 +15,7 @@ namespace ShadowsOfShadows.Entities
         private static MathNet.Numerics.Distributions.Normal rnd = new MathNet.Numerics.Distributions.Normal(0.7, 0.15);
 
         public bool IsMoving { get; set; }
+		public bool IsAttacking { get; set; }
 
         private int Speed;
         public int CurrentSpeed { get; set; }
@@ -42,6 +43,19 @@ namespace ShadowsOfShadows.Entities
         public void Interact()
         {
         }
+
+		private void Attack()
+		{
+			if (!IsAttacking)
+				return;
+
+			var entity = Screen.MainConsole.CurrentRoom.Entities.FirstOrDefault(e => e.Transform.Position ==
+				Transform.Position +
+				Transform.Direction.AsPoint());
+			var enemy = entity as Character;
+			if (enemy != null)
+				Attack (enemy);
+		}
 
         private void Move()
         {
@@ -80,6 +94,7 @@ namespace ShadowsOfShadows.Entities
             {
                 CurrentSpeed = Speed;
                 Move();
+				Attack();
             }
         }
 

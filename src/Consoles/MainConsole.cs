@@ -67,6 +67,8 @@ namespace ShadowsOfShadows.Consoles
                 Screen.MenuConsole.OpenMainMenu();
 
             ProcessMovement(info);
+
+			ProcessAttack(info);
             
             if (info.IsKeyPressed(Keys.E))
             {
@@ -87,6 +89,14 @@ namespace ShadowsOfShadows.Consoles
             return true;
         }
         
+		private void ProcessAttack(Keyboard info)
+		{
+			if (info.IsKeyDown (Keys.Space))
+				Player.IsAttacking = true;
+			else
+				Player.IsAttacking = false;
+		}
+
         private void ProcessMovement(Keyboard info)
         {
             if (info.IsKeyDown(Keys.Up))
