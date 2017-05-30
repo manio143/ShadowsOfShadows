@@ -20,13 +20,14 @@ namespace ShadowsOfShadows.Items
         public override void Use()
         {
             Active = true;
+            Screen.MainConsole.Player.ActiveBuffs.Add(this);
         }
 
         public void Update(System.TimeSpan delta)
         {
             if (!Active) return;
 
-            if(delta > Duration)
+            if(delta >= Duration)
             {
                 Duration = System.TimeSpan.Zero;
                 Active = false;

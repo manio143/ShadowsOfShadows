@@ -40,8 +40,8 @@ namespace ShadowsOfShadows
 
     public class Screen : SadConsole.ConsoleContainer
     {
-        const int MENU_WIDTH = 15;
-        const int MESSAGES_HEIGHT = 7;
+        public const int MENU_WIDTH = 15;
+        public const int MESSAGES_HEIGHT = 7;
 
         public static MainConsole MainConsole;
         public static MessageConsole MessageConsole;
@@ -52,10 +52,6 @@ namespace ShadowsOfShadows
             MainConsole = new MainConsole(width - MENU_WIDTH + 1, height - MESSAGES_HEIGHT + 2);
             MessageConsole = new MessageConsole(1, height - MESSAGES_HEIGHT + 1, width, MESSAGES_HEIGHT);
             MenuConsole = new MenuConsole(width - MENU_WIDTH, 1, MENU_WIDTH + 1, height - MESSAGES_HEIGHT + 1);
-
-            Children.Add(MainConsole);
-            Children.Add(MessageConsole);
-            Children.Add(MenuConsole);
 
             MessageConsole.PrintMessageAndWait("This is a message\nAnd with line breaks");
             MessageConsole.AskQuestion("Co mi powiesz?", typeof(TestEnum)).PostProcessing =
@@ -80,6 +76,25 @@ namespace ShadowsOfShadows
                 if (MenuConsole.ProcessKeyboard(state))
                     return true;
             return MainConsole.ProcessKeyboard(state);
+        }
+
+        public override void Update(TimeSpan delta)
+        {
+            base.Update(delta);
+            if (MessageConsole.IsActive)
+                MessageConsole.Update(delta);
+            else if (MenuConsole.IsActive)
+                MenuConsole.Update(delta);
+            else 
+                MainConsole.Update(delta);
+        }
+
+        public override void Draw(TimeSpan delta)
+        {
+            base.Draw(delta);
+            MessageConsole.Draw(delta);
+            MenuConsole.Draw(delta);
+            MainConsole.Draw(delta);
         }
     }
 }
