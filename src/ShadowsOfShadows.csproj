@@ -140,6 +140,9 @@
 	<Folder Include="Serialization\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="MonoGame.Framework.dll.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="C64.font">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
