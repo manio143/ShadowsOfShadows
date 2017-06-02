@@ -8,15 +8,17 @@ using Microsoft.Xna.Framework;
 
 namespace ShadowsOfShadows.Entities
 {
+    [Serializable]
     public class Wall : Thing
     {
-        public Wall(IRenderable renderable) : base(renderable)
-        {
-        }
+        /* For serialization */
+        public Wall() : base((char)219) { }
 
-		public Wall(Point position) : this (new ConsoleRenderable(219))
-		{
-			Transform.Position = position;
-		}
+        public Wall(IRenderable renderable) : base(renderable) { }
+
+		    public Wall(Point position) : this (new ConsoleRenderable(219))
+	    	{
+		     	Transform.Position = position;
+	    	}
     }
 }

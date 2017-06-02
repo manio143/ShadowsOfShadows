@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace ShadowsOfShadows.Items
 {
     public class ManaPotion : Consumable
     {
+		[XmlIgnore]
         public int AmountOfMana { get; private set; }
         public ManaPotion(String name, int amountOfMana): base(name, "Mana regeneration " + amountOfMana + "\n")
         {

@@ -9,8 +9,8 @@ namespace ShadowsOfShadows.Entities
 {
     public class Stone : Thing
     {
-        public Stone(IRenderable renderable) : base(renderable)
-        {
-        }
+        public Stone() : base() { throw new NotImplementedException(); }
+
+        public Stone(IRenderable renderable) : base(renderable) { }
     }
 }

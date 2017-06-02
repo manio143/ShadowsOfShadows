@@ -7,6 +7,8 @@ namespace ShadowsOfShadows.Entities
 	{
 		private int Experience;
 
+        public Monster() : base('M') { }
+
 		public Monster(int speed, int velocity) : base("Monster", 'M', speed, velocity)
 		{
 			this.Experience = 0;
@@ -16,6 +18,6 @@ namespace ShadowsOfShadows.Entities
 		{
 			T projectile = (T)new Projectile(1, direction);
 		}
-	}
+    }
 }
 

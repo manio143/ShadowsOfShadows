@@ -7,7 +7,7 @@ namespace ShadowsOfShadows.Physics
 {
 	public struct Polygon
 	{
-		public List<Rectangle> Rectangles{ get; }
+		public List<Rectangle> Rectangles{ get; set; }
 
 		public Polygon (List<Rectangle> rectangles)
 		{

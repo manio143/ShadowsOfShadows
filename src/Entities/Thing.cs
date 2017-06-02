@@ -9,8 +9,10 @@ namespace ShadowsOfShadows.Entities
 {
     public abstract class Thing : Entity
     {
-        public Thing(IRenderable renderable) : base(renderable)
-        {
-        }
+        public Thing() { }
+
+        public Thing(char c) : base(c) { }
+
+        public Thing(IRenderable renderable) : base(renderable) { }
     }
 }

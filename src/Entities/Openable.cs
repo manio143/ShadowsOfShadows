@@ -6,6 +6,10 @@ namespace ShadowsOfShadows.Entities
     {
         public int LockDificulty { get; set; }
 
+        public Openable() : base() { }
+
+        public Openable(char c) : base(c) { }
+
         public Openable(IRenderable rendarable, int lockDificulty) : base(rendarable)
         {
             LockDificulty = lockDificulty;

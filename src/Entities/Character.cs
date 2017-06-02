@@ -10,18 +10,22 @@ namespace ShadowsOfShadows.Entities
 {
     public abstract class Character : Entity, IInteractable, IUpdateable
     {
-        public string Name { get; }
+        public string Name { get; set; }
 
         private static MathNet.Numerics.Distributions.Normal rnd = new MathNet.Numerics.Distributions.Normal(0.7, 0.15);
 
         public bool IsMoving { get; set; }
 		public bool IsAttacking { get; set; }
 
-        private int Speed;
+        public int Speed { get; set; }
         public int CurrentSpeed { get; set; }
         public int Velocity { get; set; }
 
         public List<Item> Equipment { get; }
+
+        public Character() { }
+
+        public Character(char c) : base(c) { }
 
         protected Character(string name, char renderChar, int speed, int velocity) : base(
             new ConsoleRenderable(renderChar))

@@ -8,8 +8,8 @@ namespace ShadowsOfShadows.Items
 {
     public class Key : QuestItem
     {
-        public Key(string name, string description) : base(name, "Description " + description)
-        {
-        }
+		public Key() : base("Key") { }
+		
+        public Key(string name, string description) : base(name, "Description " + description) { }
     }
 }

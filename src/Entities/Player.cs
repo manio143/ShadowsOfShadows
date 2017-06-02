@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using ShadowsOfShadows.Items;
 using ShadowsOfShadows.Helpers;
 using ShadowsOfShadows.Physics;
+using System.Xml.Serialization;
+using System.Linq;
 
 namespace ShadowsOfShadows.Entities
 {
@@ -11,13 +13,18 @@ namespace ShadowsOfShadows.Entities
         private Fraction Fraction;
 
         private int Experience;
-        public int Level { get; }
 
+		    public int Level { get; set; }
+        
         public List<TimedConsumable> ActiveBuffs { get; set; } = new List<TimedConsumable>();
 
-		public Dictionary<Skill, int> Skills { get; }
+        [XmlIgnore] // TODO Can a dictionary really be serialized?
+        public Dictionary<Skill, int> Skills { get; private set; }
 
-		public Player(string name, Fraction fraction, int speed) : base(name, 'P', speed, 1)
+        /* For serialization */
+        public Player() : base('P') { }
+
+        public Player(string name, Fraction fraction, int speed) : base(name, 'P', speed, 1)
 		{
 			this.Fraction = fraction;
             this.Experience = 0;
@@ -40,6 +47,30 @@ namespace ShadowsOfShadows.Entities
 		{
 			T projectile = (T)new Projectile(Skills[Skill.ShootingPower], direction);
 		}
+
+        public SerializeableKeyValue<Skill, int>[] SearchCategoriesSerializable
+        {
+            get
+            {
+                var list = new SerializeableKeyValue<Skill, int> [Skills.Count];
+                if (Skills != null)
+                {
+                    int i = 0;
+                    foreach (var skill in Skills)
+                        list[i++] = new SerializeableKeyValue<Skill, int>() { Key = skill.Key, Value = Skills[skill.Key] };
+                    //list.AddRange(Skills.Keys.Select(key => new SerializeableKeyValue<Skill, int>() { Key = key, Value = Skills[key] }));
+                }
+                return list.ToArray();
+            }
+            set
+            {
+                Skills = new Dictionary<Skill, int>();
+                foreach (var item in value)
+                {
+                    Skills.Add(item.Key, item.Value);
+                }
+            }
+        }
 
         public override void Update(TimeSpan deltaTime)
         {

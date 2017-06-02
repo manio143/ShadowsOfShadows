@@ -6,7 +6,14 @@ namespace ShadowsOfShadows.Items
 	public abstract class Item : IEquatable<Item>
     {
         protected string Name { get; set; }
-        protected string StatsString { get; set; }
+        public string StatsString { get; set; }
+
+        public Item() { }
+
+		public Item(string name)
+		{
+			Name = name;
+		}
 
         public Item(string name, string stats)
         {

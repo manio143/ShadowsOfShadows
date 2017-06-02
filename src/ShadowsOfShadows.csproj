@@ -31,10 +31,18 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="NVorbis">
+      <HintPath>packages\MonoGame.Framework.DesktopGL.3.5.1.1679\lib\net40\NVorbis.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenTK">
+      <HintPath>packages\MonoGame.Framework.DesktopGL.3.5.1.1679\lib\net40\OpenTK.dll</HintPath>
+    </Reference>
     <Reference Include="SadConsole">
       <HintPath>packages\SadConsole.6.1.3\lib\net\SadConsole.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.XML" />
+    <Reference Include="System.Xml.Serialization" />
     <Reference Include="MonoGame.Framework">
       <HintPath>packages\MonoGame.Framework.DesktopGL.3.5.1.1679\lib\net40\MonoGame.Framework.dll</HintPath>
     </Reference>
@@ -47,6 +55,7 @@
     <Compile Include="Helpers\EnumHelper.cs" />
     <Compile Include="Helpers\GenericsHelper.cs" />
     <Compile Include="Helpers\PopularQuestions.cs" />
+    <Compile Include="Helpers\SerializableHelper.cs" />
     <Compile Include="Physics\Direction.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -118,18 +127,22 @@
     <Compile Include="Items\WizardsCape.cs" />
     <Compile Include="Items\WizardsHood.cs" />
     <Compile Include="Items\WoodenShield.cs" />
+    <Compile Include="Serialization\GameState.cs" />
+    <Compile Include="Serialization\SaveSlot.cs" />
+    <Compile Include="Serialization\Serializer.cs" />
     <Compile Include="TestData\TestRooms.cs" />
     <Compile Include="Generators\RoomGenerator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <Folder Include="Entities\" />
-    <Folder Include="Renderables\" />
-    <Folder Include="Helpers\" />
-    <Folder Include="Physics\" />
-    <Folder Include="Consoles\" />
-    <Folder Include="Items\" />
-    <Folder Include="Generators\" />
+	<Folder Include="Entities\" />
+	<Folder Include="Renderables\" />
+  <Folder Include="Helpers\" />
+  <Folder Include="Physics\" />
+  <Folder Include="Consoles\" />
+  <Folder Include="Items\" />
+	<Folder Include="Serialization\" />
+  <Folder Include="Generators\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="MonoGame.Framework.dll.config">

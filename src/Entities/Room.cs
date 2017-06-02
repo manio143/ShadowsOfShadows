@@ -3,9 +3,12 @@ using Microsoft.Xna.Framework;
 
 namespace ShadowsOfShadows.Entities
 {
-	public class Room
-	{
-		public List<Entity> Entities { get; }
+    public class Room
+    {
+        public List<Entity> Entities { get; set; }
+
+        /* For serialization */
+        public Room() { }
 
 		public Point EnterPoint { get; set; }
 		public Point ExitPoint { get; set; }

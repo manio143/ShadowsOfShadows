@@ -8,7 +8,9 @@ namespace ShadowsOfShadows.Items
 {
     public abstract class LegsArmor : Wearable
     {
-        public int DP { get; private set; }
+		public int DP { get; set; }
+
+		public LegsArmor() : base("Legs Armor") { }
 
         public LegsArmor(String name, int dp) : base(name, "Defence Power " + dp.ToString() + "\n")
         {

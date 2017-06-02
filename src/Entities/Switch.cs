@@ -9,6 +9,8 @@ namespace ShadowsOfShadows.Entities
 {
     public class Switch : Thing, IInteractable
     {
+        public Switch() : base() { throw new NotImplementedException(); }
+
         public Switch(IRenderable renderable) : base(renderable)
         {
             Value = false;

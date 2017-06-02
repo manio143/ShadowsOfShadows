@@ -8,8 +8,6 @@ namespace ShadowsOfShadows.Items
 {
     public class SteelHelmet : HeadArmor
     {
-        public SteelHelmet() : base("Steel Helmet", 3)
-        {
-        }
+        public SteelHelmet() : base("Steel Helmet", 3) { }
     }
 }

@@ -8,9 +8,11 @@ namespace ShadowsOfShadows.Items
 {
     public abstract class Wearable :  Item
     {
-        public Wearable(String name, String stats) : base(name, stats)
-        {
-        }
+		public Wearable() : base() { }
+
+		public Wearable(String name) : base(name) { }
+
+        public Wearable(String name, String stats) : base(name, stats) { }
 
         public override AllowedItem Allowed { get; } = AllowedItem.Single;
         public abstract void Equip();

@@ -5,7 +5,9 @@ namespace ShadowsOfShadows.Items
 {
     public class RegenerationConsumable : Consumable
     {
-        public int RegenerationValue { get; private set;}
+        public int RegenerationValue { get; /*private*/ set;}
+
+		public RegenerationConsumable () : base() { }
 
         public RegenerationConsumable(String name, int regen) :base(name, "Health regeneration: " + regen + "\n") 
         {
