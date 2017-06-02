@@ -12,7 +12,10 @@ namespace ShadowsOfShadows.Entities
     {
         public string Name { get; set; }
 
+        private static MathNet.Numerics.Distributions.Normal rnd = new MathNet.Numerics.Distributions.Normal(0.7, 0.15);
+
         public bool IsMoving { get; set; }
+		public bool IsAttacking { get; set; }
 
         public int Speed { get; set; }
         public int CurrentSpeed { get; set; }
@@ -45,6 +48,19 @@ namespace ShadowsOfShadows.Entities
         {
         }
 
+		private void Attack()
+		{
+			if (!IsAttacking)
+				return;
+
+			var entity = Screen.MainConsole.CurrentRoom.Entities.FirstOrDefault(e => e.Transform.Position ==
+				Transform.Position +
+				Transform.Direction.AsPoint());
+			var enemy = entity as Character;
+			if (enemy != null)
+				Attack (enemy);
+		}
+
         private void Move()
         {
             if (IsMoving == false)
@@ -75,13 +91,14 @@ namespace ShadowsOfShadows.Entities
                 Transform.Position = lastPosition;
         }
 
-        public void Update(TimeSpan deltaTime)
+        public virtual void Update(TimeSpan deltaTime)
         {
             CurrentSpeed--;
             if (CurrentSpeed == 0)
             {
                 CurrentSpeed = Speed;
                 Move();
+				Attack();
             }
         }
 
@@ -103,13 +120,15 @@ namespace ShadowsOfShadows.Entities
 
         public void Attack(Character character)
         {
-            Health -= character.DefencePower;
-            character.Health -= AttackPower;
+            int previousHP = character.Health;
+            double sample = rnd.Sample();
+            character.TakeDamage((int)(AttackPower * sample));
+            Screen.MessageConsole.PrintMessage(Name + " dealt " + (previousHP - character.Health) + " damage to " + character.Name);
         }
 
         public void TakeDamage(int amount)
         {
-            Health = Math.Max(Health - Math.Min(DefencePower - amount, 0), 0);
+            Health = Math.Max(Health - Math.Max(amount - DefencePower, 0), 0);
         }
     }
 }

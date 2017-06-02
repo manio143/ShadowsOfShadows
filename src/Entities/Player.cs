@@ -8,12 +8,15 @@ using System.Linq;
 
 namespace ShadowsOfShadows.Entities
 {
-	public class Player : Character
-	{
-		private Fraction Fraction;
+    public class Player : Character
+    {
+        private Fraction Fraction;
 
-		private int Experience;
-		public int Level { get; set; }
+        private int Experience;
+
+		    public int Level { get; set; }
+        
+        public List<TimedConsumable> ActiveBuffs { get; set; } = new List<TimedConsumable>();
 
         [XmlIgnore] // TODO Can a dictionary really be serialized?
         public Dictionary<Skill, int> Skills { get; private set; }
@@ -66,6 +69,28 @@ namespace ShadowsOfShadows.Entities
                 {
                     Skills.Add(item.Key, item.Value);
                 }
+            }
+        }
+
+        public override void Update(TimeSpan deltaTime)
+        {
+            base.Update(deltaTime);
+
+            bool changes = false;
+
+            for (int i = ActiveBuffs.Count - 1; i >= 0; i--)
+            {
+                ActiveBuffs[i].Update(deltaTime);
+                if (ActiveBuffs[i].Active == false)
+                {
+                    ActiveBuffs.RemoveAt(i);
+                    changes = true;
+                }
+            }
+            if(changes && !Screen.MenuConsole.IsActive)
+            {
+                // refresh player's stats
+                Screen.MenuConsole.PrintPlayerStats();
             }
         }
     }

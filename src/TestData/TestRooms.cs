@@ -9,26 +9,17 @@ namespace ShadowsOfShadows.TestData
 {
     public static class TestRooms
     {
-        public static Room Room1 => new Room(new Entity[]
-        {
-            new Wall(new ConsoleRenderable(219)) {Transform = new Transform() {Position = new Point(0, 0)}},
-            new Wall(new ConsoleRenderable(219)) {Transform = new Transform() {Position = new Point(0, 1)}},
-            new Wall(new ConsoleRenderable(219)) {Transform = new Transform() {Position = new Point(0, 2)}},
-            new Wall(new ConsoleRenderable(219)) {Transform = new Transform() {Position = new Point(0, 3)}},
-            new Wall(new ConsoleRenderable(219)) {Transform = new Transform() {Position = new Point(0, 4)}},
-            new Wall(new ConsoleRenderable(219)) {Transform = new Transform() {Position = new Point(1, 4)}},
-            new Wall(new ConsoleRenderable(219)) {Transform = new Transform() {Position = new Point(2, 4)}},
-            new Wall(new ConsoleRenderable(219)) {Transform = new Transform() {Position = new Point(3, 4)}},
-            new Wall(new ConsoleRenderable(219)) {Transform = new Transform() {Position = new Point(4, 4)}},
-            new Wall(new ConsoleRenderable(219)) {Transform = new Transform() {Position = new Point(4, 3)}},
-            new Wall(new ConsoleRenderable(219)) {Transform = new Transform() {Position = new Point(4, 2)}},
-            new Wall(new ConsoleRenderable(219)) {Transform = new Transform() {Position = new Point(4, 1)}},
-            new Wall(new ConsoleRenderable(219)) {Transform = new Transform() {Position = new Point(4, 0)}},
+		private static Room room1;
+		public static Room Room1 => room1;
 
-            new Chest(new ConsoleRenderable('c'), 1, new[] {new Apple()})
-            {
-                Transform = new Transform() {Position = new Point(3, 3)}
-            },
-        });
+		static TestRooms()
+		{
+			room1 = new RoomGenerator().GenerateEmpty(15, 9, new Point(-3, -3));
+			room1.Entities.Add(new Chest(new ConsoleRenderable('c'), 1, new Item [] { new Apple(), new StrengthPotion(System.TimeSpan.FromSeconds(5))})
+				{
+					Transform = new Transform() {Position = new Point(3, 3)}
+				});
+			room1.EnterPoint = new Point(-1, -1);
+		}
     }
 }

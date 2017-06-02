@@ -38,12 +38,7 @@ namespace ShadowsOfShadows.Consoles
                 entity.Renderable.ConsoleObject.Position = entity.Transform.Position;*/
             Player = new Player("Player", Fraction.Warrior, 10);
 
-
-            var v = new Wall(new ConsoleRenderable(219));
-            v.Transform.Position = new Point(2, 2);
-            v.Transform.Collision.TurnOff();
-            CurrentRoom.Entities.Add(v);
-            Player.Transform.Position = new Point(1, 1);
+			Player.Transform.Position = CurrentRoom.EnterPoint;
 
             Middle = new Point(Width / 2, Height / 2);
             
@@ -87,6 +82,39 @@ namespace ShadowsOfShadows.Consoles
             if (info.IsKeyPressed(Keys.Escape))
                 Screen.MenuConsole.OpenMainMenu();
 
+            ProcessMovement(info);
+
+			ProcessAttack(info);
+            
+            if (info.IsKeyPressed(Keys.E))
+            {
+                var entity = CurrentRoom.Entities.FirstOrDefault(e => e.Transform.Position ==
+                                                                   Player.Transform.Position +
+                                                                   Player.Transform.Direction
+                                                                       .AsPoint()) as IInteractable;
+                entity?.Interact();
+            }
+            if (info.IsKeyPressed(Keys.T))
+            {
+                var entity = CurrentRoom.Entities.FirstOrDefault(e => e.Transform.Position ==
+                                                                   Player.Transform.Position +
+                                                                   Player.Transform.Direction.AsPoint()) as Openable;
+                entity?.TryToUnlock();
+            }
+
+            return true;
+        }
+        
+		private void ProcessAttack(Keyboard info)
+		{
+			if (info.IsKeyDown (Keys.Space))
+				Player.IsAttacking = true;
+			else
+				Player.IsAttacking = false;
+		}
+
+        private void ProcessMovement(Keyboard info)
+        {
             if (info.IsKeyDown(Keys.Up))
             {
                 Player.Transform.Direction = Direction.Up;
@@ -117,23 +145,8 @@ namespace ShadowsOfShadows.Consoles
             if (info.IsKeyReleased(Keys.Down) && Player.Transform.Direction == Direction.Down)
                 Player.IsMoving = false;
 
-            if (info.IsKeyPressed(Keys.E))
-            {
-                var entity = CurrentRoom.Entities.FirstOrDefault(e => e.Transform.Position ==
-                                                                   Player.Transform.Position +
-                                                                   Player.Transform.Direction
-                                                                       .AsPoint()) as IInteractable;
-                entity?.Interact();
-            }
-            if (info.IsKeyPressed(Keys.T))
-            {
-                var entity = CurrentRoom.Entities.FirstOrDefault(e => e.Transform.Position ==
-                                                                   Player.Transform.Position +
-                                                                   Player.Transform.Direction.AsPoint()) as Openable;
-                entity?.TryToUnlock();
-            }
-
-            return true;
-        }
+            if (info.IsKeyUp(Keys.Up) && info.IsKeyUp(Keys.Left) && info.IsKeyUp(Keys.Right) && info.IsKeyUp(Keys.Down))
+                Player.IsMoving = false;
+        }    
     }
 }

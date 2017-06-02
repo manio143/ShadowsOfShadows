@@ -291,9 +291,29 @@ namespace ShadowsOfShadows.Consoles
     public class EquipmentMessage : ChoiceMessage<Item>
     {
         public EquipmentMessage()
-            : base(Screen.MainConsole.Player.Equipment.Select(item => new Tuple<Item, string>(item, item.ToString())), "EQUIPMENT")
+            : base(ComputeNameList(Screen.MainConsole.Player.Equipment), "EQUIPMENT")
         {
         }
+
+		private static IEnumerable<Tuple<Item, string>> ComputeNameList(IEnumerable<Item> items)
+		{
+			var dict = new Dictionary<Item, int>();
+			foreach(var item in items)
+				if(dict.ContainsKey(item))
+					dict[item]+=1;
+				else
+					dict[item]=1;
+			return dict.Select(kvp => {
+				string title = kvp.Key.ToString();
+				//Not great but currently I don't see another way
+				int remaining = Screen.MENU_WIDTH - 1 - title.Length;
+				if(kvp.Value > 1) {
+					string countStr = kvp.Value.ToString();
+					title += countStr.PadLeft(remaining - countStr.Length);
+				}
+				return new Tuple<Item, string>(kvp.Key, title);
+			});
+		}
 
         public override void ProcessKeyboard(Keyboard info)
         {

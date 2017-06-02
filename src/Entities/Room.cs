@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 
 namespace ShadowsOfShadows.Entities
 {
@@ -8,6 +9,9 @@ namespace ShadowsOfShadows.Entities
 
         /* For serialization */
         public Room() { }
+
+		public Point EnterPoint { get; set; }
+		public Point ExitPoint { get; set; }
 
 		public Room (IEnumerable<Entity> entities)
 		{
