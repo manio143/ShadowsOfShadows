@@ -21,6 +21,8 @@ namespace ShadowsOfShadows.Consoles
         public abstract List<GameObject> Other { get; }
         public bool Finished { get; protected set; }
 
+        public virtual bool NonBlocking { get; } = false;
+
         public Action<Message> PostProcessing { get; set; }
 
         public abstract void Create(MessageConsole console);
@@ -361,6 +363,8 @@ namespace ShadowsOfShadows.Consoles
         public override GameObject Text { get; }
         public override GameObject WaitPointer { get; }
         public override List<GameObject> Other { get; }
+
+        public override bool NonBlocking { get; } = true;
 
         private Timer timer;
 
