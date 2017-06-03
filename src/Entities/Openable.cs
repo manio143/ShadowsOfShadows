@@ -1,4 +1,5 @@
-﻿using ShadowsOfShadows.Renderables;
+﻿using ShadowsOfShadows.Consoles;
+using ShadowsOfShadows.Renderables;
 
 namespace ShadowsOfShadows.Entities
 {
@@ -21,12 +22,12 @@ namespace ShadowsOfShadows.Entities
             if (Screen.MainConsole.Player.UnlockingSkillLevel >= LockDificulty)
             {
                 LockDificulty = 0;
-                Screen.MessageConsole.PrintMessage("Lockpicking succeeded");
+                Screen.MessageConsole.PrintMessageWithTimeout("Lockpicking succeeded", TimeoutMessage.GENERAL_TIMEOUT);
                 return true;
             }
             else
             {
-                Screen.MessageConsole.PrintMessage("Lockpicking failed");
+                Screen.MessageConsole.PrintMessageWithTimeout("Lockpicking failed", TimeoutMessage.GENERAL_TIMEOUT);
                 return false;
             }
         }
@@ -39,7 +40,7 @@ namespace ShadowsOfShadows.Entities
                 return true;
             else
             {
-                Screen.MessageConsole.PrintMessage("Target is locked");
+                Screen.MessageConsole.PrintMessageWithTimeout("Target is locked", TimeoutMessage.GENERAL_TIMEOUT);
                 return false;
             }
         }

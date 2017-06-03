@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using ShadowsOfShadows.Consoles;
 using ShadowsOfShadows.Renderables;
 using ShadowsOfShadows.Items;
 
@@ -24,7 +25,7 @@ namespace ShadowsOfShadows.Entities
             {
                 Active = false;
                 Screen.MainConsole.Player.TakeDamage(Damage);
-                Screen.MessageConsole.PrintMessage("It's a trap!");
+                Screen.MessageConsole.PrintMessageWithTimeout("It's a trap!", TimeoutMessage.SHORT_TIMEOUT);
             }
 
             base.Interact();

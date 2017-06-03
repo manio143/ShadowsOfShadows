@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ShadowsOfShadows.Consoles;
 using ShadowsOfShadows.Renderables;
 
 namespace ShadowsOfShadows.Entities
@@ -21,7 +22,7 @@ namespace ShadowsOfShadows.Entities
         public void Interact()
         {
             Value = !Value;
-			Screen.MessageConsole.PrintMessage("Switch has been set to " + Value);
+			Screen.MessageConsole.PrintMessageWithTimeout("Switch has been set to " + Value, TimeoutMessage.GENERAL_TIMEOUT);
         }
     }
 }

@@ -27,7 +27,7 @@ namespace ShadowsOfShadows.Consoles
             this.Position = new Point(posX, poxY);
         }
 
-        public void PrintMessage(string message)
+        protected void PrintMessage(string message)
         {
             PrintMessage(new SimpleMessage(message));
         }
@@ -42,6 +42,11 @@ namespace ShadowsOfShadows.Consoles
             CurrentMessage = message;
         }
 
+        public void PrintMessageWithTimeout(string message, int milliseconds)
+        {
+            PrintMessageAndWait(new TimeoutMessage(message, milliseconds));
+        }
+        
         public void PrintMessageAndWait(string message)
         {
             PrintMessageAndWait(new WaitMessage(message));
