@@ -4,6 +4,7 @@ using ShadowsOfShadows.Consoles;
 
 namespace ShadowsOfShadows.Items
 {
+    [ItemType(ItemType.Armor)]
     public abstract class BodyArmor : Wearable
     {
         public int DP { get; set; }

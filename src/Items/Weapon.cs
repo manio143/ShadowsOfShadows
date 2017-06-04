@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ShadowsOfShadows.Items
 {
+    [ItemType(ItemType.Weapon)]
     public class Weapon : Wearable
     {
         public int AP { get; set; }

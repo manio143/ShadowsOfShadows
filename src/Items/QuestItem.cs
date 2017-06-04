@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ShadowsOfShadows.Items
 {
+    [ItemType(ItemType.Other)]
     public class QuestItem : Item
     {
 		public QuestItem() : base() { }

@@ -5,6 +5,7 @@ using ShadowsOfShadows.Consoles;
 
 namespace ShadowsOfShadows.Items
 {
+    [ItemType(ItemType.Potion)]
     public class DefensePotion : TimedConsumable
     {
 		[XmlIgnore]

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ShadowsOfShadows.Items
 {
+    [ItemType(ItemType.Armor)]
     public abstract class HeadArmor : Wearable
     {
         public int DP { get; set; }

@@ -1,9 +1,8 @@
-﻿using System;
-using System.Linq;
-using ShadowsOfShadows.Entities;
+﻿using System.Linq;
 using Microsoft.Xna.Framework;
+using ShadowsOfShadows.Entities;
 
-namespace ShadowsOfShadows
+namespace ShadowsOfShadows.Generators
 {
 	public class RoomGenerator
 	{
