@@ -5,17 +5,17 @@ namespace ShadowsOfShadows.Items
 {
 	public abstract class Item : IEquatable<Item>
     {
-        protected string Name { get; set; }
-        public string StatsString { get; set; }
+        protected string Name { get; set; } = String.Empty;
+        public string StatsString { get; set; } = String.Empty;
 
-        public Item() { }
+        protected Item() { }
 
-		public Item(string name)
-		{
-			Name = name;
-		}
+        protected Item(string name)
+        {
+            Name = name;
+        }
 
-        public Item(string name, string stats)
+        protected Item(string name, string stats)
         {
             Name = name;
             StatsString = stats;
@@ -57,7 +57,7 @@ namespace ShadowsOfShadows.Items
 
 		public override int GetHashCode ()
 		{
-			var elements = GetType ().GetProperties ().Select (p => p.GetValue (this).GetHashCode ());
+			var elements = GetType ().GetProperties ().Select (p => p.GetValue (this)?.GetHashCode () ?? 0);
 			int sum = 0;
 			foreach (var e in elements)
 				sum = (sum + e) % 288919320;

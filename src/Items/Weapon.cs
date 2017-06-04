@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 namespace ShadowsOfShadows.Items
 {
     [ItemType(ItemType.Weapon)]
-    public class Weapon : Wearable
+    public abstract class Weapon : Wearable
     {
         public int AP { get; set; }
         public int MP { get; set; }
 
-		public Weapon() : base() { }
+        protected Weapon() : base() { }
 
-		public Weapon(String name) : base(name) { }
+        protected Weapon(String name) : base(name) { }
 
-        public Weapon(String name, int ap, int mp) : base(name, "Attack power " + ap +",\n" + "Magic power " + mp + "\n")
+        protected Weapon(String name, int ap, int mp) : base(name, "Attack power " + ap +",\n" + "Magic power " + mp + "\n")
         {
             AP = ap;
             MP = mp;

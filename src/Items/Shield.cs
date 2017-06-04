@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 namespace ShadowsOfShadows.Items
 {
     [ItemType(ItemType.Armor)]
-    public class Shield : Wearable
+    public abstract class Shield : Wearable
     {
         public int DP { get; set; }
 
-		public Shield() : base("Shield") { }
+        protected Shield() : base("Shield") { }
 
-        public Shield(String name, int dp) : base(name, "Defence Power " + dp.ToString() + "\n")
+        protected Shield(String name, int dp) : base(name, "Defence Power " + dp.ToString() + "\n")
         {
             DP = dp;
         }

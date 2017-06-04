@@ -11,9 +11,9 @@ namespace ShadowsOfShadows.Items
     {
 		public int DP { get; set; }
 
-		public LegsArmor() : base("Legs Armor") { }
+        protected LegsArmor() : base("Legs Armor") { }
 
-        public LegsArmor(String name, int dp) : base(name, "Defence Power " + dp.ToString() + "\n")
+        protected LegsArmor(String name, int dp) : base(name, "Defence Power " + dp.ToString() + "\n")
         {
             DP = dp;
         }
