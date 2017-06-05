@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Timers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using SadConsole.GameHelpers;
@@ -19,6 +20,8 @@ namespace ShadowsOfShadows.Consoles
         public abstract GameObject WaitPointer { get; }
         public abstract List<GameObject> Other { get; }
         public bool Finished { get; protected set; }
+
+        public virtual bool NonBlocking { get; } = false;
 
         public Action<Message> PostProcessing { get; set; }
 
@@ -338,7 +341,7 @@ namespace ShadowsOfShadows.Consoles
             {
                 consumable.Use();
                 Screen.MainConsole.Player.Equipment.Remove(consumable);
-                Screen.MessageConsole.PrintMessage($"{consumable} consumed.");
+                Screen.MessageConsole.PrintMessageWithTimeout($"{consumable} consumed.", TimeoutMessage.GENERAL_TIMEOUT);
                 ResetView();
             }
         }
@@ -349,6 +352,37 @@ namespace ShadowsOfShadows.Consoles
             PostProcessing = null;
             newMessage.StartIndex = PointerIndex;
             Finished = true;
+        }
+    }
+
+    public class TimeoutMessage : Message
+    {
+        public const int GENERAL_TIMEOUT = 3000; //3 seconds
+        public const int SHORT_TIMEOUT = 2000;   //2 seconds
+
+        public override GameObject Text { get; }
+        public override GameObject WaitPointer { get; }
+        public override List<GameObject> Other { get; }
+
+        public override bool NonBlocking { get; } = true;
+
+        private Timer timer;
+
+        public TimeoutMessage(string message, int milliseconds)
+        {
+            Text = ConsoleObjects.CreateFromString(message);
+            WaitPointer = null;
+            Other = null;
+
+            timer = new Timer(milliseconds);
+            timer.AutoReset = false;
+            timer.Elapsed += (sender, args) => Finished = true;
+        }
+
+        public override void Create(MessageConsole console)
+        {
+            Text.Position = console.Position + new Point(1, 1);
+            timer.Start();
         }
     }
 }

@@ -14,6 +14,7 @@ namespace ShadowsOfShadows.Consoles
     {
         public bool IsActive { get; set; }
         public bool ClearInactive { get; set; } = true;
+        public bool Blocking { get; private set; } = true;
 
         protected Message CurrentMessage;
 
@@ -27,7 +28,7 @@ namespace ShadowsOfShadows.Consoles
             this.Position = new Point(posX, poxY);
         }
 
-        public void PrintMessage(string message)
+        protected void PrintMessage(string message)
         {
             PrintMessage(new SimpleMessage(message));
         }
@@ -40,8 +41,14 @@ namespace ShadowsOfShadows.Consoles
             if (message.WaitPointer != null) ConsoleObjects.Add(message.WaitPointer);
             if (message.Other != null) ConsoleObjects.AddRange(message.Other);
             CurrentMessage = message;
+            if (message.NonBlocking) Blocking = false;
         }
 
+        public void PrintMessageWithTimeout(string message, int milliseconds)
+        {
+            PrintMessageAndWait(new TimeoutMessage(message, milliseconds));
+        }
+        
         public void PrintMessageAndWait(string message)
         {
             PrintMessageAndWait(new WaitMessage(message));
@@ -92,6 +99,7 @@ namespace ShadowsOfShadows.Consoles
                 CurrentMessage.ProcessKeyboard(info);
                 if (CurrentMessage.Finished)
                 {
+                    if (CurrentMessage.NonBlocking) Blocking = true;
                     CurrentMessage.OnPostProcessing();
                     wait = false;
                     if (MessageQueue.Count > 0)
@@ -106,7 +114,7 @@ namespace ShadowsOfShadows.Consoles
                     }
                 }
             }
-            return true;
+            return Blocking;
         }
 
         public override void Update(TimeSpan delta)

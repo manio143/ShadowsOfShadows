@@ -82,11 +82,18 @@ namespace ShadowsOfShadows
         {
             base.Update(delta);
             if (MessageConsole.IsActive)
+            {
                 MessageConsole.Update(delta);
-            else if (MenuConsole.IsActive)
+                if (MessageConsole.Blocking)
+                    return;
+            }
+            if (MenuConsole.IsActive)
+            {
                 MenuConsole.Update(delta);
-            else 
-                MainConsole.Update(delta);
+                if (MenuConsole.Blocking)
+                    return;
+            }
+            MainConsole.Update(delta);
         }
 
         public override void Draw(TimeSpan delta)

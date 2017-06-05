@@ -5,6 +5,8 @@ using ShadowsOfShadows.Items;
 using ShadowsOfShadows.Physics;
 using ShadowsOfShadows.Renderables;
 using System.Linq;
+using System.Threading;
+using ShadowsOfShadows.Consoles;
 
 namespace ShadowsOfShadows.Entities
 {
@@ -123,7 +125,9 @@ namespace ShadowsOfShadows.Entities
             int previousHP = character.Health;
             double sample = rnd.Sample();
             character.TakeDamage((int)(AttackPower * sample));
-            Screen.MessageConsole.PrintMessage(Name + " dealt " + (previousHP - character.Health) + " damage to " + character.Name);
+            Screen.MessageConsole.PrintMessageWithTimeout(
+                Name + " dealt " + (previousHP - character.Health) + " damage to " + character.Name,
+                TimeoutMessage.SHORT_TIMEOUT);
         }
 
         public void TakeDamage(int amount)
