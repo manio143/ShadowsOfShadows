@@ -26,27 +26,11 @@ namespace ShadowsOfShadows.Consoles
 
         public MainConsole(int width, int height) : base(width, height)
         {
-            //Example of loading game state from file
-            /*var lastGame = Serializer.Load(SaveSlot.Slot3);
-            Player = lastGame.Player;
-            Player.Skills = lastGame.PlayerSkills;
-            Player.Renderable.ConsoleObject.Position = Player.Transform.Position;
-            CurrentRoom = lastGame.Rooms[0];
-            Middle = lastGame.Middle;
-            foreach (var entity in CurrentRoom.Entities)
-                entity.Renderable.ConsoleObject.Position = entity.Transform.Position;*/
             Player = new Player("Player", Fraction.Warrior, 10);
 
             Player.Transform.Position = CurrentRoom.EnterPoint;
 
             Middle = new Point(Width / 2, Height / 2);
-
-            //Example of saving game state
-            var rooms = new List<Room>();
-            rooms.Add(CurrentRoom);
-
-            var gS = new GameState(Player, rooms, Middle);
-            Serializer.Save(SaveSlot.Slot2, gS);
         }
 
         public override void Draw(System.TimeSpan delta)
