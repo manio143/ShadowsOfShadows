@@ -30,6 +30,7 @@ namespace ShadowsOfShadows.Consoles
             /*var lastGame = Serializer.Load(SaveSlot.Slot3);
 
             Player = lastGame.Player;
+            Player.Skills = lastGame.PlayerSkills;
             Player.Renderable.ConsoleObject.Position = Player.Transform.Position;
             CurrentRoom = lastGame.Rooms[0];
             Middle = lastGame.Middle;
@@ -47,7 +48,7 @@ namespace ShadowsOfShadows.Consoles
             rooms.Add(CurrentRoom);
 
             var gS = new GameState(Player, rooms, Middle);
-            Serializer.Save(SaveSlot.Slot3, gS);
+            Serializer.Save(SaveSlot.Slot2, gS);
         }
 
         public override void Draw(System.TimeSpan delta)
