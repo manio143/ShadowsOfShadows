@@ -18,31 +18,29 @@ namespace ShadowsOfShadows.Consoles
 {
     public class MainConsole : Console
     {
-        public Player Player { get; private set; }
+        public Player Player { get; set; }
 
-        private Point Middle { get; }
+        public Point Middle { get; set; }
 
-        public Room CurrentRoom { get; private set; } = TestRooms.Room1;
+        public Room CurrentRoom { get; set; } = TestRooms.Room1;
 
         public MainConsole(int width, int height) : base(width, height)
         {
             //Example of loading game state from file
             /*var lastGame = Serializer.Load(SaveSlot.Slot3);
-
             Player = lastGame.Player;
             Player.Skills = lastGame.PlayerSkills;
             Player.Renderable.ConsoleObject.Position = Player.Transform.Position;
             CurrentRoom = lastGame.Rooms[0];
             Middle = lastGame.Middle;
-
             foreach (var entity in CurrentRoom.Entities)
                 entity.Renderable.ConsoleObject.Position = entity.Transform.Position;*/
             Player = new Player("Player", Fraction.Warrior, 10);
 
-			Player.Transform.Position = CurrentRoom.EnterPoint;
+            Player.Transform.Position = CurrentRoom.EnterPoint;
 
             Middle = new Point(Width / 2, Height / 2);
-            
+
             //Example of saving game state
             var rooms = new List<Room>();
             rooms.Add(CurrentRoom);
@@ -85,8 +83,8 @@ namespace ShadowsOfShadows.Consoles
 
             ProcessMovement(info);
 
-			ProcessAttack(info);
-            
+            ProcessAttack(info);
+
             if (info.IsKeyPressed(Keys.E))
             {
                 var entity = CurrentRoom.Entities.FirstOrDefault(e => e.Transform.Position ==
@@ -105,14 +103,14 @@ namespace ShadowsOfShadows.Consoles
 
             return true;
         }
-        
-		private void ProcessAttack(Keyboard info)
-		{
-			if (info.IsKeyDown (Keys.Space))
-				Player.IsAttacking = true;
-			else
-				Player.IsAttacking = false;
-		}
+
+        private void ProcessAttack(Keyboard info)
+        {
+            if (info.IsKeyDown(Keys.Space))
+                Player.IsAttacking = true;
+            else
+                Player.IsAttacking = false;
+        }
 
         private void ProcessMovement(Keyboard info)
         {
@@ -148,6 +146,6 @@ namespace ShadowsOfShadows.Consoles
 
             if (info.IsKeyUp(Keys.Up) && info.IsKeyUp(Keys.Left) && info.IsKeyUp(Keys.Right) && info.IsKeyUp(Keys.Down))
                 Player.IsMoving = false;
-        }    
+        }
     }
 }

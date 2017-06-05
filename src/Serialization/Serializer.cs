@@ -25,11 +25,12 @@ namespace ShadowsOfShadows.Serialization
 
 		private static Type[] GetAllTypes()
 		{
-			return typeof(Serializer).Assembly.GetTypes ()
-				.Where(t => t.Namespace.Contains("Entities") 
-					|| t.Namespace.Contains("Item")
-					|| t.Namespace.Contains("Physics")
-					|| t.Namespace.Contains("Helpers")
+            return typeof(Serializer).Assembly.GetTypes()
+                .Where(t => t.Namespace.Contains("Entities")
+                    || t.Namespace.Contains("Item")
+                    || t.Namespace.Contains("Physics")
+                    || t.Namespace.Contains("Helpers")
+                    || t == typeof(TestItem)
 				).Where(t => !t.IsSealed)
 				.Where(t => !t.IsGenericTypeDefinition)
 				.Where(t => !t.IsInterface)
