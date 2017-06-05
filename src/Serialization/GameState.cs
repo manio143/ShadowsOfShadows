@@ -35,28 +35,17 @@ namespace ShadowsOfShadows.Serialization
             this.Middle = middle;
 		}
 
-        public SerializeableKeyValue<Skill, int>[] SearchCategoriesSerializable
+        public List<SerializeableKeyValue<Skill, int>> PlayerSkillsSerial
         {
             get
             {
-                var skills = PlayerSkills;
-                var list = new SerializeableKeyValue<Skill, int>[skills.Count];
-                if (skills != null)
-                {
-                    int i = 0;
-                    foreach (var skill in skills)
-                        list[i++] = new SerializeableKeyValue<Skill, int>() { Key = skill.Key, Value = skills[skill.Key] };
-                    //list.AddRange(Skills.Keys.Select(key => new SerializeableKeyValue<Skill, int>() { Key = key, Value = Skills[key] }));
-                }
-                return list.ToArray();
+                return PlayerSkills.ToSerializableKvp();
             }
             set
             {
                 PlayerSkills = new Dictionary<Skill, int>();
                 foreach (var item in value)
-                {
                     PlayerSkills.Add(item.Key, item.Value);
-                }
             }
         }
     }
