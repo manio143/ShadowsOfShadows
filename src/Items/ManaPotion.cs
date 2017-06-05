@@ -7,6 +7,7 @@ using System.Xml.Serialization;
 
 namespace ShadowsOfShadows.Items
 {
+    [ItemType(ItemType.Potion)]
     public class ManaPotion : Consumable
     {
 		[XmlIgnore]
@@ -23,6 +24,8 @@ namespace ShadowsOfShadows.Items
             Screen.MainConsole.Player.Mana = Math.Min(Screen.MainConsole.Player.Mana + AmountOfMana, Screen.MainConsole.Player.MaxMana);
         }
     }
+    
+    [ItemType(ItemType.Potion)]
     public class StrongManaPotion : ManaPotion
     {
         public StrongManaPotion() : base("Strong Mana Potion", 10)

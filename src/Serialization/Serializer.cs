@@ -32,7 +32,8 @@ namespace ShadowsOfShadows.Serialization
 					|| t.Namespace.Contains("Helpers")
 				).Where(t => !t.IsSealed)
 				.Where(t => !t.IsGenericTypeDefinition)
-				.Where(t => !t.IsInterface).ToArray ();
+				.Where(t => !t.IsInterface)
+				.Where(t => !typeof(System.Attribute).IsAssignableFrom(t)).ToArray ();
 		}
 
         public static void Save(SaveSlot slot, GameState state)

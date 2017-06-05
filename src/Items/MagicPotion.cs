@@ -7,6 +7,7 @@ using System.Xml.Serialization;
 
 namespace ShadowsOfShadows.Items
 {
+    [ItemType(ItemType.Potion)]
     public class MagicPotion : TimedConsumable
     {
 		[XmlIgnore]

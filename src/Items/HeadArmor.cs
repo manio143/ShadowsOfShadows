@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 
 namespace ShadowsOfShadows.Items
 {
+    [ItemType(ItemType.Armor)]
     public abstract class HeadArmor : Wearable
     {
         public int DP { get; set; }
 
-		public HeadArmor() : base("Head Armor") { }
+        protected HeadArmor() : base("Head Armor") { }
 
-        public HeadArmor(String name, int dp) : base(name, "Defence Power " + dp.ToString() + "\n")
+        protected HeadArmor(String name, int dp) : base(name, "Defence Power " + dp.ToString() + "\n")
         {
             DP = dp;
         }
