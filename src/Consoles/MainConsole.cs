@@ -13,6 +13,7 @@ using IUpdateable = ShadowsOfShadows.Entities.IUpdateable;
 using Keyboard = SadConsole.Input.Keyboard;
 using System.Collections.Generic;
 using SadConsole.GameHelpers;
+using ShadowsOfShadows.Generators;
 
 namespace ShadowsOfShadows.Consoles
 {
@@ -22,22 +23,19 @@ namespace ShadowsOfShadows.Consoles
 
 		public Point Middle { get; set; }
 
-        public Room CurrentRoom { get; set; } = TestRooms.Room1;
+		public RoomGenerator RoomGenerator { get; } = new RoomGenerator();
+
+		public List<Room> CurrentRooms { get; private set; } = new List<Room>();
 
 		public GameState State { get; set; }
 
         public MainConsole(int width, int height) : base(width, height)
         {
-			var rooms = new List<Room>();
-			rooms.Add(CurrentRoom);
+			CurrentRooms.Add(RoomGenerator.GenerateRoom());
         	
-			State = new GameState (new Player("Player", Fraction.Warrior, 10), rooms, new Point(Width / 2, Height / 2));
-
-			Player = State.Player;
-			Middle = State.Middle;
-
-			Player.Transform.Position = CurrentRoom.EnterPoint;
-		}
+			State = new GameState (new Player("Player", Fraction.Warrior, 10), CurrentRooms, new Point(Width / 2, Height / 2));
+			Player.Transform.Position = CurrentRooms[0].EnterPoint + new Point(1, 0);
+        }
 
         public override void Draw(System.TimeSpan delta)
         {
@@ -48,7 +46,8 @@ namespace ShadowsOfShadows.Consoles
             playerObject.Position = Middle;
             playerObject.Draw(delta);
 
-            foreach (var entity in CurrentRoom.Entities)
+			foreach(var room in CurrentRooms)
+            foreach (var entity in room.Entities)
             {
                 var consoleObject = entity.Renderable.ConsoleObject;
                 //var consoleObject = entity.Renderable.ConsoleObject;
@@ -58,10 +57,13 @@ namespace ShadowsOfShadows.Consoles
             }
         }
 
+		public List<Entity> Entities { get { return CurrentRooms.Select (r => r.Entities).Aggregate (Enumerable.Empty<Entity> (), (acc, e) => acc.Concat (e)).ToList (); } }
+
         public override void Update(TimeSpan delta)
         {
             base.Update(delta);
-            foreach (var entity in CurrentRoom.Entities)
+			foreach(var room in CurrentRooms)
+			foreach (var entity in room.Entities)
                 (entity as IUpdateable)?.Update(delta);
             Player.Update(delta);
         }
@@ -77,7 +79,7 @@ namespace ShadowsOfShadows.Consoles
 
             if (info.IsKeyPressed(Keys.E))
             {
-                var entity = CurrentRoom.Entities.FirstOrDefault(e => e.Transform.Position ==
+                var entity = Entities.FirstOrDefault(e => e.Transform.Position ==
                                                                    Player.Transform.Position +
                                                                    Player.Transform.Direction
                                                                        .AsPoint()) as IInteractable;
@@ -85,7 +87,7 @@ namespace ShadowsOfShadows.Consoles
             }
             if (info.IsKeyPressed(Keys.T))
             {
-                var entity = CurrentRoom.Entities.FirstOrDefault(e => e.Transform.Position ==
+                var entity = Entities.FirstOrDefault(e => e.Transform.Position ==
                                                                    Player.Transform.Position +
                                                                    Player.Transform.Direction.AsPoint()) as Openable;
                 entity?.TryToUnlock();

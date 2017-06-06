@@ -55,7 +55,7 @@ namespace ShadowsOfShadows.Entities
 			if (!IsAttacking)
 				return;
 
-			var entity = Screen.MainConsole.CurrentRoom.Entities.FirstOrDefault(e => e.Transform.Position ==
+			var entity = Screen.MainConsole.Entities.FirstOrDefault(e => e.Transform.Position ==
 				Transform.Position +
 				Transform.Direction.AsPoint());
 			var enemy = entity as Character;
@@ -68,7 +68,7 @@ namespace ShadowsOfShadows.Entities
             if (IsMoving == false)
                 return;
 
-            var entity = Screen.MainConsole.CurrentRoom.Entities.FirstOrDefault(e => e.Transform.Position ==
+            var entity = Screen.MainConsole.Entities.FirstOrDefault(e => e.Transform.Position ==
                                                                    Transform.Position +
                                                                    Transform.Direction.AsPoint());
             
