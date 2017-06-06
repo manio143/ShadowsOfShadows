@@ -13,7 +13,7 @@ namespace ShadowsOfShadows.Items
 		[XmlIgnore]
         public int AP { get; private set; }
 
-		public StrengthPotion() : base("Strength Potion") { }
+		public StrengthPotion() : this(new TimeSpan(0, 0, 10)) { }
 
         public StrengthPotion(TimeSpan duration) : base("Strength Potion", "Attack power 3\n", duration)
         {
