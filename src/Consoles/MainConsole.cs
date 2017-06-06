@@ -24,6 +24,8 @@ namespace ShadowsOfShadows.Consoles
 
         public Room CurrentRoom { get; set; } = TestRooms.Room1;
 
+		public GameState State { get; set; }
+
         public MainConsole(int width, int height) : base(width, height)
         {
             Player = new Player("Player", Fraction.Warrior, 10);
@@ -31,7 +33,12 @@ namespace ShadowsOfShadows.Consoles
             Player.Transform.Position = CurrentRoom.EnterPoint;
 
             Middle = new Point(Width / 2, Height / 2);
-        }
+
+			var rooms = new List<Room>();
+			rooms.Add(CurrentRoom);
+        	
+			State = new GameState (Player, rooms, Middle);
+		}
 
         public override void Draw(System.TimeSpan delta)
         {

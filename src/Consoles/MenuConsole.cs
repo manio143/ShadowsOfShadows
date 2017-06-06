@@ -111,12 +111,10 @@ namespace ShadowsOfShadows.Consoles
 		public void SaveGame()
 		{
 			var message = AskQuestion ("", typeof(SaveSlot));
-			var rooms = new List<Room>();
-			rooms.Add(Screen.MainConsole.CurrentRoom);
 			message.PostProcessing = msg => { 
 				var slot = ((QuestionMessage)msg).Result;
-				Serialization.Serializer.Save ((SaveSlot)slot, new GameState (Screen.MainConsole.Player, rooms, Screen.MainConsole.Middle));
-				Screen.MessageConsole.PrintMessage("Game saved."); // TODO Timeout
+				Serialization.Serializer.Save ((SaveSlot)slot, Screen.MainConsole.State);
+				Screen.MessageConsole.PrintMessageWithTimeout("Game saved.", TimeoutMessage.GENERAL_TIMEOUT);
 				OpenMainMenu();
 			};
 		}
@@ -136,7 +134,7 @@ namespace ShadowsOfShadows.Consoles
                 foreach (var entity in Screen.MainConsole.CurrentRoom.Entities)
                     entity.Renderable.ConsoleObject.Position = entity.Transform.Position;
 
-                Screen.MessageConsole.PrintMessage("Game loaded."); // TODO Timeout
+				Screen.MessageConsole.PrintMessageWithTimeout("Game loaded.", TimeoutMessage.GENERAL_TIMEOUT);
                 OpenMainMenu();
             };
 		}

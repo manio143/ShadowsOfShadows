@@ -30,7 +30,6 @@ namespace ShadowsOfShadows.Serialization
                     || t.Namespace.Contains("Item")
                     || t.Namespace.Contains("Physics")
                     || t.Namespace.Contains("Helpers")
-                    || t == typeof(TestItem)
 				).Where(t => !t.IsSealed)
 				.Where(t => !t.IsGenericTypeDefinition)
 				.Where(t => !t.IsInterface)
