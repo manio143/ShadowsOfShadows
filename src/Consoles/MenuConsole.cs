@@ -126,13 +126,17 @@ namespace ShadowsOfShadows.Consoles
                 var slot = ((QuestionMessage)msg).Result;
                 var gS = Serialization.Serializer.Load((SaveSlot)slot);
 
-                Screen.MainConsole.Player = gS.Player;
-                Screen.MainConsole.Player.Renderable.ConsoleObject.Position = gS.Player.Transform.Position;
-                Screen.MainConsole.CurrentRoom = gS.Rooms[0];
-                Screen.MainConsole.Middle = gS.Middle;
+				Screen.MainConsole.State = gS;
 
-                foreach (var entity in Screen.MainConsole.CurrentRoom.Entities)
-                    entity.Renderable.ConsoleObject.Position = entity.Transform.Position;
+				Screen.MainConsole.Player = Screen.MainConsole.State.Player;
+				Screen.MainConsole.Middle = Screen.MainConsole.State.Middle;
+
+				Screen.MainConsole.Player.Renderable.ConsoleObject.Position = Screen.MainConsole.Player.Transform.Position;
+
+				Screen.MainConsole.CurrentRoom = Screen.MainConsole.State.Rooms[0];
+
+				foreach (var entity in Screen.MainConsole.CurrentRoom.Entities)
+					entity.Renderable.ConsoleObject.Position = entity.Transform.Position;
 
 				Screen.MessageConsole.PrintMessageWithTimeout("Game loaded.", TimeoutMessage.GENERAL_TIMEOUT);
                 OpenMainMenu();

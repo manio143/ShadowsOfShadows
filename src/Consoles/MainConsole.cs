@@ -18,9 +18,9 @@ namespace ShadowsOfShadows.Consoles
 {
     public class MainConsole : Console
     {
-        public Player Player { get; set; }
+		public Player Player { get; set; }
 
-        public Point Middle { get; set; }
+		public Point Middle { get; set; }
 
         public Room CurrentRoom { get; set; } = TestRooms.Room1;
 
@@ -28,16 +28,15 @@ namespace ShadowsOfShadows.Consoles
 
         public MainConsole(int width, int height) : base(width, height)
         {
-            Player = new Player("Player", Fraction.Warrior, 10);
-
-            Player.Transform.Position = CurrentRoom.EnterPoint;
-
-            Middle = new Point(Width / 2, Height / 2);
-
 			var rooms = new List<Room>();
 			rooms.Add(CurrentRoom);
         	
-			State = new GameState (Player, rooms, Middle);
+			State = new GameState (new Player("Player", Fraction.Warrior, 10), rooms, new Point(Width / 2, Height / 2));
+
+			Player = State.Player;
+			Middle = State.Middle;
+
+			Player.Transform.Position = CurrentRoom.EnterPoint;
 		}
 
         public override void Draw(System.TimeSpan delta)
