@@ -83,17 +83,26 @@ namespace ShadowsOfShadows.Consoles
             }
         }
 
+        private string AddPadding(string s, int value)
+        {
+            return s.PadLeft(value - s.Length);
+        }
+
         public void PrintPlayerStats()
         {
+            const int labelLength = 9;
+            int remaining = Screen.MENU_WIDTH - labelLength - 2; // dlugosc etykiety = 9
             PrintMessage(
                 "STATS\n\n" +
-                "HP       " + Screen.MainConsole.Player.Health + "\n" +
-                "Mana     " + Screen.MainConsole.Player.Mana + "\n" +
-                "AP       " + Screen.MainConsole.Player.AttackPower + "\n" +
-                "MP       " + Screen.MainConsole.Player.MagicPower + "\n" +
-                "DP       " + Screen.MainConsole.Player.DefencePower + "\n" +
-                "Level    " + Screen.MainConsole.Player.Level + "\n" +
+                "HP       " + AddPadding(Screen.MainConsole.Player.Health.ToString(), remaining) + "\n" +
+                "Mana     " + AddPadding(Screen.MainConsole.Player.Mana.ToString(), remaining) + "\n" +
+                "AP       " + AddPadding(Screen.MainConsole.Player.AttackPower.ToString(), remaining) + "\n" +
+                "MP       " + AddPadding(Screen.MainConsole.Player.MagicPower.ToString(), remaining) + "\n" +
+                "DP       " + AddPadding(Screen.MainConsole.Player.DefencePower.ToString(), remaining) + "\n" +
+                "Level    " + AddPadding(Screen.MainConsole.Player.Level.ToString(), remaining) + "\n" +
                 "\n"
+                +
+                Screen.MainConsole.Player.GetPlayerBuffs()
             );
         }
 
