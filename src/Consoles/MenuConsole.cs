@@ -101,7 +101,8 @@ namespace ShadowsOfShadows.Consoles
                 "DP       " + AddPadding(Screen.MainConsole.Player.DefencePower.ToString(), remaining) + "\n" +
                 "Level    " + AddPadding(Screen.MainConsole.Player.Level.ToString(), remaining) + "\n" +
                 "\n"
-  
+                +
+                Screen.MainConsole.Player.GetPlayerBuffs()
             );
         }
 

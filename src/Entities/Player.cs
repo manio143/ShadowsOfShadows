@@ -41,7 +41,17 @@ namespace ShadowsOfShadows.Entities
 			this.Skills = skills;
 		}
 
-		public int UnlockingSkillLevel => Skills[Skill.Lockpicking];
+        public string GetPlayerBuffs()
+        {
+            string result = "Active buffs:\n";
+            foreach (var buff in ActiveBuffs)
+            {
+                result += buff.ToString() + ":\n" + buff.StatsString + "\n";
+            }
+            return result;
+        }
+
+        public int UnlockingSkillLevel => Skills[Skill.Lockpicking];
 
 		public override void Shoot<T>(Direction direction)
 		{
