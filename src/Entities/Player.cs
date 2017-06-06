@@ -46,7 +46,8 @@ namespace ShadowsOfShadows.Entities
             string result = "Active buffs:\n";
             foreach (var buff in ActiveBuffs)
             {
-                result += buff.ToString() + ":\n" + buff.StatsString + "\n";
+				var statsWithOffset = buff.StatsString.Split ('\n').Select (s => " " + s).Aggregate ("", (acc, s) => acc + s + "\n");
+				result += buff.ToString() + ":\n" + statsWithOffset;
             }
             return result;
         }

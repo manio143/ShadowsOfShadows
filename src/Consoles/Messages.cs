@@ -309,7 +309,7 @@ namespace ShadowsOfShadows.Consoles
 			return dict.Select(kvp => {
 				string title = kvp.Key.ToString();
 				//Not great but currently I don't see another way
-				int remaining = Screen.MENU_WIDTH - 1 - title.Length;
+				int remaining = Screen.MENU_WIDTH - 2 - title.Length;
 				if(kvp.Value > 1) {
 					string countStr = kvp.Value.ToString();
 					title += countStr.PadLeft(remaining - countStr.Length);

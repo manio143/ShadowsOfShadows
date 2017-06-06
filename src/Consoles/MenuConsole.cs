@@ -91,7 +91,7 @@ namespace ShadowsOfShadows.Consoles
         public void PrintPlayerStats()
         {
             const int labelLength = 9;
-            int remaining = Screen.MENU_WIDTH - labelLength - 1; // dlugosc etykiety = 9
+            int remaining = Screen.MENU_WIDTH - labelLength - 2; // dlugosc etykiety = 9
             PrintMessage(
                 "STATS\n\n" +
                 "HP       " + AddPadding(Screen.MainConsole.Player.Health.ToString(), remaining) + "\n" +
