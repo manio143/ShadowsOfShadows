@@ -20,6 +20,8 @@ namespace ShadowsOfShadows.Serialization
 		{
 			if (!Directory.Exists (SaveFolder))
 				Directory.CreateDirectory (SaveFolder);
+			if (File.Exists (SaveFolder + "/" + slot + ".sav") && create)
+				File.WriteAllText (SaveFolder + "/" + slot + ".sav", String.Empty);
 			return File.Open (SaveFolder + "/" + slot + ".sav", create ? FileMode.OpenOrCreate : FileMode.Open);
 		}
 
