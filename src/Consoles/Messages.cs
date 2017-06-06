@@ -259,6 +259,8 @@ namespace ShadowsOfShadows.Consoles
             if (similar == null)
             {
                 Screen.MainConsole.Player.Equipment.Add(item);
+				if (item is Wearable)
+					((Wearable)item).Equip ();
                 Chest.Items.Remove(item);
                 ResetView();
             }
@@ -273,7 +275,11 @@ namespace ShadowsOfShadows.Consoles
                     if ((YesNoQuestion) (message as QuestionMessage).Result == YesNoQuestion.Yes)
                     {
                         Screen.MainConsole.Player.Equipment.Remove(similar);
+						if (similar is Wearable)
+							((Wearable)similar).UnEquip ();
                         Screen.MainConsole.Player.Equipment.Add(item);
+						if (item is Wearable)
+							((Wearable)item).Equip ();
                         Chest.Items.Remove(item);
                         Chest.Items.Add(similar);
                         ResetView();
