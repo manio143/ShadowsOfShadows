@@ -49,8 +49,8 @@
     <Reference Include="MathNet.Numerics">
       <HintPath>packages\MathNet.Numerics.3.19.0\lib\net40\MathNet.Numerics.dll</HintPath>
     </Reference>
-    <Reference Include="Wire">
-      <HintPath>packages\Wire.0.8.2\lib\net45\Wire.dll</HintPath>
+    <Reference Include="YamlDotNet">
+      <HintPath>packages\YamlDotNet.4.2.1\lib\net35\YamlDotNet.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -60,6 +60,7 @@
     <Compile Include="Helpers\GenericsHelper.cs" />
     <Compile Include="Helpers\PopularQuestions.cs" />
     <Compile Include="Helpers\SerializableHelper.cs" />
+    <Compile Include="Helpers\PrimitivesSerializer.cs" />
     <Compile Include="Items\ItemTypeAttribute.cs" />
     <Compile Include="Physics\Direction.cs" />
     <Compile Include="Program.cs" />

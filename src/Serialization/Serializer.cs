@@ -4,27 +4,22 @@ using System.Linq;
 
 using Microsoft.Xna.Framework;
 
+using YamlDotNet.Serialization;
+
 using ShadowsOfShadows.Entities;
 using ShadowsOfShadows.Items;
 using ShadowsOfShadows.Renderables;
+using ShadowsOfShadows.Helpers;
 
 namespace ShadowsOfShadows.Serialization
 {
     public static class Serializer
     {
 
-        private static Wire.Serializer serializer;
         private static string SaveFolder = Path.Combine(
                         Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
                         "ShadowsOfShadows",
                         "savedgames");
-
-        static Serializer()
-        {
-            var renderableSurrogate = Wire.Surrogate.Create<ConsoleRenderable, Tuple<int, Color>>(r => new Tuple<int, Color>(r.symbol, r.color), tup => new ConsoleRenderable(tup.Item1, tup.Item2));
-            var options = new Wire.SerializerOptions(versionTolerance: true, preserveObjectReferences: true, surrogates: new [] {renderableSurrogate});
-            serializer = new Wire.Serializer(options);
-        }
 
         private static FileStream OpenFile(SaveSlot slot, bool create = false)
         {
@@ -39,8 +34,14 @@ namespace ShadowsOfShadows.Serialization
         {
             try
             {
-                using (var stream = OpenFile(slot, true))
-                    serializer.Serialize(state, stream);
+                var serializer = new SerializerBuilder()
+                    .EnsureRoundtrip()  //save type info
+                    .EmitDefaults()     //save default values
+                    .WithTypeConverter(new PrimitivesConverter())
+                    .Build();
+
+                using (var writer = new StreamWriter(OpenFile(slot, true)))
+                    serializer.Serialize(writer, state);
             }
             catch (Exception e)
             {
@@ -50,8 +51,12 @@ namespace ShadowsOfShadows.Serialization
 
         public static GameState Load(SaveSlot slot)
         {
-            using (var stream = OpenFile(slot))
-                return serializer.Deserialize<GameState>(stream);
+            var deserializer = new DeserializerBuilder()
+                .WithTypeConverter(new PrimitivesConverter())
+                .Build();
+
+            using (var reader = new StreamReader(OpenFile(slot)))
+                return deserializer.Deserialize<GameState>(reader);
         }
     }
 }
