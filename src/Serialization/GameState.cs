@@ -11,15 +11,15 @@ using System.Linq;
 
 namespace ShadowsOfShadows.Serialization
 {
-	[Serializable()]
-	public class GameState
-	{
+    [Serializable()]
+    public class GameState
+    {
         [XmlIgnore]
         public Dictionary<Skill, int> PlayerSkills { get; set; }
 
         [XmlElement("Player")]
-		public Player Player { get; set; }
-		[XmlArray("Rooms"), XmlArrayItem(typeof(Room), ElementName = "Room")]
+        public Player Player { get; set; }
+        [XmlArray("Rooms"), XmlArrayItem(typeof(Room), ElementName = "Room")]
         public List<Room> Rooms { get; set; }
 
         public Point Middle { get; set; }

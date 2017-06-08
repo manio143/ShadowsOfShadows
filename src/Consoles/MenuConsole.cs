@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using Microsoft.Xna.Framework;
 
@@ -6,6 +7,7 @@ using SadConsole;
 using ShadowsOfShadows.Helpers;
 
 using ShadowsOfShadows.Entities;
+using ShadowsOfShadows.Serialization;
 
 namespace ShadowsOfShadows.Consoles
 {
@@ -63,11 +65,11 @@ namespace ShadowsOfShadows.Consoles
                 case MainMenuOptions.Equipment:
                     OpenEquipment();
                     break;
-                case MainMenuOptions.SaveGame:
-                    //TODO: Show slot options
+				case MainMenuOptions.SaveGame:
+					SaveGame();
                     break;
-                case MainMenuOptions.LoadGame:
-                    //TODO: Show slot options
+				case MainMenuOptions.LoadGame:
+					LoadGame();
                     break;
                 case MainMenuOptions.Settings:
                     //TODO: Show settings (should we have any)
@@ -105,6 +107,41 @@ namespace ShadowsOfShadows.Consoles
                 Screen.MainConsole.Player.GetPlayerBuffs()
             );
         }
+
+		public void SaveGame()
+		{
+			var message = AskQuestion ("", typeof(SaveSlot));
+			message.PostProcessing = msg => { 
+				var slot = ((QuestionMessage)msg).Result;
+				Serialization.Serializer.Save ((SaveSlot)slot, Screen.MainConsole.State);
+				Screen.MessageConsole.PrintMessageWithTimeout("Game saved.", TimeoutMessage.GENERAL_TIMEOUT);
+				OpenMainMenu();
+			};
+		}
+
+		public void LoadGame()
+		{
+            var message = AskQuestion("", typeof(SaveSlot));
+            message.PostProcessing = msg => {
+                var slot = ((QuestionMessage)msg).Result;
+                var gS = Serialization.Serializer.Load((SaveSlot)slot);
+
+				Screen.MainConsole.State = gS;
+
+				Screen.MainConsole.Player = Screen.MainConsole.State.Player;
+				Screen.MainConsole.Middle = Screen.MainConsole.State.Middle;
+
+				Screen.MainConsole.Player.Renderable.ConsoleObject.Position = Screen.MainConsole.Player.Transform.Position;
+
+				Screen.MainConsole.CurrentRoom = Screen.MainConsole.State.Rooms[0];
+
+				foreach (var entity in Screen.MainConsole.CurrentRoom.Entities)
+					entity.Renderable.ConsoleObject.Position = entity.Transform.Position;
+
+				Screen.MessageConsole.PrintMessageWithTimeout("Game loaded.", TimeoutMessage.GENERAL_TIMEOUT);
+                OpenMainMenu();
+            };
+		}
 
         public ChestMessage OpenChest(Chest chest)
         {

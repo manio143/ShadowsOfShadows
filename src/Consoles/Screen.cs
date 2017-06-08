@@ -23,21 +23,6 @@ namespace ShadowsOfShadows
 
     }
 
-    public class TestItem : Item
-    {
-        public override AllowedItem Allowed { get; }
-
-        public override bool IsLike(Item item)
-        {
-            return item is TestItem;
-        }
-
-        public TestItem(AllowedItem allowed) : base(allowed == AllowedItem.Multiple ? "MultipleItem" : "SingleItem", "")
-        {
-            Allowed = allowed;
-        }
-    }
-
     public class Screen : SadConsole.ConsoleContainer
     {
         public const int MENU_WIDTH = 20;
@@ -58,10 +43,9 @@ namespace ShadowsOfShadows
                 (m) =>
                 {
                     var chest = new Chest(new ConsoleRenderable('c'), 0,
-                        new[]
+                        new Item[]
                         {
-                            new TestItem(AllowedItem.Multiple), new TestItem(AllowedItem.Multiple),
-                            new TestItem(AllowedItem.Single), new TestItem(AllowedItem.Single)
+                       		
                         });
                     MenuConsole.OpenChest(chest);
                 };

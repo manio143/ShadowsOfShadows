@@ -20,16 +20,18 @@ namespace ShadowsOfShadows.Serialization
 		{
 			if (!Directory.Exists (SaveFolder))
 				Directory.CreateDirectory (SaveFolder);
+			if (File.Exists (SaveFolder + "/" + slot + ".sav") && create)
+				File.WriteAllText (SaveFolder + "/" + slot + ".sav", String.Empty);
 			return File.Open (SaveFolder + "/" + slot + ".sav", create ? FileMode.OpenOrCreate : FileMode.Open);
 		}
 
 		private static Type[] GetAllTypes()
 		{
-			return typeof(Serializer).Assembly.GetTypes ()
-				.Where(t => t.Namespace.Contains("Entities") 
-					|| t.Namespace.Contains("Item")
-					|| t.Namespace.Contains("Physics")
-					|| t.Namespace.Contains("Helpers")
+            return typeof(Serializer).Assembly.GetTypes()
+                .Where(t => t.Namespace.Contains("Entities")
+                    || t.Namespace.Contains("Item")
+                    || t.Namespace.Contains("Physics")
+                    || t.Namespace.Contains("Helpers")
 				).Where(t => !t.IsSealed)
 				.Where(t => !t.IsGenericTypeDefinition)
 				.Where(t => !t.IsInterface)
