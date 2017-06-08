@@ -19,7 +19,7 @@ namespace ShadowsOfShadows.Entities
         public List<TimedConsumable> ActiveBuffs { get; set; } = new List<TimedConsumable>();
 
         [XmlIgnore] // TODO Can a dictionary really be serialized?
-        public Dictionary<Skill, int> Skills { get; private set; }
+        public Dictionary<Skill, int> Skills { get; set; }
 
         /* For serialization */
         public Player() : base('P') { }
@@ -58,30 +58,6 @@ namespace ShadowsOfShadows.Entities
 		{
 			T projectile = (T)new Projectile(Skills[Skill.ShootingPower], direction);
 		}
-
-        public SerializeableKeyValue<Skill, int>[] SearchCategoriesSerializable
-        {
-            get
-            {
-                var list = new SerializeableKeyValue<Skill, int> [Skills.Count];
-                if (Skills != null)
-                {
-                    int i = 0;
-                    foreach (var skill in Skills)
-                        list[i++] = new SerializeableKeyValue<Skill, int>() { Key = skill.Key, Value = Skills[skill.Key] };
-                    //list.AddRange(Skills.Keys.Select(key => new SerializeableKeyValue<Skill, int>() { Key = key, Value = Skills[key] }));
-                }
-                return list.ToArray();
-            }
-            set
-            {
-                Skills = new Dictionary<Skill, int>();
-                foreach (var item in value)
-                {
-                    Skills.Add(item.Key, item.Value);
-                }
-            }
-        }
 
         public override void Update(TimeSpan deltaTime)
         {
