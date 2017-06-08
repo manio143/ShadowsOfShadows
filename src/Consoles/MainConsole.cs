@@ -18,40 +18,35 @@ namespace ShadowsOfShadows.Consoles
 {
     public class MainConsole : Console
     {
-		public Player Player { get; set; }
+        public Player Player { get { return State.Player; } }
 
-		public Point Middle { get; set; }
+        public Point Middle { get { return new Point(Width / 2, Height / 2); } }
 
         public Room CurrentRoom { get; set; } = TestRooms.Room1;
 
-		public GameState State { get; set; }
+        public GameState State { get; set; }
 
         public MainConsole(int width, int height) : base(width, height)
         {
-			var rooms = new List<Room>();
-			rooms.Add(CurrentRoom);
-        	
-			State = new GameState (new Player("Player", Fraction.Warrior, 10), rooms, new Point(Width / 2, Height / 2));
+            var rooms = new List<Room>();
+            rooms.Add(CurrentRoom);
 
-			Player = State.Player;
-			Middle = State.Middle;
+            State = new GameState(new Player("Player", Fraction.Warrior, 10), rooms);
 
-			Player.Transform.Position = CurrentRoom.EnterPoint;
-		}
+            Player.Transform.Position = CurrentRoom.EnterPoint;
+        }
 
         public override void Draw(System.TimeSpan delta)
         {
             base.Draw(delta);
 
             var playerObject = Player.Renderable.ConsoleObject;
-            //var playerObject = Player.Renderable.ConsoleObject;
             playerObject.Position = Middle;
             playerObject.Draw(delta);
 
             foreach (var entity in CurrentRoom.Entities)
             {
                 var consoleObject = entity.Renderable.ConsoleObject;
-                //var consoleObject = entity.Renderable.ConsoleObject;
                 consoleObject.Position = entity.Transform.Position - Player.Transform.Position + Middle;
                 if (consoleObject.Position.X < Width && consoleObject.Position.Y < Height)
                     consoleObject.Draw(delta);
