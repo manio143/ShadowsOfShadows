@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 
 using Microsoft.Xna.Framework;
@@ -40,7 +41,8 @@ namespace ShadowsOfShadows.Serialization
                     .WithTypeConverter(new PrimitivesConverter())
                     .Build();
 
-                using (var writer = new StreamWriter(OpenFile(slot, true)))
+                using (var compression = new GZipStream(OpenFile(slot, true), CompressionMode.Compress))
+                using (var writer = new StreamWriter(compression))
                     serializer.Serialize(writer, state);
             }
             catch (Exception e)
@@ -55,7 +57,8 @@ namespace ShadowsOfShadows.Serialization
                 .WithTypeConverter(new PrimitivesConverter())
                 .Build();
 
-            using (var reader = new StreamReader(OpenFile(slot)))
+            using (var compression = new GZipStream(OpenFile(slot), CompressionMode.Decompress))            
+            using (var reader = new StreamReader(compression))
                 return deserializer.Deserialize<GameState>(reader);
         }
     }
