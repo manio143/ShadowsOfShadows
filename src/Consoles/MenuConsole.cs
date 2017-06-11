@@ -87,13 +87,13 @@ namespace ShadowsOfShadows.Consoles
 
         private string AddPadding(string s, int value)
         {
-            return s.PadLeft(value - s.Length);
+            return s.PadLeft(value);
         }
 
         public void PrintPlayerStats()
         {
             const int labelLength = 9;
-            int remaining = Screen.MENU_WIDTH - labelLength - 2; // dlugosc etykiety = 9
+            int remaining = Screen.MENU_WIDTH - labelLength - 3; // dlugosc etykiety = 9
             PrintMessage(
                 "STATS\n\n" +
                 "HP       " + AddPadding(Screen.MainConsole.Player.Health.ToString(), remaining) + "\n" +
@@ -128,15 +128,7 @@ namespace ShadowsOfShadows.Consoles
 
 				Screen.MainConsole.State = gS;
 
-				Screen.MainConsole.Player = Screen.MainConsole.State.Player;
-				Screen.MainConsole.Middle = Screen.MainConsole.State.Middle;
-
-				Screen.MainConsole.Player.Renderable.ConsoleObject.Position = Screen.MainConsole.Player.Transform.Position;
-
-				Screen.MainConsole.CurrentRoom = Screen.MainConsole.State.Rooms[0];
-
-				foreach (var entity in Screen.MainConsole.CurrentRoom.Entities)
-					entity.Renderable.ConsoleObject.Position = entity.Transform.Position;
+                Screen.MainConsole.Update(new TimeSpan());
 
 				Screen.MessageConsole.PrintMessageWithTimeout("Game loaded.", TimeoutMessage.GENERAL_TIMEOUT);
                 OpenMainMenu();

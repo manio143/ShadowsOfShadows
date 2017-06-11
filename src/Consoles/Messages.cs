@@ -259,6 +259,8 @@ namespace ShadowsOfShadows.Consoles
             if (similar == null)
             {
                 Screen.MainConsole.Player.Equipment.Add(item);
+				if (item is Wearable)
+					((Wearable)item).Equip ();
                 Chest.Items.Remove(item);
                 ResetView();
             }
@@ -273,7 +275,11 @@ namespace ShadowsOfShadows.Consoles
                     if ((YesNoQuestion) (message as QuestionMessage).Result == YesNoQuestion.Yes)
                     {
                         Screen.MainConsole.Player.Equipment.Remove(similar);
+						if (similar is Wearable)
+							((Wearable)similar).UnEquip ();
                         Screen.MainConsole.Player.Equipment.Add(item);
+						if (item is Wearable)
+							((Wearable)item).Equip ();
                         Chest.Items.Remove(item);
                         Chest.Items.Add(similar);
                         ResetView();
@@ -309,10 +315,10 @@ namespace ShadowsOfShadows.Consoles
 			return dict.Select(kvp => {
 				string title = kvp.Key.ToString();
 				//Not great but currently I don't see another way
-				int remaining = Screen.MENU_WIDTH - 2 - title.Length;
+				int remaining = Screen.MENU_WIDTH - 3 - title.Length;
 				if(kvp.Value > 1) {
 					string countStr = kvp.Value.ToString();
-					title += countStr.PadLeft(remaining - countStr.Length);
+					title += countStr.PadLeft(remaining);
 				}
 				return new Tuple<Item, string>(kvp.Key, title);
 			});

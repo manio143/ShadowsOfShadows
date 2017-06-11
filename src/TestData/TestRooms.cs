@@ -16,9 +16,9 @@ namespace ShadowsOfShadows.TestData
 
         static TestRooms()
         {
-            room1 = new RoomGenerator().GenerateEmpty(15, 9, new Point(-3, -3));
+			room1 = new RoomGenerator().GenerateEmpty(15, 9, new Point(-3, -3), new Point());
             room1.Entities.Add(new Chest(new ConsoleRenderable('c'), 1,
-                new Item[] {new Apple(), new StrengthPotion(System.TimeSpan.FromSeconds(5))})
+				new Item[] {new Apple(), new StrengthPotion(System.TimeSpan.FromSeconds(5)), new Apple(),new Apple(),new Apple(),new Apple(),new Apple(),new Apple(),new Apple(),new Apple(),new Apple()})
             {
                 Transform = new Transform() {Position = new Point(3, 3)}
             });

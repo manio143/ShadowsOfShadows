@@ -18,6 +18,8 @@ namespace ShadowsOfShadows.Entities
 
         public bool TryToUnlock()
         {
+			if (LockDificulty == 0)
+				return true;
             // maybe here should be some randomization
             if (Screen.MainConsole.Player.UnlockingSkillLevel >= LockDificulty)
             {

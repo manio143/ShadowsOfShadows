@@ -10,7 +10,7 @@ namespace ShadowsOfShadows.Entities
 	{
 		public Transform Transform { get; set;}
 
-        [XmlIgnore]
+        [YamlDotNet.Serialization.YamlIgnore]
 		public IRenderable Renderable { get; set; }
 
         /* For serialization */
