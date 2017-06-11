@@ -7,7 +7,7 @@ namespace ShadowsOfShadows.Entities
 	{
 		private int Experience;
 
-        public Monster() : base('M') { }
+        public Monster() : this(0 , 0) { }
 
 		public Monster(int speed, int velocity) : base("Monster", 'M', speed, velocity)
 		{

@@ -8,7 +8,7 @@ namespace ShadowsOfShadows.Entities
 	{
 		private Fraction Fraction;
 
-        public NPC() : base('N') { }
+        public NPC() : this(Fraction.Warrior, 0) { }
 
 		public NPC (Fraction fraction, int speed) : base("NPC", 'N', speed, 1)
 		{
