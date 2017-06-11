@@ -47,7 +47,10 @@ namespace ShadowsOfShadows.Generators
 			var pivot = lastRoom.ExitPoint + new Point (1, -offset);
 
 			var room = GenerateEmpty (width, height, pivot, lastRoom.ExitPoint, !first);
-
+            var gen = new CharacterGenerator();
+            var character = gen.GenerateCharacter();
+            character.Transform.Position = room.Position + new Point(room.Size.X / 2, room.Size.Y /2);
+            room.Entities.Add(character);
 			first = false;
 
 			lastRoom = room;

@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Consoles\Messages.cs" />
+    <Compile Include="Generators\CharacterGenerator.cs" />
     <Compile Include="Generators\ItemGenerator.cs" />
     <Compile Include="Helpers\EnumHelper.cs" />
     <Compile Include="Helpers\GenericsHelper.cs" />
@@ -140,16 +141,7 @@
     <Compile Include="Generators\RoomGenerator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ItemGroup>
-    <Folder Include="Entities\" />
-    <Folder Include="Renderables\" />
-    <Folder Include="Helpers\" />
-    <Folder Include="Physics\" />
-    <Folder Include="Consoles\" />
-    <Folder Include="Items\" />
-    <Folder Include="Serialization\" />
-    <Folder Include="Generators\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="MonoGame.Framework.dll.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
