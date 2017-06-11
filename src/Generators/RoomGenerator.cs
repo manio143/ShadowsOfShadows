@@ -42,7 +42,7 @@ namespace ShadowsOfShadows.Generators
 			var width = sizeGen.Sample ();
 			var height = sizeGen.Sample ();
 
-			var offset = new DiscreteUniform (1, height - 1).Sample();
+			var offset = new DiscreteUniform (1, height - 2).Sample();
 
 			var pivot = lastRoom.ExitPoint + new Point (1, -offset);
 
