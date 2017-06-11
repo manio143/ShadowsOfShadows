@@ -18,7 +18,6 @@ namespace ShadowsOfShadows.Entities
         
         public List<TimedConsumable> ActiveBuffs { get; set; } = new List<TimedConsumable>();
 
-        [XmlIgnore] // TODO Can a dictionary really be serialized?
         public Dictionary<Skill, int> Skills { get; set; }
 
         /* For serialization */
@@ -52,6 +51,7 @@ namespace ShadowsOfShadows.Entities
             return result;
         }
 
+        [YamlDotNet.Serialization.YamlIgnore]
         public int UnlockingSkillLevel => Skills[Skill.Lockpicking];
 
 		public override void Shoot<T>(Direction direction)

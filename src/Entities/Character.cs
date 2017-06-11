@@ -23,7 +23,7 @@ namespace ShadowsOfShadows.Entities
         public int CurrentSpeed { get; set; }
         public int Velocity { get; set; }
 
-        public List<Item> Equipment { get; }
+        public List<Item> Equipment { get; set; }
 
         public Character() { }
 

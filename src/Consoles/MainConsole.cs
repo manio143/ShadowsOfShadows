@@ -19,21 +19,19 @@ namespace ShadowsOfShadows.Consoles
 {
     public class MainConsole : Console
     {
-		public Player Player { get; set; }
+        public Player Player { get { return State.Player; } }
 
-		public Point Middle { get; set; }
+        public Point Middle { get { return new Point(Width / 2, Height / 2); } }
 
 		public RoomGenerator RoomGenerator { get; } = new RoomGenerator();
 
-		public List<Room> CurrentRooms { get; private set; } = new List<Room>();
+		public List<Room> CurrentRooms => State.Rooms;
 
-		public GameState State { get; set; }
+        public GameState State { get; set; }
 
         public MainConsole(int width, int height) : base(width, height)
         {
-			CurrentRooms.Add(RoomGenerator.GenerateRoom());
-        	
-			State = new GameState (new Player("Player", Fraction.Warrior, 10), CurrentRooms, new Point(Width / 2, Height / 2));
+			State = new GameState (new Player("Player", Fraction.Warrior, 10), new List<Room>(){RoomGenerator.GenerateRoom()});
 			Player.Transform.Position = CurrentRooms[0].EnterPoint + new Point(1, 0);
         }
 
@@ -42,7 +40,6 @@ namespace ShadowsOfShadows.Consoles
             base.Draw(delta);
 
             var playerObject = Player.Renderable.ConsoleObject;
-            //var playerObject = Player.Renderable.ConsoleObject;
             playerObject.Position = Middle;
             playerObject.Draw(delta);
 
@@ -50,7 +47,6 @@ namespace ShadowsOfShadows.Consoles
             foreach (var entity in room.Entities)
             {
                 var consoleObject = entity.Renderable.ConsoleObject;
-                //var consoleObject = entity.Renderable.ConsoleObject;
                 consoleObject.Position = entity.Transform.Position - Player.Transform.Position + Middle;
                 if (consoleObject.Position.X < Width && consoleObject.Position.Y < Height)
                     consoleObject.Draw(delta);

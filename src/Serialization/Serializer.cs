@@ -1,73 +1,65 @@
 ﻿using System;
-using System.Xml.Serialization;
-using System.Xml;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
+
+using Microsoft.Xna.Framework;
+
+using YamlDotNet.Serialization;
 
 using ShadowsOfShadows.Entities;
 using ShadowsOfShadows.Items;
+using ShadowsOfShadows.Renderables;
+using ShadowsOfShadows.Helpers;
 
 namespace ShadowsOfShadows.Serialization
 {
     public static class Serializer
     {
+
         private static string SaveFolder = Path.Combine(
                         Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
                         "ShadowsOfShadows",
                         "savedgames");
 
-		private static FileStream OpenFile(SaveSlot slot, bool create = false)
-		{
-			if (!Directory.Exists (SaveFolder))
-				Directory.CreateDirectory (SaveFolder);
-			if (File.Exists (SaveFolder + "/" + slot + ".sav") && create)
-				File.WriteAllText (SaveFolder + "/" + slot + ".sav", String.Empty);
-			return File.Open (SaveFolder + "/" + slot + ".sav", create ? FileMode.OpenOrCreate : FileMode.Open);
-		}
-
-		private static Type[] GetAllTypes()
-		{
-            return typeof(Serializer).Assembly.GetTypes()
-                .Where(t => t.Namespace.Contains("Entities")
-                    || t.Namespace.Contains("Item")
-                    || t.Namespace.Contains("Physics")
-                    || t.Namespace.Contains("Helpers")
-				).Where(t => !t.IsSealed)
-				.Where(t => !t.IsGenericTypeDefinition)
-				.Where(t => !t.IsInterface)
-				.Where(t => !typeof(System.Attribute).IsAssignableFrom(t)).ToArray ();
-		}
+        private static FileStream OpenFile(SaveSlot slot, bool create = false)
+        {
+            if (!Directory.Exists(SaveFolder))
+                Directory.CreateDirectory(SaveFolder);
+            if (File.Exists(SaveFolder + "/" + slot + ".sav") && create)
+                File.WriteAllText(SaveFolder + "/" + slot + ".sav", String.Empty);
+            return File.Open(SaveFolder + "/" + slot + ".sav", create ? FileMode.OpenOrCreate : FileMode.Open);
+        }
 
         public static void Save(SaveSlot slot, GameState state)
         {
-            // TODO Catch exception
-			XmlSerializer serializer = new XmlSerializer(typeof(GameState), GetAllTypes());
-            var xml = "";
+            try
+            {
+                var serializer = new SerializerBuilder()
+                    .EnsureRoundtrip()  //save type info
+                    .EmitDefaults()     //save default values
+                    .WithTypeConverter(new PrimitivesConverter())
+                    .Build();
 
-            using (var sww = new StringWriter())
-                using (XmlWriter writer = XmlWriter.Create(sww))
-                {
-					serializer.Serialize(writer, state);
-                    xml = sww.ToString();
-
-				var file = new System.IO.StreamWriter(OpenFile(slot, true));
-                    file.Write(xml);
-
-                    file.Close();
-                }
+                using (var compression = new GZipStream(OpenFile(slot, true), CompressionMode.Compress))
+                using (var writer = new StreamWriter(compression))
+                    serializer.Serialize(writer, state);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("{0}\n{1}", e.GetType(), e.Message);
+            }
         }
 
         public static GameState Load(SaveSlot slot)
         {
-            GameState state = null;
+            var deserializer = new DeserializerBuilder()
+                .WithTypeConverter(new PrimitivesConverter())
+                .Build();
 
-			XmlSerializer serializer = new XmlSerializer(typeof(GameState), GetAllTypes());
-
-			var reader = new StreamReader(OpenFile(slot));
-            state = (GameState)serializer.Deserialize(reader);
-            reader.Close();
-
-            return state;
+            using (var compression = new GZipStream(OpenFile(slot), CompressionMode.Decompress))            
+            using (var reader = new StreamReader(compression))
+                return deserializer.Deserialize<GameState>(reader);
         }
     }
 }
