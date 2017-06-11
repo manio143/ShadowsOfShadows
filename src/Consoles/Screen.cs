@@ -32,27 +32,21 @@ namespace ShadowsOfShadows
         public static MessageConsole MessageConsole;
         public static MenuConsole MenuConsole;
 
+        private StartScreen StartScreen;
         public Screen(int width, int height)
         {
             MainConsole = new MainConsole(width - MENU_WIDTH + 1, height - MESSAGES_HEIGHT + 2);
             MessageConsole = new MessageConsole(1, height - MESSAGES_HEIGHT + 1, width, MESSAGES_HEIGHT);
             MenuConsole = new MenuConsole(width - MENU_WIDTH, 1, MENU_WIDTH + 1, height - MESSAGES_HEIGHT + 1);
 
-            MessageConsole.PrintMessageAndWait("This is a message\nAnd with line breaks");
-            MessageConsole.AskQuestion("Co mi powiesz?", typeof(TestEnum)).PostProcessing =
-                (m) =>
-                {
-                    var chest = new Chest(new ConsoleRenderable('c'), 0,
-                        new Item[]
-                        {
-                       		
-                        });
-                    MenuConsole.OpenChest(chest);
-                };
+            StartScreen = new StartScreen(width + 2, height + 2);
         }
 
         public override bool ProcessKeyboard(Keyboard state)
         {
+            if (StartScreen.IsActive)
+                if (StartScreen.ProcessKeyboard(state))
+                    return true;
             if (MessageConsole.IsActive)
                 if (MessageConsole.ProcessKeyboard(state))
                     return true;
@@ -65,6 +59,12 @@ namespace ShadowsOfShadows
         public override void Update(TimeSpan delta)
         {
             base.Update(delta);
+            if (StartScreen.IsActive)
+            {
+                StartScreen.Update(delta);
+                if (StartScreen.Blocking)
+                    return;
+            }
             if (MessageConsole.IsActive)
             {
                 MessageConsole.Update(delta);
@@ -83,9 +83,14 @@ namespace ShadowsOfShadows
         public override void Draw(TimeSpan delta)
         {
             base.Draw(delta);
-            MessageConsole.Draw(delta);
-            MenuConsole.Draw(delta);
-            MainConsole.Draw(delta);
+            if (StartScreen.IsActive)
+                StartScreen.Draw(delta);
+            else
+            {
+                MessageConsole.Draw(delta);
+                MenuConsole.Draw(delta);
+                MainConsole.Draw(delta);
+            }
         }
     }
 }

@@ -91,6 +91,9 @@ namespace ShadowsOfShadows.Consoles
         public override GameObject WaitPointer { get; }
         public override List<GameObject> Other { get; }
 
+        public Point ChoicePositionOffset { get; set; }
+        public Point TextPositionOffset { get; set; }
+
         private int pointerIndex;
 
         protected int PointerIndex
@@ -137,7 +140,7 @@ namespace ShadowsOfShadows.Consoles
 
             PointerIndex = StartIndex;
 
-            Text.Position = console.Position + new Point(1, 1);
+            Text.Position = console.Position + new Point(1, 1) + TextPositionOffset;
         }
 
         private void ComputePositions(MessageConsole console)
@@ -147,7 +150,7 @@ namespace ShadowsOfShadows.Consoles
             for (var i = 0; i < columns; i++)
             {
                 for (var j = 0; j < Rows && i * Rows + j < Answers.Count; j++)
-                    Positions.Add(console.Position + new Point(last, j + 1 + (Text == null ? 0 : 2)));
+                    Positions.Add(console.Position + new Point(last, j + 1 + (Text == null ? 0 : 2)) + ChoicePositionOffset);
 
                 var maxLegth = 0;
                 for (var j = 0; j < Rows && i * Rows + j < Answers.Count; j++)
