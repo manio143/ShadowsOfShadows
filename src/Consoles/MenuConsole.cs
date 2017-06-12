@@ -38,6 +38,7 @@ namespace ShadowsOfShadows.Consoles
             : base(posX, posY, width, height)
         {
             ClearInactive = false;
+            PrintPlayerStats();
         }
 
         protected override void PrintMessage(Message message)
