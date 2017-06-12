@@ -1,15 +1,19 @@
 ﻿using System;
 using System.Linq;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
-using ShadowsOfShadows.Entities;
 using MathNet.Numerics.Distributions;
+
+using ShadowsOfShadows.Entities;
+using ShadowsOfShadows.Physics;
+using ShadowsOfShadows.Items;
 
 namespace ShadowsOfShadows.Generators
 {
 	public class RoomGenerator
 	{
-		private bool first = true;
-		private Room lastRoom = new Room{ ExitPoint = new Point(0,0) };
+		public bool first {get;set;} = true;
+		public Room lastRoom {get;set;} = new Room{ ExitPoint = new Point(0,0) };
 
 		private DiscreteUniform sizeGen = new DiscreteUniform (5, 30);
 
@@ -51,7 +55,13 @@ namespace ShadowsOfShadows.Generators
             var character = gen.GenerateCharacter();
             character.Transform.Position = room.Position + new Point(room.Size.X / 2, room.Size.Y /2);
             room.Entities.Add(character);
+			
 			first = false;
+
+			var itemGen = new ItemGenerator();
+			var chest = new Chest() {Transform = new Transform() {Position = room.Position + new Point(3, 2)}};
+			chest.Items = new List<Item>() {itemGen.GenerateItem(), itemGen.GenerateItem(), itemGen.GenerateItem()};
+			room.Entities.Add(chest);
 
 			lastRoom = room;
 

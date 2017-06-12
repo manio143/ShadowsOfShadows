@@ -23,7 +23,7 @@ namespace ShadowsOfShadows.Consoles
 
         public Point Middle { get { return new Point(Width / 2, Height / 2); } }
 
-		public RoomGenerator RoomGenerator { get; } = new RoomGenerator();
+		public RoomGenerator RoomGenerator => State.RoomGenerator;
 
 		public List<Room> CurrentRooms => State.Rooms;
 
@@ -31,7 +31,7 @@ namespace ShadowsOfShadows.Consoles
 
         public MainConsole(int width, int height) : base(width, height)
         {
-			State = new GameState (new Player("Player", Fraction.Warrior, 10), new List<Room>(){RoomGenerator.GenerateRoom()});
+			State = new GameState (new Player("Player", Fraction.Warrior, 10));
 			Player.Transform.Position = CurrentRooms[0].EnterPoint + new Point(1, 0);
         }
 

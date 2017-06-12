@@ -13,7 +13,7 @@ namespace ShadowsOfShadows.Entities
     {
 		public Door() : this(Point.Zero) { }
 
-		private bool generateRoom;
+		public bool generateRoom {get;set;}
 
 		public Door(Point position, bool generateRoom = false) : base(new ConsoleRenderable('|'), 0)
         {
