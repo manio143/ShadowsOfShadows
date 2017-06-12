@@ -82,6 +82,7 @@ namespace ShadowsOfShadows.Consoles
                 Screen.MainConsole.Update(new TimeSpan());
 
 				Screen.MessageConsole.PrintMessageWithTimeout("Game loaded.", TimeoutMessage.GENERAL_TIMEOUT);
+                Screen.MenuConsole.PrintPlayerStats();
             };
 		}
     }

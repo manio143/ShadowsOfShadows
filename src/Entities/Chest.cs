@@ -9,7 +9,7 @@ namespace ShadowsOfShadows.Entities
 {
     public class Chest : Openable
     {
-        public List<Item> Items { get; }
+        public List<Item> Items { get; set; }
 
         public Chest() : base('c') { }
 
