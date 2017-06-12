@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -55,7 +55,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Consoles\Messages.cs" />
-    <Compile Include="Generators\CharacterGenerator.cs" />
     <Compile Include="Generators\ItemGenerator.cs" />
     <Compile Include="Helpers\EnumHelper.cs" />
     <Compile Include="Helpers\GenericsHelper.cs" />
@@ -75,6 +74,7 @@
     <Compile Include="Consoles\MessageConsole.cs" />
     <Compile Include="Consoles\MainConsole.cs" />
     <Compile Include="Consoles\Screen.cs" />
+    <Compile Include="Consoles\StartScreen.cs" />
     <Compile Include="Consoles\MenuConsole.cs" />
     <Compile Include="Consoles\BorderedConsole.cs" />
     <Compile Include="Physics\Polygon.cs" />
@@ -139,9 +139,19 @@
     <Compile Include="Serialization\Serializer.cs" />
     <Compile Include="TestData\TestRooms.cs" />
     <Compile Include="Generators\RoomGenerator.cs" />
+    <Compile Include="Generators\CharacterGenerator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Entities\" />
+    <Folder Include="Renderables\" />
+    <Folder Include="Helpers\" />
+    <Folder Include="Physics\" />
+    <Folder Include="Consoles\" />
+    <Folder Include="Items\" />
+    <Folder Include="Serialization\" />
+    <Folder Include="Generators\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="MonoGame.Framework.dll.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
