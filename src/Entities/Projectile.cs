@@ -23,11 +23,15 @@ namespace ShadowsOfShadows.Entities
 
 		public void Update(TimeSpan deltaTime)
 		{
-			foreach (var entity in Screen.MainConsole.CurrentRoom.Entities) 
+			foreach (var entity in Screen.MainConsole.Entities) 
 			{
-				var character = entity as Character;
-				if (character != null && CollisionBox.CheckCollision (this.Transform, character.Transform))
-					character.TakeDamage (Damage);
+				if(CollisionBox.CheckCollision (this.Transform, entity.Transform))
+				{
+					var character = entity as Character;
+					if (character != null)
+						character.TakeDamage (Damage);
+					IsDead = true;
+				}
 			}
 
 			Move();
