@@ -15,7 +15,22 @@ namespace ShadowsOfShadows.Entities
 			this.Damage = damage;
 			this.Transform.Direction = direction;
 		}
+			
+		private void Move()
+		{
+			this.Transform.Position = this.Transform.Position +	this.Transform.Direction.AsPoint();
+		}
 
-        public void Update(TimeSpan deltaTime) { }
-    }
+		public void Update(TimeSpan deltaTime)
+		{
+			foreach (var entity in Screen.MainConsole.CurrentRoom.Entities) 
+			{
+				var character = entity as Character;
+				if (character != null && CollisionBox.CheckCollision (this.Transform, character.Transform))
+					character.TakeDamage (Damage);
+			}
+
+			Move();
+		}
+	}
 }
