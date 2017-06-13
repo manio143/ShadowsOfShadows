@@ -16,7 +16,7 @@ namespace ShadowsOfShadows.Generators
 		public Room lastRoom {get;set;} = new Room{ ExitPoint = new Point(0,0) };
 
 		private DiscreteUniform sizeGen = new DiscreteUniform (5, 30);
-		private Bernoulli boolGen = new Bernoulli(0.16);
+		private Bernoulli boolGen = new Bernoulli(0.20);
 		private Normal itemCountGen = new Normal(3, 0.5);
 
 		public Room GenerateEmpty(int width, int height, Point position, Point entryPoint, bool entryDoor = true)
@@ -45,8 +45,6 @@ namespace ShadowsOfShadows.Generators
 
 		public Room GenerateRoom() 
 		{
-			first = false;
-			
 			var width = sizeGen.Sample ();
 			var height = sizeGen.Sample ();
 
@@ -65,7 +63,7 @@ namespace ShadowsOfShadows.Generators
 				{
 					var character = characterGen.GenerateCharacter();
 					var position = findRandomPosition(room);
-					character.Transform.Position = room.Position + position;
+					character.Transform.Position = position;
 					room.Entities.Add(character);
 				}
 			}
@@ -75,7 +73,7 @@ namespace ShadowsOfShadows.Generators
 				{
 					var chest = new Chest();
 					var position = findRandomPosition(room);
-					chest.Transform.Position = room.Position + position;
+					chest.Transform.Position = position;
 					var itemCount = randomItemCount();
 					chest.Items = new List<Item>();
 					for(int j=0; j <itemCount; j++)
@@ -85,6 +83,7 @@ namespace ShadowsOfShadows.Generators
 			}
 
 			lastRoom = room;
+			first = false;
 
 			return room;
 		}
@@ -94,7 +93,8 @@ namespace ShadowsOfShadows.Generators
 			Point p;
 			do
 			{
-				p = new Point(room.Position.X + (sizeGen.Sample() % room.Size.X - 2), room.Position.Y + (sizeGen.Sample() % room.Size.Y - 2));
+				p = new Point(room.Position.X + (sizeGen.Sample() % (room.Size.X - 2)) + 1,
+							  room.Position.Y + (sizeGen.Sample() % (room.Size.Y - 2)) + 1);
 			} while(room.Entities.Any(e => e.Transform.Position == p));
 			return p;
 		}
