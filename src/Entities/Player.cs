@@ -26,36 +26,24 @@ namespace ShadowsOfShadows.Entities
         public Player(string name, Fraction fraction, int speed) : base(name, 'P', speed, 1)
 		{
 			this.Fraction = fraction;
-            this.Experience = 0;
-			this.Level = 1;
+
+			SetAttributes ();
+
 			this.Skills = SkillFactory.GetNewSkillSet(fraction);
 
-			this.Health = this.MaxHealth = 10;
-			this.AttackPower = (this.Skills[Skill.Strength] + this.Skills[Skill.ShootingPower]) / 2;
-			this.DefencePower = this.Skills[Skill.Strength];
-
-			this.Mana = this.MaxMana = this.Skills[Skill.Mana];
-
-			this.Immortal = false;
-			this.MagicPower = this.Skills[Skill.MagicPower];
+			SetInitialStats ();
 		}
 
 		public Player(string name, Fraction fraction, int speed, List<Item> equipment, Dictionary<Skill, int> skills
 		              ) : base(name, 'P', speed, 1, equipment)
 		{
             this.Fraction = fraction;
-            this.Experience = 0;
-			this.Level = 1;
+
+			SetAttributes ();
+
 			this.Skills = skills;
 
-			this.Health = this.MaxHealth = 10;
-			this.AttackPower = (this.Skills[Skill.Strength] + this.Skills[Skill.ShootingPower]) / 2;
-			this.DefencePower = this.Skills[Skill.Strength];
-
-			this.Mana = this.MaxMana = this.Skills[Skill.Mana];
-
-			this.Immortal = false;
-			this.MagicPower = this.Skills[Skill.MagicPower];
+			SetInitialStats ();
 		}
 
         public string GetPlayerBuffs()
@@ -68,6 +56,24 @@ namespace ShadowsOfShadows.Entities
             }
             return result;
         }
+
+		private void SetAttributes()
+		{
+			this.Experience = 0;
+			this.Level = 1;
+		}
+
+		private void SetInitialStats()
+		{
+			this.Health = this.MaxHealth = 10;
+			this.AttackPower = (this.Skills[Skill.Strength] + this.Skills[Skill.ShootingPower]) / 2;
+			this.DefencePower = this.Skills[Skill.Strength];
+
+			this.Mana = this.MaxMana = this.Skills[Skill.Mana];
+
+			this.Immortal = false;
+			this.MagicPower = this.Skills[Skill.MagicPower];
+		}
 
         [YamlDotNet.Serialization.YamlIgnore]
         public int UnlockingSkillLevel => Skills[Skill.Lockpicking];
