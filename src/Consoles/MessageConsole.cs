@@ -28,7 +28,7 @@ namespace ShadowsOfShadows.Consoles
             this.Position = new Point(posX, poxY);
         }
 
-        protected void PrintMessage(string message)
+        public void PrintMessage(string message)
         {
             PrintMessage(new SimpleMessage(message));
         }

@@ -307,6 +307,14 @@ namespace ShadowsOfShadows.Consoles
         {
         }
 
+		public override void Create (MessageConsole console)
+		{
+			base.Create (console);
+			if (Answers.Count > 0) {
+				Screen.MessageConsole.PrintMessage(Answers [PointerIndex].Item1.Details ());
+			}
+		}
+
 		private static IEnumerable<Tuple<Item, string>> ComputeNameList(IEnumerable<Item> items)
 		{
 			var dict = new Dictionary<Item, int>();
@@ -341,6 +349,9 @@ namespace ShadowsOfShadows.Consoles
             {
                 Finished = true;
             }
+			if (Answers.Count > 0) {
+				Screen.MessageConsole.PrintMessage(Answers [PointerIndex].Item1.Details ());
+			}
         }
 
         private void ProcessItem(Item item)
