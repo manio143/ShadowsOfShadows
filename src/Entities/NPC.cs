@@ -6,20 +6,13 @@ namespace ShadowsOfShadows.Entities
 {
 	public class NPC : Character
 	{
-		private Fraction Fraction;
-
-        public NPC() : this(Fraction.Warrior, 0) { }
-
-		public NPC (Fraction fraction, int speed) : base("NPC", 'N', speed, 1)
+		public NPC () : base("NPC", 'N', 0, 1)
 		{
-			this.Fraction = fraction;
 			Immortal = true;
 		}
 
 		public override void Shoot<T>(Direction direction)
 		{
-			T projectile = (T)new Projectile(SkillFactory.GetNewSkillSet(Fraction)[Skill.ShootingPower],
-											 direction);
 		}
     }
 }

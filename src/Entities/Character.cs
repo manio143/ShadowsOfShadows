@@ -132,7 +132,10 @@ namespace ShadowsOfShadows.Entities
 
         public void TakeDamage(int amount)
         {
-            Health = Math.Max(Health - Math.Max(amount - DefencePower, 0), 0);
+			if (amount < 0)
+				Health = Math.Min (MaxHealth, Health - amount);
+			else
+				Health = Math.Max(Health - Math.Max(amount - DefencePower, 0), 0);
         }
     }
 }
