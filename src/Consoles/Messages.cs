@@ -239,6 +239,15 @@ namespace ShadowsOfShadows.Consoles
             Chest = chest;
         }
 
+		public override void Create (MessageConsole console)
+		{
+			base.Create (console);
+			if (Answers.Count > 0) {
+				Screen.MessageConsole.PrintMessage(Answers [PointerIndex].Item1.Details ());
+			}
+		}
+
+
         public override void ProcessKeyboard(Keyboard info)
         {
             base.ProcessKeyboard(info);
@@ -253,6 +262,9 @@ namespace ShadowsOfShadows.Consoles
             {
                 Finished = true;
             }
+			if ((info.IsKeyPressed(Keys.Up) || info.IsKeyPressed(Keys.Down)) && Answers.Count > 0) {
+				Screen.MessageConsole.PrintMessage(Answers [PointerIndex].Item1.Details ());
+			}
         }
 
         private void ProcessItemWithEquipment(Item item)
@@ -349,7 +361,7 @@ namespace ShadowsOfShadows.Consoles
             {
                 Finished = true;
             }
-			if (Answers.Count > 0) {
+			if ((info.IsKeyPressed(Keys.Up) || info.IsKeyPressed(Keys.Down)) && Answers.Count > 0) {
 				Screen.MessageConsole.PrintMessage(Answers [PointerIndex].Item1.Details ());
 			}
         }
