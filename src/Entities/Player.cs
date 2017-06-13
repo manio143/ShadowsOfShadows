@@ -29,6 +29,15 @@ namespace ShadowsOfShadows.Entities
             this.Experience = 0;
 			this.Level = 1;
 			this.Skills = SkillFactory.GetNewSkillSet(fraction);
+
+			this.Health = this.MaxHealth = 10;
+			this.AttackPower = (this.Skills[Skill.Strength] + this.Skills[Skill.ShootingPower]) / 2;
+			this.DefencePower = this.Skills[Skill.Strength];
+
+			this.Mana = this.MaxMana = this.Skills[Skill.Mana];
+
+			this.Immortal = false;
+			this.MagicPower = this.Skills[Skill.MagicPower];
 		}
 
 		public Player(string name, Fraction fraction, int speed, List<Item> equipment, Dictionary<Skill, int> skills
@@ -38,6 +47,15 @@ namespace ShadowsOfShadows.Entities
             this.Experience = 0;
 			this.Level = 1;
 			this.Skills = skills;
+
+			this.Health = this.MaxHealth = 10;
+			this.AttackPower = (this.Skills[Skill.Strength] + this.Skills[Skill.ShootingPower]) / 2;
+			this.DefencePower = this.Skills[Skill.Strength];
+
+			this.Mana = this.MaxMana = this.Skills[Skill.Mana];
+
+			this.Immortal = false;
+			this.MagicPower = this.Skills[Skill.MagicPower];
 		}
 
         public string GetPlayerBuffs()
