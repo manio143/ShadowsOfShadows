@@ -41,6 +41,7 @@ namespace ShadowsOfShadows.Consoles
         public SimpleMessage(string msg)
         {
             message = msg;
+            Finished = true;
         }
 
         private GameObject text;
