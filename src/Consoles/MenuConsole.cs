@@ -11,7 +11,6 @@ using ShadowsOfShadows.Serialization;
 
 namespace ShadowsOfShadows.Consoles
 {
-
     public enum MainMenuOptions
     {
         [Display("Equipment")]
@@ -61,19 +60,19 @@ namespace ShadowsOfShadows.Consoles
         private void MainMenuChoice(Message msg)
         {
             var qm = msg as QuestionMessage;
-            switch ((MainMenuOptions) qm.Result)
+            switch ((MainMenuOptions)qm.Result)
             {
                 case MainMenuOptions.Equipment:
                     OpenEquipment();
                     break;
-				case MainMenuOptions.SaveGame:
-					SaveGame();
+                case MainMenuOptions.SaveGame:
+                    SaveGame();
                     break;
-				case MainMenuOptions.LoadGame:
-					LoadGame();
+                case MainMenuOptions.LoadGame:
+                    LoadGame();
                     break;
                 case MainMenuOptions.Settings:
-                    //TODO: Show settings (should we have any)
+                //TODO: Show settings (should we have any)
                 case MainMenuOptions.CloseMenu:
                     PrintPlayerStats();
                     break;
@@ -89,8 +88,9 @@ namespace ShadowsOfShadows.Consoles
         {
             var quitMessage = Screen.MessageConsole.AskQuestion("Are you sure?", typeof(YesNoQuestion));
             quitMessage.DefaultAnswer = YesNoQuestion.No;
-            quitMessage.PostProcessing = (m) => {
-                if(((YesNoQuestion) ((QuestionMessage)m).Result) == YesNoQuestion.Yes)
+            quitMessage.PostProcessing = (m) =>
+            {
+                if (((YesNoQuestion)((QuestionMessage)m).Result) == YesNoQuestion.Yes)
                     SadConsole.Game.Instance.Exit();
                 else
                     PrintPlayerStats();
@@ -120,38 +120,43 @@ namespace ShadowsOfShadows.Consoles
             );
         }
 
-		public void SaveGame()
-		{
-			var message = AskQuestion ("", typeof(SaveSlot));
+        public void SaveGame()
+        {
+            var message = AskQuestion("", typeof(SaveSlot));
             message.DefaultAnswer = SaveSlot.None;
-			message.PostProcessing = msg => { 
-				var slot = (SaveSlot)((QuestionMessage)msg).Result;
-                if(slot != SaveSlot.None) {
-                    Serialization.Serializer.Save (slot, Screen.MainConsole.State);
+            message.PostProcessing = msg =>
+            {
+                var slot = (SaveSlot)((QuestionMessage)msg).Result;
+                if (slot != SaveSlot.None)
+                {
+                    Serialization.Serializer.Save(slot, Screen.MainConsole.State);
                     Screen.MessageConsole.PrintMessageWithTimeout("Game saved.", TimeoutMessage.GENERAL_TIMEOUT);
                 }
-				OpenMainMenu();
-			};
-		}
+                OpenMainMenu();
+            };
+        }
 
-		public void LoadGame()
-		{
+        public void LoadGame()
+        {
             var message = AskSaveSlot();
             message.PostProcessing += (m) => OpenMainMenu();
-		}
+        }
 
         protected QuestionMessage AskSaveSlot()
         {
-            var message = AskQuestion("", typeof(SaveSlot), (@enum, str) => {
-                if(!Serialization.Serializer.SaveExists((SaveSlot)@enum))
+            var message = AskQuestion("", typeof(SaveSlot), (@enum, str) =>
+            {
+                if (!Serialization.Serializer.SaveExists((SaveSlot)@enum))
                     return str + " (empty)";
                 else
                     return str;
             });
             message.DefaultAnswer = SaveSlot.None;
-            message.PostProcessing = msg => {
+            message.PostProcessing = msg =>
+            {
                 var slot = (SaveSlot)((QuestionMessage)msg).Result;
-                if(slot != SaveSlot.None && Serialization.Serializer.SaveExists(slot)) {
+                if (slot != SaveSlot.None && Serialization.Serializer.SaveExists(slot))
+                {
                     var gS = Serialization.Serializer.Load(slot);
 
                     Screen.MainConsole.State = gS;
@@ -168,10 +173,11 @@ namespace ShadowsOfShadows.Consoles
         {
             var message = new ChestMessage(chest);
             PrintMessageAndWait(message);
-			message.PostProcessing = msg => {
-				Screen.MessageConsole.PrintMessage("");
-				PrintPlayerStats ();
-			};
+            message.PostProcessing = msg =>
+            {
+                Screen.MessageConsole.PrintMessage("");
+                PrintPlayerStats();
+            };
             return message;
         }
 
@@ -179,11 +185,12 @@ namespace ShadowsOfShadows.Consoles
         {
             var message = new EquipmentMessage();
             PrintMessageAndWait(message);
-			message.PostProcessing = msg => {
-				Screen.MessageConsole.PrintMessage("");
-				OpenMainMenu ();
-			};
-           	return message;
+            message.PostProcessing = msg =>
+            {
+                Screen.MessageConsole.PrintMessage("");
+                OpenMainMenu();
+            };
+            return message;
         }
     }
 }

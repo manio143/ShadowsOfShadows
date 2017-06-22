@@ -16,7 +16,6 @@ namespace ShadowsOfShadows.Serialization
 {
     public static class Serializer
     {
-
         private readonly static string SaveFolder = Path.Combine(
                         Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
                         "ShadowsOfShadows",
@@ -57,7 +56,7 @@ namespace ShadowsOfShadows.Serialization
                 .WithTypeConverter(new PrimitivesConverter())
                 .Build();
 
-            using (var compression = new GZipStream(OpenFile(slot), CompressionMode.Decompress))            
+            using (var compression = new GZipStream(OpenFile(slot), CompressionMode.Decompress))
             using (var reader = new StreamReader(compression))
                 return deserializer.Deserialize<GameState>(reader);
         }

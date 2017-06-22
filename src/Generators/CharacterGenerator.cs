@@ -8,9 +8,9 @@ using ShadowsOfShadows.Entities;
 
 namespace ShadowsOfShadows.Generators
 {
-    class CharacterGenerator
+    internal class CharacterGenerator
     {
-        private Bernoulli monsterOrNPCDistribution; 
+        private Bernoulli monsterOrNPCDistribution;
         private DiscreteUniform monsterDistribution;
         private DiscreteUniform npcDistribution;
 
@@ -21,7 +21,7 @@ namespace ShadowsOfShadows.Generators
         {
             var assembly = GetType().Assembly;
 
-            monsterTypes = assembly.GetTypes().Where(type => type.IsClass && (type.IsSubclassOf(typeof(Monster)) || type == typeof (Monster)) && !type.IsAbstract).ToArray();
+            monsterTypes = assembly.GetTypes().Where(type => type.IsClass && (type.IsSubclassOf(typeof(Monster)) || type == typeof(Monster)) && !type.IsAbstract).ToArray();
             npcTypes = assembly.GetTypes().Where(type => type.IsClass && (type == typeof(NPC) || type.IsSubclassOf(typeof(NPC))) && !type.IsAbstract).ToArray();
 
             monsterDistribution = new DiscreteUniform(0, monsterTypes.Length - 1);
@@ -36,13 +36,12 @@ namespace ShadowsOfShadows.Generators
                 return GenerateMonster();
             else
                 return GenerateNPC();
-            
         }
 
         private Monster GenerateMonster()
         {
             var index = monsterDistribution.Sample();
-            return (Monster) Activator.CreateInstance(monsterTypes[index]);
+            return (Monster)Activator.CreateInstance(monsterTypes[index]);
         }
 
         private NPC GenerateNPC()

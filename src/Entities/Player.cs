@@ -14,8 +14,8 @@ namespace ShadowsOfShadows.Entities
 
         private int Experience;
 
-		    public int Level { get; set; }
-        
+        public int Level { get; set; }
+
         public List<TimedConsumable> ActiveBuffs { get; set; } = new List<TimedConsumable>();
 
         public Dictionary<Skill, int> Skills { get; set; }
@@ -24,64 +24,64 @@ namespace ShadowsOfShadows.Entities
         public Player() : base('P') { }
 
         public Player(string name, Fraction fraction, int speed) : base(name, 'P', speed, 1)
-		{
-			this.Fraction = fraction;
+        {
+            Fraction = fraction;
 
-			SetAttributes ();
+            SetAttributes();
 
-			this.Skills = SkillFactory.GetNewSkillSet(fraction);
+            this.Skills = SkillFactory.GetNewSkillSet(fraction);
 
-			SetInitialStats ();
-		}
+            SetInitialStats();
+        }
 
-		public Player(string name, Fraction fraction, int speed, List<Item> equipment, Dictionary<Skill, int> skills
-		              ) : base(name, 'P', speed, 1, equipment)
-		{
-            this.Fraction = fraction;
+        public Player(string name, Fraction fraction, int speed, List<Item> equipment, Dictionary<Skill, int> skills
+                      ) : base(name, 'P', speed, 1, equipment)
+        {
+            Fraction = fraction;
 
-			SetAttributes ();
+            SetAttributes();
 
-			this.Skills = skills;
+            this.Skills = skills;
 
-			SetInitialStats ();
-		}
+            SetInitialStats();
+        }
 
         public string GetPlayerBuffs()
         {
             string result = "Active buffs:\n";
             foreach (var buff in ActiveBuffs)
             {
-				var statsWithOffset = buff.StatsString.Split ('\n').Select (s => " " + s).Aggregate ("", (acc, s) => acc + s + "\n");
-				result += buff.ToString() + ":\n" + statsWithOffset;
+                var statsWithOffset = buff.StatsString.Split('\n').Select(s => " " + s).Aggregate("", (acc, s) => acc + s + "\n");
+                result += buff.ToString() + ":\n" + statsWithOffset;
             }
             return result;
         }
 
-		private void SetAttributes()
-		{
-			this.Experience = 0;
-			this.Level = 1;
-		}
+        private void SetAttributes()
+        {
+            Experience = 0;
+            this.Level = 1;
+        }
 
-		private void SetInitialStats()
-		{
-			this.Health = this.MaxHealth = 10;
-			this.AttackPower = (this.Skills[Skill.Strength] + this.Skills[Skill.ShootingPower]) / 2;
-			this.DefencePower = this.Skills[Skill.Strength];
+        private void SetInitialStats()
+        {
+            this.Health = this.MaxHealth = 10;
+            this.AttackPower = (this.Skills[Skill.Strength] + this.Skills[Skill.ShootingPower]) / 2;
+            this.DefencePower = this.Skills[Skill.Strength];
 
-			this.Mana = this.MaxMana = this.Skills[Skill.Mana];
+            this.Mana = this.MaxMana = this.Skills[Skill.Mana];
 
-			this.Immortal = false;
-			this.MagicPower = this.Skills[Skill.MagicPower];
-		}
+            this.Immortal = false;
+            this.MagicPower = this.Skills[Skill.MagicPower];
+        }
 
         [YamlDotNet.Serialization.YamlIgnore]
         public int UnlockingSkillLevel => Skills[Skill.Lockpicking];
 
-		public override void Shoot<T>(Direction direction)
-		{
-			T projectile = (T)new Projectile(Skills[Skill.ShootingPower], direction);
-		}
+        public override void Shoot<T>(Direction direction)
+        {
+            T projectile = (T)new Projectile(Skills[Skill.ShootingPower], direction);
+        }
 
         public override void Update(TimeSpan deltaTime)
         {
@@ -98,7 +98,7 @@ namespace ShadowsOfShadows.Entities
                     changes = true;
                 }
             }
-            if(changes && !Screen.MenuConsole.IsActive)
+            if (changes && !Screen.MenuConsole.IsActive)
             {
                 // refresh player's stats
                 Screen.MenuConsole.PrintPlayerStats();

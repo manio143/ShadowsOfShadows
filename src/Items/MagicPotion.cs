@@ -10,7 +10,7 @@ namespace ShadowsOfShadows.Items
     [ItemType(ItemType.Potion)]
     public class MagicPotion : TimedConsumable
     {
-		[XmlIgnore]
+        [XmlIgnore]
         public int MP { get; private set; }
         public MagicPotion() : base("Magic Potion", "Magic power 3\n", TimeSpan.FromSeconds(10))
         {
@@ -19,8 +19,8 @@ namespace ShadowsOfShadows.Items
 
         public override void Use()
         {
-           base.Use();
-           Screen.MainConsole.Player.MagicPower += MP;
+            base.Use();
+            Screen.MainConsole.Player.MagicPower += MP;
         }
 
         public override void EndEffect()

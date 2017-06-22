@@ -1,17 +1,18 @@
+using YamlDotNet.Core;
+using YamlDotNet.Core.Events;
+using YamlDotNet.Serialization;
+using Microsoft.Xna.Framework;
+using System.Linq;
+
 namespace ShadowsOfShadows.Helpers
 {
-    using YamlDotNet.Core;
-    using YamlDotNet.Core.Events;
-    using YamlDotNet.Serialization;
-    using Microsoft.Xna.Framework;
-    using System.Linq;
     public class PrimitivesConverter : IYamlTypeConverter
     {
         private readonly bool jsonCompatible;
 
         public PrimitivesConverter()
         {
-            this.jsonCompatible = false;
+            jsonCompatible = false;
         }
 
         public bool Accepts(System.Type type)
@@ -51,7 +52,6 @@ namespace ShadowsOfShadows.Helpers
                 var rect = (Rectangle)value;
                 emitter.Emit(new Scalar(null, null, $"{rect.X};{rect.Y};{rect.Width};{rect.Height}", jsonCompatible ? ScalarStyle.DoubleQuoted : ScalarStyle.Any, true, false));
             }
-
         }
     }
 }

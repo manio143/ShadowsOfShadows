@@ -10,10 +10,10 @@ namespace ShadowsOfShadows.Items
     [ItemType(ItemType.Potion)]
     public class StrengthPotion : TimedConsumable
     {
-		[XmlIgnore]
+        [XmlIgnore]
         public int AP { get; private set; }
 
-		public StrengthPotion() : this(new TimeSpan(0, 0, 10)) { }
+        public StrengthPotion() : this(new TimeSpan(0, 0, 10)) { }
 
         public StrengthPotion(TimeSpan duration) : base("Strength Potion", "Attack power 3\n", duration)
         {
@@ -29,6 +29,5 @@ namespace ShadowsOfShadows.Items
         {
             Screen.MainConsole.Player.AttackPower -= AP;
         }
-
     }
 }

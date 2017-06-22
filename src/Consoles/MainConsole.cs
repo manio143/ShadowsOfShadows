@@ -23,16 +23,16 @@ namespace ShadowsOfShadows.Consoles
 
         public Point Middle { get { return new Point(Width / 2, Height / 2); } }
 
-		public RoomGenerator RoomGenerator => State.RoomGenerator;
+        public RoomGenerator RoomGenerator => State.RoomGenerator;
 
-		public List<Room> CurrentRooms => State.Rooms;
+        public List<Room> CurrentRooms => State.Rooms;
 
         public GameState State { get; set; }
 
         public MainConsole(int width, int height) : base(width, height)
         {
-			State = new GameState (new Player("Player", Fraction.Warrior, 10));
-			Player.Transform.Position = CurrentRooms[0].EnterPoint + new Point(1, 0);
+            State = new GameState(new Player("Player", Fraction.Warrior, 10));
+            Player.Transform.Position = CurrentRooms[0].EnterPoint + new Point(1, 0);
         }
 
         public override void Draw(System.TimeSpan delta)
@@ -43,32 +43,32 @@ namespace ShadowsOfShadows.Consoles
             playerObject.Position = Middle;
             playerObject.Draw(delta);
 
-			foreach(var room in CurrentRooms)
-            foreach (var entity in room.Entities)
-            {
-                var consoleObject = entity.Renderable.ConsoleObject;
-                consoleObject.Position = entity.Transform.Position - Player.Transform.Position + Middle;
-                if (consoleObject.Position.X < Width && consoleObject.Position.Y < Height)
-                    consoleObject.Draw(delta);
-            }
+            foreach (var room in CurrentRooms)
+                foreach (var entity in room.Entities)
+                {
+                    var consoleObject = entity.Renderable.ConsoleObject;
+                    consoleObject.Position = entity.Transform.Position - Player.Transform.Position + Middle;
+                    if (consoleObject.Position.X < Width && consoleObject.Position.Y < Height)
+                        consoleObject.Draw(delta);
+                }
         }
 
-		public List<Entity> Entities { get { return CurrentRooms.Select (r => r.Entities).Aggregate (Enumerable.Empty<Entity> (), (acc, e) => acc.Concat (e)).ToList (); } }
+        public List<Entity> Entities { get { return CurrentRooms.Select(r => r.Entities).Aggregate(Enumerable.Empty<Entity>(), (acc, e) => acc.Concat(e)).ToList(); } }
 
         public override void Update(TimeSpan delta)
         {
             base.Update(delta);
-			foreach(var room in CurrentRooms)
-			foreach (var entity in room.Entities)
-                (entity as IUpdateable)?.Update(delta);
+            foreach (var room in CurrentRooms)
+                foreach (var entity in room.Entities)
+                    (entity as IUpdateable)?.Update(delta);
 
-			foreach(var room in CurrentRooms)
-			foreach (var entity in room.Entities)
-			{
-				var projectile = entity as Projectile;
-				if (projectile != null && projectile.IsDead)
-					room.Entities.Remove (projectile);
-			}
+            foreach (var room in CurrentRooms)
+                foreach (var entity in room.Entities)
+                {
+                    var projectile = entity as Projectile;
+                    if (projectile != null && projectile.IsDead)
+                        room.Entities.Remove(projectile);
+                }
             Player.Update(delta);
         }
 

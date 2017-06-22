@@ -147,7 +147,7 @@ namespace ShadowsOfShadows.Consoles
 
         private void ComputePositions(MessageConsole console)
         {
-            var columns = (int) Math.Ceiling(Answers.Count * 1.0 / Rows);
+            var columns = (int)Math.Ceiling(Answers.Count * 1.0 / Rows);
             var last = 1;
             for (var i = 0; i < columns; i++)
             {
@@ -242,15 +242,18 @@ namespace ShadowsOfShadows.Consoles
             Chest = chest;
         }
 
-		public override void Create (MessageConsole console)
-		{
-			base.Create (console);
-			if (Answers.Count > 0) {
-				Screen.MessageConsole.PrintMessage(Answers [PointerIndex].Item1.Details ());
-			} else {
+        public override void Create(MessageConsole console)
+        {
+            base.Create(console);
+            if (Answers.Count > 0)
+            {
+                Screen.MessageConsole.PrintMessage(Answers[PointerIndex].Item1.Details());
+            }
+            else
+            {
                 Screen.MessageConsole.PrintMessage(""); //will clear MessageConsole when last item is taken
             }
-		}
+        }
 
 
         public override void ProcessKeyboard(Keyboard info)
@@ -267,9 +270,10 @@ namespace ShadowsOfShadows.Consoles
             {
                 Finished = true;
             }
-			if ((info.IsKeyPressed(Keys.Up) || info.IsKeyPressed(Keys.Down)) && Answers.Count > 0) {
-				Screen.MessageConsole.PrintMessage(Answers [PointerIndex].Item1.Details ());
-			}
+            if ((info.IsKeyPressed(Keys.Up) || info.IsKeyPressed(Keys.Down)) && Answers.Count > 0)
+            {
+                Screen.MessageConsole.PrintMessage(Answers[PointerIndex].Item1.Details());
+            }
         }
 
         private void ProcessItemWithEquipment(Item item)
@@ -279,8 +283,8 @@ namespace ShadowsOfShadows.Consoles
             if (similar == null)
             {
                 Screen.MainConsole.Player.Equipment.Add(item);
-				if (item is Wearable)
-					((Wearable)item).Equip ();
+                if (item is Wearable)
+                    ((Wearable)item).Equip();
                 Chest.Items.Remove(item);
                 ResetView();
             }
@@ -292,14 +296,14 @@ namespace ShadowsOfShadows.Consoles
                 question.DefaultAnswer = YesNoQuestion.No;
                 question.PostProcessing = message =>
                 {
-                    if ((YesNoQuestion) (message as QuestionMessage).Result == YesNoQuestion.Yes)
+                    if ((YesNoQuestion)(message as QuestionMessage).Result == YesNoQuestion.Yes)
                     {
                         Screen.MainConsole.Player.Equipment.Remove(similar);
-						if (similar is Wearable)
-							((Wearable)similar).UnEquip ();
+                        if (similar is Wearable)
+                            ((Wearable)similar).UnEquip();
                         Screen.MainConsole.Player.Equipment.Add(item);
-						if (item is Wearable)
-							((Wearable)item).Equip ();
+                        if (item is Wearable)
+                            ((Wearable)item).Equip();
                         Chest.Items.Remove(item);
                         Chest.Items.Add(similar);
                         ResetView();
@@ -324,35 +328,40 @@ namespace ShadowsOfShadows.Consoles
         {
         }
 
-		public override void Create (MessageConsole console)
-		{
-			base.Create (console);
-			if (Answers.Count > 0) {
-				Screen.MessageConsole.PrintMessage(Answers [PointerIndex].Item1.Details ());
-			} else {
+        public override void Create(MessageConsole console)
+        {
+            base.Create(console);
+            if (Answers.Count > 0)
+            {
+                Screen.MessageConsole.PrintMessage(Answers[PointerIndex].Item1.Details());
+            }
+            else
+            {
                 Screen.MessageConsole.PrintMessage(""); //will clear MessageConsole when last item is taken
             }
-		}
+        }
 
-		private static IEnumerable<Tuple<Item, string>> ComputeNameList(IEnumerable<Item> items)
-		{
-			var dict = new Dictionary<Item, int>();
-			foreach(var item in items)
-				if(dict.ContainsKey(item))
-					dict[item]+=1;
-				else
-					dict[item]=1;
-			return dict.Select(kvp => {
-				string title = kvp.Key.ToString();
-				//Not great but currently I don't see another way
-				int remaining = Screen.MENU_WIDTH - 3 - title.Length;
-				if(kvp.Value > 1) {
-					string countStr = kvp.Value.ToString();
-					title += countStr.PadLeft(remaining);
-				}
-				return new Tuple<Item, string>(kvp.Key, title);
-			});
-		}
+        private static IEnumerable<Tuple<Item, string>> ComputeNameList(IEnumerable<Item> items)
+        {
+            var dict = new Dictionary<Item, int>();
+            foreach (var item in items)
+                if (dict.ContainsKey(item))
+                    dict[item] += 1;
+                else
+                    dict[item] = 1;
+            return dict.Select(kvp =>
+            {
+                string title = kvp.Key.ToString();
+                //Not great but currently I don't see another way
+                int remaining = Screen.MENU_WIDTH - 3 - title.Length;
+                if (kvp.Value > 1)
+                {
+                    string countStr = kvp.Value.ToString();
+                    title += countStr.PadLeft(remaining);
+                }
+                return new Tuple<Item, string>(kvp.Key, title);
+            });
+        }
 
         public override void ProcessKeyboard(Keyboard info)
         {
@@ -368,9 +377,10 @@ namespace ShadowsOfShadows.Consoles
             {
                 Finished = true;
             }
-			if ((info.IsKeyPressed(Keys.Up) || info.IsKeyPressed(Keys.Down)) && Answers.Count > 0) {
-				Screen.MessageConsole.PrintMessage(Answers [PointerIndex].Item1.Details ());
-			}
+            if ((info.IsKeyPressed(Keys.Up) || info.IsKeyPressed(Keys.Down)) && Answers.Count > 0)
+            {
+                Screen.MessageConsole.PrintMessage(Answers[PointerIndex].Item1.Details());
+            }
         }
 
         private void ProcessItem(Item item)

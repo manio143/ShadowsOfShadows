@@ -11,15 +11,15 @@ namespace ShadowsOfShadows.Items
         public System.TimeSpan Duration { get; set; }
         public bool Active { get; set; }
 
-		public TimedConsumable() : base() { }
+        public TimedConsumable() : base() { }
 
-		public TimedConsumable(string name) : base(name) { }
+        public TimedConsumable(string name) : base(name) { }
 
         public TimedConsumable(String name, String stats, System.TimeSpan duration) : base(name, "Duration " + duration.TotalSeconds + ",\n" + stats)
         {
             Duration = duration;
             Active = false;
-        } 
+        }
 
         public override void Use()
         {
@@ -31,12 +31,12 @@ namespace ShadowsOfShadows.Items
         {
             if (!Active) return;
 
-            if(delta >= Duration)
+            if (delta >= Duration)
             {
                 Duration = System.TimeSpan.Zero;
                 Active = false;
                 EndEffect();
-            } 
+            }
             else
             {
                 Duration -= delta;

@@ -21,16 +21,16 @@ namespace ShadowsOfShadows.Serialization
         [XmlArray("Rooms"), XmlArrayItem(typeof(Room), ElementName = "Room")]
         public List<Room> Rooms { get; set; }
 
-   		public RoomGenerator RoomGenerator { get; set; } = new RoomGenerator();
+        public RoomGenerator RoomGenerator { get; set; } = new RoomGenerator();
 
 
         /* For serialization */
         public GameState() { }
 
-		public GameState (Player player)
-		{
-			this.Player = player;
-			this.Rooms = new List<Room>() {this.RoomGenerator.GenerateRoom()};
-		}
+        public GameState(Player player)
+        {
+            this.Player = player;
+            this.Rooms = new List<Room>() { this.RoomGenerator.GenerateRoom() };
+        }
     }
 }

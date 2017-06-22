@@ -22,7 +22,7 @@ namespace ShadowsOfShadows.Entities
         public void Interact()
         {
             Value = !Value;
-			Screen.MessageConsole.PrintMessageWithTimeout("Switch has been set to " + Value, TimeoutMessage.GENERAL_TIMEOUT);
+            Screen.MessageConsole.PrintMessageWithTimeout("Switch has been set to " + Value, TimeoutMessage.GENERAL_TIMEOUT);
         }
     }
 }

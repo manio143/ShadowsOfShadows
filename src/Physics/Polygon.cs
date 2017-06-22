@@ -5,14 +5,14 @@ using System.Collections.Generic;
 
 namespace ShadowsOfShadows.Physics
 {
-	public struct Polygon
-	{
-		public List<Rectangle> Rectangles{ get; set; }
+    public struct Polygon
+    {
+        public List<Rectangle> Rectangles { get; set; }
 
-		public Polygon (List<Rectangle> rectangles)
-		{
-			this.Rectangles = rectangles;
-		}
+        public Polygon(List<Rectangle> rectangles)
+        {
+            this.Rectangles = rectangles;
+        }
 
         public List<Rectangle> WithOffset(Point p)
         {
@@ -24,6 +24,6 @@ namespace ShadowsOfShadows.Physics
 
             return result;
         }
-	}
+    }
 }
 

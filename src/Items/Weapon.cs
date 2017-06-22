@@ -16,7 +16,7 @@ namespace ShadowsOfShadows.Items
 
         protected Weapon(String name) : base(name) { }
 
-        protected Weapon(String name, int ap, int mp) : base(name, "Attack power " + ap +",\n" + "Magic power " + mp + "\n")
+        protected Weapon(String name, int ap, int mp) : base(name, "Attack power " + ap + ",\n" + "Magic power " + mp + "\n")
         {
             AP = ap;
             MP = mp;

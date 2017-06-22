@@ -20,7 +20,6 @@ namespace ShadowsOfShadows
         Wojtek,
         [Display("Do zobaczenia...")]
         DoZo
-
     }
 
     public class Screen : SadConsole.ConsoleContainer

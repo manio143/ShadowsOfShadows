@@ -48,7 +48,7 @@ namespace ShadowsOfShadows.Consoles
         {
             PrintMessageAndWait(new TimeoutMessage(message, milliseconds));
         }
-        
+
         public void PrintMessageAndWait(string message)
         {
             PrintMessageAndWait(new WaitMessage(message));
@@ -106,7 +106,7 @@ namespace ShadowsOfShadows.Consoles
                     {
                         var nextMessage = MessageQueue.Dequeue();
                         //skip SimpleMessages to the last
-                        while(nextMessage.Finished && MessageQueue.Count > 0 && MessageQueue.Peek().Finished)
+                        while (nextMessage.Finished && MessageQueue.Count > 0 && MessageQueue.Peek().Finished)
                             nextMessage = MessageQueue.Dequeue();
                         PrintMessageAndWait(nextMessage);
                     }

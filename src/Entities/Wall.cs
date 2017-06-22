@@ -16,9 +16,9 @@ namespace ShadowsOfShadows.Entities
 
         public Wall(IRenderable renderable) : base(renderable) { }
 
-		    public Wall(Point position) : this (new ConsoleRenderable(219))
-	    	{
-		     	Transform.Position = position;
-	    	}
+        public Wall(Point position) : this(new ConsoleRenderable(219))
+        {
+            Transform.Position = position;
+        }
     }
 }

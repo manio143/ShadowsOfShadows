@@ -28,7 +28,7 @@ namespace ShadowsOfShadows.Consoles
     }
     public class StartScreen : MenuConsole
     {
-        const string title =
+        private const string title =
             "  sssss hh   hh     A     DDD   ooooo W            W  sssss\n" +
             " ss     hh   hh    A A    D  D  o   o  W          W  ss    \n" +
             " sssss  hhhhhhh   A   A   D   D o   o  W    W     W  sssss \n" +
@@ -71,8 +71,8 @@ namespace ShadowsOfShadows.Consoles
                         break;
                 }
             };
-            question.TextPositionOffset = new Point(Width/2 - 32, 4);
-            question.ChoicePositionOffset = new Point(Width/2 - 10, 25);
+            question.TextPositionOffset = new Point(Width / 2 - 32, 4);
+            question.ChoicePositionOffset = new Point(Width / 2 - 10, 25);
         }
 
         private void PrintTutorial()
@@ -84,15 +84,16 @@ namespace ShadowsOfShadows.Consoles
         }
 
         public new void LoadGame()
-		{
+        {
             var message = AskSaveSlot();
-            message.ChoicePositionOffset = new Point(Width/2 - 8, 23);
-            message.PostProcessing += (msg) => {
+            message.ChoicePositionOffset = new Point(Width / 2 - 8, 23);
+            message.PostProcessing += (msg) =>
+            {
                 var slot = (SaveSlot)(msg as QuestionMessage).Result;
-                if(slot == SaveSlot.None || !Serialization.Serializer.SaveExists(slot))
+                if (slot == SaveSlot.None || !Serialization.Serializer.SaveExists(slot))
                     PrintStartScreen();
                 Screen.MenuConsole.PrintPlayerStats();
             };
-		}
+        }
     }
 }

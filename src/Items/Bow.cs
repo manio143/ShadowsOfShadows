@@ -5,7 +5,7 @@ namespace ShadowsOfShadows.Items
 {
     public class Bow : Weapon
     {
-		public Bow() : base("Bow") { }
+        public Bow() : base("Bow") { }
 
         public Bow(int ap, int mp) : base("Bow", ap, mp) { }
 

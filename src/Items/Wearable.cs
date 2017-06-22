@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace ShadowsOfShadows.Items
 {
-    public abstract class Wearable :  Item
+    public abstract class Wearable : Item
     {
-		public Wearable() : base() { }
+        public Wearable() : base() { }
 
-		public Wearable(String name) : base(name) { }
+        public Wearable(String name) : base(name) { }
 
         public Wearable(String name, String stats) : base(name, stats) { }
 

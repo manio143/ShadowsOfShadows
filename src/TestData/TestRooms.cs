@@ -16,17 +16,17 @@ namespace ShadowsOfShadows.TestData
 
         static TestRooms()
         {
-			room1 = new RoomGenerator().GenerateEmpty(15, 9, new Point(-3, -3), new Point());
+            room1 = new RoomGenerator().GenerateEmpty(15, 9, new Point(-3, -3), new Point());
             room1.Entities.Add(new Chest(new ConsoleRenderable('c'), 1,
-				new Item[] {new Apple(), new StrengthPotion(System.TimeSpan.FromSeconds(5)), new Apple(),new Apple(),new Apple(),new Apple(),new Apple(),new Apple(),new Apple(),new Apple(),new Apple()})
+                new Item[] { new Apple(), new StrengthPotion(System.TimeSpan.FromSeconds(5)), new Apple(), new Apple(), new Apple(), new Apple(), new Apple(), new Apple(), new Apple(), new Apple(), new Apple() })
             {
-                Transform = new Transform() {Position = new Point(3, 3)}
+                Transform = new Transform() { Position = new Point(3, 3) }
             });
             var itemGen = new ItemGenerator();
             room1.Entities.Add(new Chest(new ConsoleRenderable('c'), 0,
                 Enumerable.Range(1, 5).Select(n => itemGen.GenerateItem()).Cast<Item>().ToArray())
             {
-                Transform = new Transform() {Position = new Point(0, 5)}
+                Transform = new Transform() { Position = new Point(0, 5) }
             });
             room1.EnterPoint = new Point(-1, -1);
         }
