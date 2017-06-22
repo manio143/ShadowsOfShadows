@@ -74,16 +74,27 @@ namespace ShadowsOfShadows.Consoles
                     break;
                 case MainMenuOptions.Settings:
                     //TODO: Show settings (should we have any)
-                    break;
                 case MainMenuOptions.CloseMenu:
                     PrintPlayerStats();
                     break;
                 case MainMenuOptions.Quit:
-                    SadConsole.Game.Instance.Exit();
+                    Quit();
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+        }
+
+        private void Quit()
+        {
+            var quitMessage = Screen.MessageConsole.AskQuestion("Are you sure?", typeof(YesNoQuestion));
+            quitMessage.DefaultAnswer = YesNoQuestion.No;
+            quitMessage.PostProcessing = (m) => {
+                if(((YesNoQuestion) ((QuestionMessage)m).Result) == YesNoQuestion.Yes)
+                    SadConsole.Game.Instance.Exit();
+                else
+                    PrintPlayerStats();
+            };
         }
 
         private string AddPadding(string s, int value)
