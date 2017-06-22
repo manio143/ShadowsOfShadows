@@ -247,7 +247,9 @@ namespace ShadowsOfShadows.Consoles
 			base.Create (console);
 			if (Answers.Count > 0) {
 				Screen.MessageConsole.PrintMessage(Answers [PointerIndex].Item1.Details ());
-			}
+			} else {
+                Screen.MessageConsole.PrintMessage(""); //will clear MessageConsole when last item is taken
+            }
 		}
 
 
@@ -327,7 +329,9 @@ namespace ShadowsOfShadows.Consoles
 			base.Create (console);
 			if (Answers.Count > 0) {
 				Screen.MessageConsole.PrintMessage(Answers [PointerIndex].Item1.Details ());
-			}
+			} else {
+                Screen.MessageConsole.PrintMessage(""); //will clear MessageConsole when last item is taken
+            }
 		}
 
 		private static IEnumerable<Tuple<Item, string>> ComputeNameList(IEnumerable<Item> items)
