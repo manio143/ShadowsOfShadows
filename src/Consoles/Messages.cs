@@ -390,8 +390,8 @@ namespace ShadowsOfShadows.Consoles
 
     public class TimeoutMessage : Message
     {
-        public const int GENERAL_TIMEOUT = 3000; //3 seconds
-        public const int SHORT_TIMEOUT = 2000;   //2 seconds
+        public const int GENERAL_TIMEOUT = 2000; //2 seconds
+        public const int SHORT_TIMEOUT = 1500;   //1,5 seconds
 
         public override GameObject Text { get; }
         public override GameObject WaitPointer { get; }
