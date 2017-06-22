@@ -8,7 +8,7 @@ namespace ShadowsOfShadows.Entities
 {
     public abstract class Entity
 	{
-		public Transform Transform { get; set;}
+		public Transform Transform { get; set;} = new Transform();
 
         [YamlDotNet.Serialization.YamlIgnore]
 		public IRenderable Renderable { get; set; }
@@ -23,7 +23,6 @@ namespace ShadowsOfShadows.Entities
 
 		public Entity ( IRenderable renderable)
 		{
-			Transform = new Transform ();
             Renderable = renderable;
 		}
 	}
