@@ -77,7 +77,7 @@ namespace ShadowsOfShadows.Consoles
 
         public override void ProcessKeyboard(Keyboard info)
         {
-            if (info.IsKeyPressed(Keys.Space))
+            if (info.IsKeyPressed(Keys.Space) || info.IsKeyPressed(Keys.Enter))
                 Finished = true;
         }
     }
