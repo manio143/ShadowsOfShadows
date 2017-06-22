@@ -78,9 +78,9 @@ namespace ShadowsOfShadows.Consoles
                 MessageQueue.Enqueue(messages[i]);
         }
 
-        public QuestionMessage AskQuestion(string message, Type answersType)
+        public QuestionMessage AskQuestion(string message, Type answersType, Func<Enum, string, string> displayModifier = null)
         {
-            var questionMessage = new QuestionMessage(answersType, message);
+            var questionMessage = new QuestionMessage(answersType, message, displayModifier);
             PrintMessageAndWait(questionMessage);
             return questionMessage;
         }

@@ -193,12 +193,13 @@ namespace ShadowsOfShadows.Consoles
 
     public class QuestionMessage : ChoiceMessage<Enum>
     {
-        public QuestionMessage(Type answersType, string question = null)
+        public QuestionMessage(Type answersType, string question = null, Func<Enum, string, string> displayModifier = null)
             : base(answersType.GetEnumValues()
                     .Cast<Enum>()
                     .Select(
                         @enum => new Tuple<Enum, string>(@enum, @enum.GetAttributeOfType<DisplayAttribute>()?.Title))
                     .Where(tp => tp.Item2 != null)
+                    .Select(tp => displayModifier != null ? new Tuple<Enum, string>(tp.Item1, displayModifier(tp.Item1, tp.Item2)) : tp)
                 , question)
         {
             if (question != null)

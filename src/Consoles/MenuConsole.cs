@@ -123,29 +123,46 @@ namespace ShadowsOfShadows.Consoles
 		public void SaveGame()
 		{
 			var message = AskQuestion ("", typeof(SaveSlot));
+            message.DefaultAnswer = SaveSlot.None;
 			message.PostProcessing = msg => { 
-				var slot = ((QuestionMessage)msg).Result;
-				Serialization.Serializer.Save ((SaveSlot)slot, Screen.MainConsole.State);
-				Screen.MessageConsole.PrintMessageWithTimeout("Game saved.", TimeoutMessage.GENERAL_TIMEOUT);
+				var slot = (SaveSlot)((QuestionMessage)msg).Result;
+                if(slot != SaveSlot.None) {
+                    Serialization.Serializer.Save (slot, Screen.MainConsole.State);
+                    Screen.MessageConsole.PrintMessageWithTimeout("Game saved.", TimeoutMessage.GENERAL_TIMEOUT);
+                }
 				OpenMainMenu();
 			};
 		}
 
 		public void LoadGame()
 		{
-            var message = AskQuestion("", typeof(SaveSlot));
-            message.PostProcessing = msg => {
-                var slot = ((QuestionMessage)msg).Result;
-                var gS = Serialization.Serializer.Load((SaveSlot)slot);
-
-				Screen.MainConsole.State = gS;
-
-                Screen.MainConsole.Update(new TimeSpan());
-
-				Screen.MessageConsole.PrintMessageWithTimeout("Game loaded.", TimeoutMessage.GENERAL_TIMEOUT);
-                OpenMainMenu();
-            };
+            var message = AskSaveSlot();
+            message.PostProcessing += (m) => OpenMainMenu();
 		}
+
+        protected QuestionMessage AskSaveSlot()
+        {
+            var message = AskQuestion("", typeof(SaveSlot), (@enum, str) => {
+                if(!Serialization.Serializer.SaveExists((SaveSlot)@enum))
+                    return str + " (empty)";
+                else
+                    return str;
+            });
+            message.DefaultAnswer = SaveSlot.None;
+            message.PostProcessing = msg => {
+                var slot = (SaveSlot)((QuestionMessage)msg).Result;
+                if(slot != SaveSlot.None && Serialization.Serializer.SaveExists(slot)) {
+                    var gS = Serialization.Serializer.Load(slot);
+
+                    Screen.MainConsole.State = gS;
+
+                    Screen.MainConsole.Update(new TimeSpan());
+
+                    Screen.MessageConsole.PrintMessageWithTimeout("Game loaded.", TimeoutMessage.GENERAL_TIMEOUT);
+                }
+            };
+            return message;
+        }
 
         public ChestMessage OpenChest(Chest chest)
         {

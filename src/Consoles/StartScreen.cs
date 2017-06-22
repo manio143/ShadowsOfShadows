@@ -48,6 +48,11 @@ namespace ShadowsOfShadows.Consoles
 
         public StartScreen(int width, int height) : base(0, 0, width, height)
         {
+            PrintStartScreen();
+        }
+
+        private void PrintStartScreen()
+        {
             PrintMessageWithTimeout("", 1); //delay question.Create()
             var question = AskQuestion(title, typeof(StartScreenQuestion));
             question.PostProcessing = (m) =>
@@ -66,10 +71,8 @@ namespace ShadowsOfShadows.Consoles
                         break;
                 }
             };
-
-            
-            question.TextPositionOffset = new Point(width/2 - 32, 4);
-            question.ChoicePositionOffset = new Point(width/2 - 10, 25);
+            question.TextPositionOffset = new Point(Width/2 - 32, 4);
+            question.ChoicePositionOffset = new Point(Width/2 - 10, 25);
         }
 
         private void PrintTutorial()
@@ -82,17 +85,12 @@ namespace ShadowsOfShadows.Consoles
 
         public new void LoadGame()
 		{
-            var message = AskQuestion("", typeof(SaveSlot));
+            var message = AskSaveSlot();
             message.ChoicePositionOffset = new Point(Width/2 - 8, 23);
-            message.PostProcessing = msg => {
-                var slot = ((QuestionMessage)msg).Result;
-                var gS = Serialization.Serializer.Load((SaveSlot)slot);
-
-				Screen.MainConsole.State = gS;
-
-                Screen.MainConsole.Update(new TimeSpan());
-
-				Screen.MessageConsole.PrintMessageWithTimeout("Game loaded.", TimeoutMessage.GENERAL_TIMEOUT);
+            message.PostProcessing += (msg) => {
+                var slot = (SaveSlot)(msg as QuestionMessage).Result;
+                if(slot == SaveSlot.None || !Serialization.Serializer.SaveExists(slot))
+                    PrintStartScreen();
                 Screen.MenuConsole.PrintPlayerStats();
             };
 		}
