@@ -61,6 +61,7 @@ namespace ShadowsOfShadows.Consoles
     {
         public WaitMessage(string msg) : base(msg)
         {
+            Finished = false;
         }
 
         private GameObject waitPointer;

@@ -55,7 +55,9 @@ namespace ShadowsOfShadows.Consoles
                 var answer = (StartScreenQuestion)((QuestionMessage)m).Result;
                 switch (answer)
                 {
-                    case StartScreenQuestion.NewGame: break;
+                    case StartScreenQuestion.NewGame:
+                        PrintTutorial();
+                        break;
                     case StartScreenQuestion.LoadGame:
                         LoadGame();
                         break;
@@ -69,6 +71,15 @@ namespace ShadowsOfShadows.Consoles
             question.TextPositionOffset = new Point(width/2 - 32, 4);
             question.ChoicePositionOffset = new Point(width/2 - 10, 25);
         }
+
+        private void PrintTutorial()
+        {
+            Screen.MessageConsole.PrintMessageAndWait("Welcome to the dungeon!\nYou're here to save the princess who has been kidnapped.");
+            Screen.MessageConsole.PrintMessageAndWait("To move around use the arrow keys on you keyboard.\nTo interract with chests (c) and doors (|) press [E].\nShould they be locked, try [T] to lockpick.");
+            Screen.MessageConsole.PrintMessageAndWait("Use [Space] to engage with a monster (M).");
+            Screen.MessageConsole.PrintMessageAndWait("Good luck finding the princess " + ((char)1));
+        }
+
         public new void LoadGame()
 		{
             var message = AskQuestion("", typeof(SaveSlot));
