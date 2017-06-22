@@ -140,7 +140,10 @@ namespace ShadowsOfShadows.Consoles
         {
             var message = new ChestMessage(chest);
             PrintMessageAndWait(message);
-            message.PostProcessing = msg => PrintPlayerStats();
+			message.PostProcessing = msg => {
+				Screen.MessageConsole.PrintMessage("");
+				PrintPlayerStats ();
+			};
             return message;
         }
 
@@ -148,8 +151,11 @@ namespace ShadowsOfShadows.Consoles
         {
             var message = new EquipmentMessage();
             PrintMessageAndWait(message);
-            message.PostProcessing = msg => OpenMainMenu();
-            return message;
+			message.PostProcessing = msg => {
+				Screen.MessageConsole.PrintMessage("");
+				OpenMainMenu ();
+			};
+           	return message;
         }
     }
 }

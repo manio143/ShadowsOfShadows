@@ -28,9 +28,9 @@ namespace ShadowsOfShadows.Consoles
             this.Position = new Point(posX, poxY);
         }
 
-        protected void PrintMessage(string message)
+        public void PrintMessage(string message)
         {
-            PrintMessage(new SimpleMessage(message));
+            PrintMessageAndWait(new SimpleMessage(message));
         }
 
         protected virtual void PrintMessage(Message message)
@@ -103,11 +103,17 @@ namespace ShadowsOfShadows.Consoles
                     CurrentMessage.OnPostProcessing();
                     wait = false;
                     if (MessageQueue.Count > 0)
-                        PrintMessageAndWait(MessageQueue.Dequeue());
+                    {
+                        var nextMessage = MessageQueue.Dequeue();
+                        //skip SimpleMessages to the last
+                        while(nextMessage.Finished && MessageQueue.Count > 0 && MessageQueue.Peek().Finished)
+                            nextMessage = MessageQueue.Dequeue();
+                        PrintMessageAndWait(nextMessage);
+                    }
                     else
                     {
-                        if (ClearInactive)
-                            PrintMessage("");
+                        if (ClearInactive && CurrentMessage.GetType() != typeof(SimpleMessage))
+                            ConsoleObjects.Clear();
                         else
                             ConsoleObjects.Remove(CurrentMessage.WaitPointer);
                         this.IsActive = false;

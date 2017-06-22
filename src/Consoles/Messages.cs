@@ -41,6 +41,7 @@ namespace ShadowsOfShadows.Consoles
         public SimpleMessage(string msg)
         {
             message = msg;
+            Finished = true;
         }
 
         private GameObject text;
@@ -239,6 +240,15 @@ namespace ShadowsOfShadows.Consoles
             Chest = chest;
         }
 
+		public override void Create (MessageConsole console)
+		{
+			base.Create (console);
+			if (Answers.Count > 0) {
+				Screen.MessageConsole.PrintMessage(Answers [PointerIndex].Item1.Details ());
+			}
+		}
+
+
         public override void ProcessKeyboard(Keyboard info)
         {
             base.ProcessKeyboard(info);
@@ -253,6 +263,9 @@ namespace ShadowsOfShadows.Consoles
             {
                 Finished = true;
             }
+			if ((info.IsKeyPressed(Keys.Up) || info.IsKeyPressed(Keys.Down)) && Answers.Count > 0) {
+				Screen.MessageConsole.PrintMessage(Answers [PointerIndex].Item1.Details ());
+			}
         }
 
         private void ProcessItemWithEquipment(Item item)
@@ -307,6 +320,14 @@ namespace ShadowsOfShadows.Consoles
         {
         }
 
+		public override void Create (MessageConsole console)
+		{
+			base.Create (console);
+			if (Answers.Count > 0) {
+				Screen.MessageConsole.PrintMessage(Answers [PointerIndex].Item1.Details ());
+			}
+		}
+
 		private static IEnumerable<Tuple<Item, string>> ComputeNameList(IEnumerable<Item> items)
 		{
 			var dict = new Dictionary<Item, int>();
@@ -341,6 +362,9 @@ namespace ShadowsOfShadows.Consoles
             {
                 Finished = true;
             }
+			if ((info.IsKeyPressed(Keys.Up) || info.IsKeyPressed(Keys.Down)) && Answers.Count > 0) {
+				Screen.MessageConsole.PrintMessage(Answers [PointerIndex].Item1.Details ());
+			}
         }
 
         private void ProcessItem(Item item)
@@ -366,8 +390,8 @@ namespace ShadowsOfShadows.Consoles
 
     public class TimeoutMessage : Message
     {
-        public const int GENERAL_TIMEOUT = 3000; //3 seconds
-        public const int SHORT_TIMEOUT = 2000;   //2 seconds
+        public const int GENERAL_TIMEOUT = 2000; //2 seconds
+        public const int SHORT_TIMEOUT = 1500;   //1,5 seconds
 
         public override GameObject Text { get; }
         public override GameObject WaitPointer { get; }
