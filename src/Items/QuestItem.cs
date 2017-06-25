@@ -9,9 +9,9 @@ namespace ShadowsOfShadows.Items
     [ItemType(ItemType.Other)]
     public class QuestItem : Item
     {
-		public QuestItem() : base() { }
+        public QuestItem() : base() { }
 
-		public QuestItem(string name) : base(name) { }
+        public QuestItem(string name) : base(name) { }
 
         public QuestItem(string name, string stats) : base(name, stats) { }
 

@@ -10,7 +10,7 @@ namespace ShadowsOfShadows.Items
     {
         public Consumable() : base() { }
 
-		public Consumable(string name) : base(name) { }
+        public Consumable(string name) : base(name) { }
 
         public Consumable(string name, string stats) : base(name, stats) { }
 

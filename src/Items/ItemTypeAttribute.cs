@@ -10,7 +10,7 @@ namespace ShadowsOfShadows.Items
         Armor,
         Weapon,
     }
-    
+
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
     public class ItemTypeAttribute : Attribute
     {

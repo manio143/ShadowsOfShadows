@@ -9,7 +9,7 @@ namespace ShadowsOfShadows.Items
     [ItemType(ItemType.Armor)]
     public abstract class LegsArmor : Wearable
     {
-		public int DP { get; set; }
+        public int DP { get; set; }
 
         protected LegsArmor() : base("Legs Armor") { }
 

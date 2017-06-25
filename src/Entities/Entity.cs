@@ -7,11 +7,11 @@ using System.Xml.Serialization;
 namespace ShadowsOfShadows.Entities
 {
     public abstract class Entity
-	{
-		public Transform Transform { get; set;} = new Transform();
+    {
+        public Transform Transform { get; set; } = new Transform();
 
         [YamlDotNet.Serialization.YamlIgnore]
-		public IRenderable Renderable { get; set; }
+        public IRenderable Renderable { get; set; }
 
         /* For serialization */
         public Entity() { }
@@ -21,9 +21,9 @@ namespace ShadowsOfShadows.Entities
             Renderable = new ConsoleRenderable(c);
         }
 
-		public Entity ( IRenderable renderable)
-		{
+        public Entity(IRenderable renderable)
+        {
             Renderable = renderable;
-		}
-	}
+        }
+    }
 }

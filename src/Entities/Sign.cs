@@ -7,18 +7,18 @@ namespace ShadowsOfShadows.Entities
 {
     public class Sign : Thing, IInteractable
     {
-        String Text { get; set; }
+        private String Text { get; set; }
 
         public Sign() : base('T') { }
 
-        public Sign(String text) : base( new ConsoleRenderable('T'))
+        public Sign(String text) : base(new ConsoleRenderable('T'))
         {
             Text = text;
         }
 
         public void Interact()
         {
-			Screen.MessageConsole.PrintMessageAndWait(Text);
+            Screen.MessageConsole.PrintMessageAndWait(Text);
         }
     }
 }

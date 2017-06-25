@@ -28,7 +28,7 @@ namespace ShadowsOfShadows.Consoles
     }
     public class StartScreen : MenuConsole
     {
-        const string title =
+        private const string title =
             "  sssss hh   hh     A     DDD   ooooo W            W  sssss\n" +
             " ss     hh   hh    A A    D  D  o   o  W          W  ss    \n" +
             " sssss  hhhhhhh   A   A   D   D o   o  W    W     W  sssss \n" +
@@ -48,6 +48,11 @@ namespace ShadowsOfShadows.Consoles
 
         public StartScreen(int width, int height) : base(0, 0, width, height)
         {
+            PrintStartScreen();
+        }
+
+        private void PrintStartScreen()
+        {
             PrintMessageWithTimeout("", 1); //delay question.Create()
             var question = AskQuestion(title, typeof(StartScreenQuestion));
             question.PostProcessing = (m) =>
@@ -55,7 +60,9 @@ namespace ShadowsOfShadows.Consoles
                 var answer = (StartScreenQuestion)((QuestionMessage)m).Result;
                 switch (answer)
                 {
-                    case StartScreenQuestion.NewGame: break;
+                    case StartScreenQuestion.NewGame:
+                        PrintTutorial();
+                        break;
                     case StartScreenQuestion.LoadGame:
                         LoadGame();
                         break;
@@ -64,26 +71,29 @@ namespace ShadowsOfShadows.Consoles
                         break;
                 }
             };
-
-            
-            question.TextPositionOffset = new Point(width/2 - 32, 4);
-            question.ChoicePositionOffset = new Point(width/2 - 10, 25);
+            question.TextPositionOffset = new Point(Width / 2 - 32, 4);
+            question.ChoicePositionOffset = new Point(Width / 2 - 10, 25);
         }
+
+        private void PrintTutorial()
+        {
+            Screen.MessageConsole.PrintMessageAndWait("Welcome to the dungeon!\nYou're here to save the princess who has been kidnapped.");
+            Screen.MessageConsole.PrintMessageAndWait("To move around use the arrow keys on you keyboard.\nTo interract with chests (c) and doors (|) press [E].\nShould they be locked, try [T] to lockpick.");
+            Screen.MessageConsole.PrintMessageAndWait("Use [Space] to engage with a monster (M).");
+            Screen.MessageConsole.PrintMessageAndWait("Good luck finding the princess " + ((char)1));
+        }
+
         public new void LoadGame()
-		{
-            var message = AskQuestion("", typeof(SaveSlot));
-            message.ChoicePositionOffset = new Point(Width/2 - 8, 23);
-            message.PostProcessing = msg => {
-                var slot = ((QuestionMessage)msg).Result;
-                var gS = Serialization.Serializer.Load((SaveSlot)slot);
-
-				Screen.MainConsole.State = gS;
-
-                Screen.MainConsole.Update(new TimeSpan());
-
-				Screen.MessageConsole.PrintMessageWithTimeout("Game loaded.", TimeoutMessage.GENERAL_TIMEOUT);
+        {
+            var message = AskSaveSlot();
+            message.ChoicePositionOffset = new Point(Width / 2 - 8, 23);
+            message.PostProcessing += (msg) =>
+            {
+                var slot = (SaveSlot)(msg as QuestionMessage).Result;
+                if (slot == SaveSlot.None || !Serialization.Serializer.SaveExists(slot))
+                    PrintStartScreen();
                 Screen.MenuConsole.PrintPlayerStats();
             };
-		}
+        }
     }
 }

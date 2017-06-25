@@ -10,15 +10,15 @@ namespace ShadowsOfShadows.Entities
         /* For serialization */
         public Room() { }
 
-		public Point EnterPoint { get; set; }
-		public Point ExitPoint { get; set; }
+        public Point EnterPoint { get; set; }
+        public Point ExitPoint { get; set; }
 
-		public Point Position { get; set; }
-		public Point Size { get; set; }
+        public Point Position { get; set; }
+        public Point Size { get; set; }
 
-		public Room (IEnumerable<Entity> entities)
-		{
-			Entities = new List<Entity> (entities);
-		}
-	}
+        public Room(IEnumerable<Entity> entities)
+        {
+            Entities = new List<Entity>(entities);
+        }
+    }
 }

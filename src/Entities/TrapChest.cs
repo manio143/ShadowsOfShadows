@@ -7,10 +7,10 @@ namespace ShadowsOfShadows.Entities
 {
     public class TrapChest : Chest
     {
-        int Damage { get; set; }
-        bool Active { get; set; }
+        private int Damage { get; set; }
+        private bool Active { get; set; }
 
-		public TrapChest() : base() { }
+        public TrapChest() : base() { }
 
         public TrapChest(IRenderable rendarable, int lockDificulty, List<Item> items, int damage) : base(rendarable,
             lockDificulty, items)

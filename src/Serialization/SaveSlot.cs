@@ -4,6 +4,7 @@ namespace ShadowsOfShadows.Serialization
 {
     public enum SaveSlot
     {
+        None = 0,
         [Display("Slot 1")]
         Slot1,
         [Display("Slot 2")]

@@ -2,10 +2,10 @@
 
 namespace ShadowsOfShadows.Helpers
 {
-	public enum Fraction
-	{	
-		Warrior,
-		Mage,
-		Hunter
-	 }
+    public enum Fraction
+    {
+        Warrior,
+        Mage,
+        Hunter
+    }
 }

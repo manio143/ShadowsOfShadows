@@ -8,7 +8,7 @@ namespace ShadowsOfShadows.Items
     [ItemType(ItemType.Potion)]
     public class DefensePotion : TimedConsumable
     {
-		[XmlIgnore]
+        [XmlIgnore]
         public int DP { get; private set; }
         public DefensePotion() : base("Defense Potion", "Defense power 3\n", TimeSpan.FromSeconds(10))
         {

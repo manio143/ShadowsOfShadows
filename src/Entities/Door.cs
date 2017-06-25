@@ -11,25 +11,25 @@ namespace ShadowsOfShadows.Entities
 {
     public class Door : Openable
     {
-		public Door() : this(Point.Zero) { }
+        public Door() : this(Point.Zero) { }
 
-		public bool generateRoom {get;set;}
+        public bool generateRoom { get; set; }
 
-		public Door(Point position, bool generateRoom = false) : base(new ConsoleRenderable('|'), 0)
+        public Door(Point position, bool generateRoom = false) : base(new ConsoleRenderable('|'), 0)
         {
-			Transform.Position = position;
-			if(!generateRoom)
-				Transform.Collision.TurnOff();
-			this.generateRoom = generateRoom;
+            Transform.Position = position;
+            if (!generateRoom)
+                Transform.Collision.TurnOff();
+            this.generateRoom = generateRoom;
         }
 
         public override void Interact()
         {
-			if(generateRoom && CheckOpened())
+            if (generateRoom && CheckOpened())
             {
-				generateRoom = false;
-				var room = Screen.MainConsole.RoomGenerator.GenerateRoom ();
-				Screen.MainConsole.CurrentRooms.Add (room);
+                generateRoom = false;
+                var room = Screen.MainConsole.RoomGenerator.GenerateRoom();
+                Screen.MainConsole.CurrentRooms.Add(room);
                 Transform.Collision.TurnOff();
             }
         }

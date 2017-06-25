@@ -23,6 +23,5 @@ namespace ShadowsOfShadows.Entities
             if (CheckOpened())
                 Screen.MenuConsole.OpenChest(this);
         }
-
     }
 }

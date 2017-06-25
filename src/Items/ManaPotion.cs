@@ -10,9 +10,9 @@ namespace ShadowsOfShadows.Items
     [ItemType(ItemType.Potion)]
     public class ManaPotion : Consumable
     {
-		[XmlIgnore]
+        [XmlIgnore]
         public int AmountOfMana { get; private set; }
-        public ManaPotion(String name, int amountOfMana): base(name, "Mana regeneration " + amountOfMana + "\n")
+        public ManaPotion(String name, int amountOfMana) : base(name, "Mana regeneration " + amountOfMana + "\n")
         {
             AmountOfMana = amountOfMana;
         }
@@ -24,7 +24,7 @@ namespace ShadowsOfShadows.Items
             Screen.MainConsole.Player.Mana = Math.Min(Screen.MainConsole.Player.Mana + AmountOfMana, Screen.MainConsole.Player.MaxMana);
         }
     }
-    
+
     [ItemType(ItemType.Potion)]
     public class StrongManaPotion : ManaPotion
     {

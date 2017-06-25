@@ -20,7 +20,6 @@ namespace ShadowsOfShadows
         Wojtek,
         [Display("Do zobaczenia...")]
         DoZo
-
     }
 
     public class Screen : SadConsole.ConsoleContainer
@@ -35,7 +34,7 @@ namespace ShadowsOfShadows
         private StartScreen StartScreen;
         public Screen(int width, int height)
         {
-            MainConsole = new MainConsole(width - MENU_WIDTH + 1, height - MESSAGES_HEIGHT + 2);
+            MainConsole = new MainConsole(width - MENU_WIDTH - 1, height - MESSAGES_HEIGHT);
             MessageConsole = new MessageConsole(1, height - MESSAGES_HEIGHT + 1, width, MESSAGES_HEIGHT);
             MenuConsole = new MenuConsole(width - MENU_WIDTH, 1, MENU_WIDTH + 1, height - MESSAGES_HEIGHT + 1);
 

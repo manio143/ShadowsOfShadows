@@ -17,7 +17,7 @@ namespace ShadowsOfShadows.Entities
         private static MathNet.Numerics.Distributions.Normal rnd = new MathNet.Numerics.Distributions.Normal(0.7, 0.15);
 
         public bool IsMoving { get; set; }
-		public bool IsAttacking { get; set; }
+        public bool IsAttacking { get; set; }
 
         public int Speed { get; set; }
         public int CurrentSpeed { get; set; }
@@ -50,18 +50,18 @@ namespace ShadowsOfShadows.Entities
         {
         }
 
-		private void Attack()
-		{
-			if (!IsAttacking)
-				return;
+        private void Attack()
+        {
+            if (!IsAttacking)
+                return;
 
-			var entity = Screen.MainConsole.Entities.FirstOrDefault(e => e.Transform.Position ==
-				Transform.Position +
-				Transform.Direction.AsPoint());
-			var enemy = entity as Character;
-			if (enemy != null)
-				Attack (enemy);
-		}
+            var entity = Screen.MainConsole.Entities.FirstOrDefault(e => e.Transform.Position ==
+                Transform.Position +
+                Transform.Direction.AsPoint());
+            var enemy = entity as Character;
+            if (enemy != null)
+                Attack(enemy);
+        }
 
         private void Move()
         {
@@ -71,8 +71,8 @@ namespace ShadowsOfShadows.Entities
             var entity = Screen.MainConsole.Entities.FirstOrDefault(e => e.Transform.Position ==
                                                                    Transform.Position +
                                                                    Transform.Direction.AsPoint());
-            
-            Point lastPosition = Transform.Position;            
+
+            Point lastPosition = Transform.Position;
             switch (Transform.Direction)
             {
                 case Direction.Right:
@@ -100,7 +100,7 @@ namespace ShadowsOfShadows.Entities
             {
                 CurrentSpeed = Speed;
                 Move();
-				Attack();
+                Attack();
             }
         }
 
@@ -132,10 +132,10 @@ namespace ShadowsOfShadows.Entities
 
         public void TakeDamage(int amount)
         {
-			if (amount < 0)
-				Health = Math.Min (MaxHealth, Health - amount);
-			else
-				Health = Math.Max(Health - Math.Max(amount - DefencePower, 0), 0);
+            if (amount < 0)
+                Health = Math.Min(MaxHealth, Health - amount);
+            else
+                Health = Math.Max(Health - Math.Max(amount - DefencePower, 0), 0);
         }
     }
 }

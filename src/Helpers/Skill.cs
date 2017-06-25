@@ -2,12 +2,12 @@
 
 namespace ShadowsOfShadows.Helpers
 {
-	public enum Skill
-	{
-		Strength,
-		MagicPower,
-		Mana,
-		ShootingPower,
-		Lockpicking,
-	}
+    public enum Skill
+    {
+        Strength,
+        MagicPower,
+        Mana,
+        ShootingPower,
+        Lockpicking,
+    }
 }
